@@ -8,7 +8,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <>
             <main className="flex min-h-screen flex-col">
                 <section className="flex h-full flex-1 flex-col">
-                    <MobileNavigation />
+                    {/* <MobileNavigation /> */}
                     <Header />
                     <div className="flex-1">{children}</div>
                     <Footer />

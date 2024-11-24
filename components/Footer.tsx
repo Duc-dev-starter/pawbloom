@@ -42,7 +42,7 @@ export const SOCIALS = {
 };
 const Footer = () => {
     return (
-        <footer className="mb-10 flex items-center justify-center border-t-2 border-brand p-7 pt-9">
+        <footer className="mb-10 flex items-center justify-center border-t-2 border-brand p-7 pt-8">
             <div className="3xl:px-0 mx-auto flex w-full max-w-[1440px] flex-col gap-14 px-6 lg:px-20">
                 <div className="flex flex-col items-start justify-center gap-[10%] md:flex-row">
                     <Link href={Path.HOME} className="mb-10">
