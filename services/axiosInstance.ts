@@ -1,4 +1,4 @@
-import { HttpStatus } from "@/constants/https";
+import { HttpStatus } from "@/enum/https";
 import Path from "@/constants/paths";
 import axios from "axios";
 import { toast } from "react-toastify";

@@ -48,7 +48,7 @@ const OTPModal = ({ email }: { email: string }) => {
                     <Image src="/assets/icons/close-dark.svg" alt="close" className="otp-close-button"
                         width={20} height={20} onClick={() => setIsOpen(false)} />
                     <AlertDialogDescription className="subtitle-2 text-center text-light-100">
-                        Chúng tôi đã gửi mã OTP về<span className="pl-1 text-brand-100">leminhduck@gmail.com</span>.
+                        Chúng tôi đã gửi mã OTP về<span className="pl-1 text-brand-100">{email}</span>.
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <InputOTP maxLength={6} value={password} onChange={setPassword}>
