@@ -1,4 +1,3 @@
-"use cache"
 import React from 'react'
 
 import { Metadata } from 'next';
@@ -14,7 +13,7 @@ export const generateMetadata = async (): Promise<Metadata> => ({
     },
 });
 
-const About = async () => {
+const About = () => {
     return (
         <div>hello</div>
     )

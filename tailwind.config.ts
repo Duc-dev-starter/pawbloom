@@ -12,7 +12,8 @@ const config: Config = {
     		colors: {
     			brand: {
     				'100': '#FC8484',
-    				DEFAULT: '#F5BFC1'
+    				DEFAULT: '#F5BFC1',
+					'200': '#E65F61'
     			},
     			customRed: '#FF7474',
     			error: '#b80000',

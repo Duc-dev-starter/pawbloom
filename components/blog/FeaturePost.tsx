@@ -50,9 +50,9 @@ const FeaturePost = () => {
                     <Image
                         src={posts[0].img}
                         alt={posts[0].title}
-                        width={400}
-                        height={200}
-                        className="rounded-lg object-cover"
+                        width={800}
+                        height={100}
+                        className="rounded-lg object-cover h-1/3"
                     />
                 )}
                 {/* Details */}
@@ -81,7 +81,7 @@ const FeaturePost = () => {
                                     alt={post.title}
                                     width={120}
                                     height={120}
-                                    className="rounded-lg object-cover w-full h-full"
+                                    className="rounded-lg object-cover h-1/3"
                                 />
                             </div>
                         )}

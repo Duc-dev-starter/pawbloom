@@ -102,7 +102,7 @@ const Footer = () => {
                                     <ul className="flex gap-4 text-[14px] font-[400] text-[#7B7B7B]">
                                         {SOCIALS.links.map((social) => (
                                             <Link href={social.href} key={social.href} target="_blank" rel="noopener noreferrer">
-                                                <Image src={social.icon} alt="social icon" width={24} height={24} className='text-brand hover:scale-110' />
+                                                <Image src={social.icon} alt="social icon" width={24} height={24} className='text-brand hover:scale-110 ' />
                                             </Link>
                                         ))}
                                     </ul>
