@@ -1,8 +1,9 @@
+"use cache"
 import React from 'react'
 
 import { Metadata } from 'next';
 
-export const generateMetadata = (): Metadata => ({
+export const generateMetadata = async (): Promise<Metadata> => ({
     title: 'Về chúng tôi',
     description: 'Tìm hiểu thêm về chúng tôi và sứ mệnh của chúng tôi.',
     keywords: ['về chúng tôi', 'sứ mệnh', 'nhiệm vụ'],
@@ -13,8 +14,8 @@ export const generateMetadata = (): Metadata => ({
     },
 });
 
-const About = () => {
-    return(
+const About = async () => {
+    return (
         <div>hello</div>
     )
 }
