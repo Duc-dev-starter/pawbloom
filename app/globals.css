@@ -131,6 +131,10 @@
     @apply text-[16px] leading-[24px] font-semibold;
   }
 
+  .p-text-gray {
+    @apply text-xl font-medium text-gray-500;
+  }
+
   .subtitle-1 {
     @apply text-[16px] leading-[24px] font-medium;
   }

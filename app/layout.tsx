@@ -3,6 +3,7 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import React from "react";
+import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -25,7 +26,11 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} remove-scrollbar font-poppins antialiased`}
       >
-        {children}
+        <TooltipProvider>
+          <Tooltip>
+            {children}
+          </Tooltip>
+        </TooltipProvider>
         <ToastContainer />
 
       </body>

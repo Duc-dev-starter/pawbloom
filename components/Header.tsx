@@ -25,6 +25,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip"
+import MobileNavigation from './MobileNavigation'
 
 
 const NAV_LINKS = [
@@ -43,7 +44,7 @@ const Header = () => {
                     <Link href={Path.HOME}>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <Image src={Images.LOGO} alt="logo" width={160} height={160} />
+                                <Image priority src={Images.LOGO} alt="logo" width={160} height={160} />
                             </TooltipTrigger>
                             <TooltipContent>
                                 <p>Trang Chủ Pawbloom</p>
@@ -51,8 +52,8 @@ const Header = () => {
                         </Tooltip>
 
                     </Link>
-
-                    <nav>
+                    <MobileNavigation />
+                    <nav className='hidden lg:block'>
                         <ul className="flex gap-6 pl-5">
                             {NAV_LINKS.map((item) => (
                                 <li key={item.title}>
