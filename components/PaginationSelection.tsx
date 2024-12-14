@@ -1,5 +1,5 @@
-import { PaginationType } from '@/app/admin/manage-product/data-table';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
+import { PaginationType } from '@/interfaces/data-table';
 import React from 'react';
 
 const PaginationSelection = ({

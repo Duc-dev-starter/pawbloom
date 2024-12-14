@@ -10,20 +10,21 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-interface AlertDeleteProductProps {
+interface AlertDeleteProps {
     isOpen: boolean;
     onClose: () => void;
     onDelete: () => void;
+    entityName: string;  // Tên đối tượng (sản phẩm, danh mục, blog)
 }
 
-const AlertDeleteProduct: React.FC<AlertDeleteProductProps> = ({ isOpen, onClose, onDelete }) => {
+const AlertDelete: React.FC<AlertDeleteProps> = ({ isOpen, onClose, onDelete, entityName }) => {
     return (
         <AlertDialog open={isOpen} onOpenChange={onClose}>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>Bạn có chắc chắn muốn xóa sản phẩm này?</AlertDialogTitle>
+                    <AlertDialogTitle>Bạn có chắc chắn muốn xóa {entityName} này?</AlertDialogTitle>
                     <AlertDialogDescription>
-                        Hành động này không thể hoàn tác. Sản phẩm sẽ bị xóa vĩnh viễn.
+                        Hành động này không thể hoàn tác. {entityName} sẽ bị xóa vĩnh viễn.
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
@@ -35,4 +36,4 @@ const AlertDeleteProduct: React.FC<AlertDeleteProductProps> = ({ isOpen, onClose
     );
 };
 
-export default AlertDeleteProduct;
+export default AlertDelete;

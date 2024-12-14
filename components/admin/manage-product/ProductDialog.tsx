@@ -2,14 +2,14 @@ import { Button } from '@/components/ui/button'
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
 import React, { useRef, useState } from 'react'
-import InputProductName from './dialog/InputProductName'
-import InputProductSupplier from './dialog/InputProductSupplier'
-import SelectProductCategory from './dialog/SelectProductCategory'
-import TabProductStatus from './dialog/TabProductStatus'
-import InputProductQuantity from './dialog/InputProductQuantity'
-import InputProductPrice from './dialog/InputProductPrice'
-import InputProductImages from './dialog/InputProductImages'
-import TextareaDescription from './dialog/TextareaDescription'
+import ProductInputName from './dialog/ProductInputName'
+import ProductInputSupplier from './dialog/ProductInputSupplier'
+import ProductSelectCategory from './dialog/ProductSelectCategory'
+import ProductTabStatus from './dialog/ProductTabStatus'
+import ProductInputQuantity from './dialog/ProductInputQuantity'
+import ProductInputPrice from './dialog/ProductInputPrice'
+import ProductInputImages from './dialog/ProductInputImages'
+import ProductTextareaDescription from './dialog/ProductTextareaDescription'
 import { Product } from '@/types/product'
 import { FormProvider, useForm } from 'react-hook-form'
 import { ProductFormData, ProductSchema } from '@/schema/product'
@@ -100,23 +100,23 @@ const ProductDialog = () => {
                     >
                         <div className='mt-1 flex flex-col gap-2'>
                             <div className='grid grid-cols-2 gap-7'>
-                                <InputProductName />
-                                {/* <InputProductImages /> */}
+                                <ProductInputName />
+                                <ProductInputImages />
                             </div>
 
                             <div className='grid grid-cols-2 items-center gap-5'>
-                                <InputProductSupplier />
-                                <SelectProductCategory selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+                                <ProductInputSupplier />
+                                <ProductSelectCategory selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
                             </div>
 
                             <div className='grid grid-cols-2 items-center gap-5'>
-                                <TabProductStatus selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-                                <TextareaDescription />
+                                <ProductTabStatus selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+                                <ProductTextareaDescription />
                             </div>
 
                             <div className='grid grid-cols-2 items-center gap-5'>
-                                <InputProductQuantity />
-                                <InputProductPrice />
+                                <ProductInputQuantity />
+                                <ProductInputPrice />
                             </div>
                         </div>
                         <DialogFooter className='mb-2 mt-3 flex items-center'>

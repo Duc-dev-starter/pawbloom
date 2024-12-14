@@ -4,7 +4,7 @@ import React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { MdError } from 'react-icons/md'
 
-const InputProductQuantity = () => {
+const ProductInputQuantity = () => {
     const { register, formState: { errors } } = useFormContext();
     return (
         <div className='mt-5 flex flex-col gap-2 pt-[6px]'>
@@ -28,4 +28,4 @@ const InputProductQuantity = () => {
     )
 }
 
-export default InputProductQuantity
+export default ProductInputQuantity

@@ -1,32 +1,27 @@
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { MdError } from 'react-icons/md'
 
-const InputProductName = () => {
+const ProductTextareaDescription = () => {
     const { register, formState: { errors } } = useFormContext();
+
     return (
         <div className='mt-5 flex flex-col gap-2'>
-            <Label htmlFor='name' className='text-slate-600'>Tên sản phẩm</Label>
+            <Label htmlFor='description' className='text-slate-600'>Mô tả sản phẩm</Label>
             <div className='flex items-center gap-2'>
-                <Input
-                    {...register('name')}
-                    type='text'
-                    id="name"
-                    className='h-11 shadow-none'
-                    placeholder='tên sản phẩm...'
-                />
+                <Textarea {...register('description')} id='description' className='h-11 shadow-none' placeholder='giới thiệu sản phẩm' />
             </div>
 
-            {errors.name && (
+            {errors.description && (
                 <div className='flex items-center gap-1 text-sm text-red-500'>
                     <MdError />
-                    <p>{errors.name?.message as string}</p>
+                    <p>{errors.description?.message as string}</p>
                 </div>
             )}
         </div>
     )
 }
 
-export default InputProductName
+export default ProductTextareaDescription

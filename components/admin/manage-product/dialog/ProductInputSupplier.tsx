@@ -4,7 +4,7 @@ import React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { MdError } from 'react-icons/md'
 
-const InputProductSupplier = () => {
+const ProductInputSupplier = () => {
     const { register, formState: { errors } } = useFormContext();
 
     return (
@@ -30,4 +30,4 @@ const InputProductSupplier = () => {
     )
 }
 
-export default InputProductSupplier
+export default ProductInputSupplier

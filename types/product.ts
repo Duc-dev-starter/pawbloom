@@ -1,11 +1,13 @@
+export type ProductStatus = 'published' | 'inactive' | 'draft';
+
 export type Product = {
     id: string;
     name: string;
     supplier: string;
     category: 'dog-food' | 'cat-food';
-    status: 'published' | 'inactive' | 'draft';
+    status: ProductStatus;
     quantity: number;
     price: number;
-    description: string
+    description: string;
     createdAt: string;
-}
+};

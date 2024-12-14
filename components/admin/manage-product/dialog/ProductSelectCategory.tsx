@@ -3,7 +3,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Product } from '@/types/product';
 import React, { SetStateAction, useEffect } from 'react'
 
-const SelectProductCategory = ({ selectedCategory, setSelectedCategory }: { selectedCategory: string, setSelectedCategory: React.Dispatch<SetStateAction<Product["category"]>> }) => {
+const ProductSelectCategory = ({ selectedCategory, setSelectedCategory }: { selectedCategory: string, setSelectedCategory: React.Dispatch<SetStateAction<Product["category"]>> }) => {
     const categories = [
         "dog-food",
         "cat-food",
@@ -36,4 +36,4 @@ const SelectProductCategory = ({ selectedCategory, setSelectedCategory }: { sele
     )
 }
 
-export default SelectProductCategory
+export default ProductSelectCategory

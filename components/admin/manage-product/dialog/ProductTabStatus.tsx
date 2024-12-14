@@ -5,7 +5,7 @@ import React, { SetStateAction } from 'react'
 import { FaCheck, FaInbox } from 'react-icons/fa6';
 import { IoClose } from 'react-icons/io5';
 
-const TabProductStatus = ({ selectedTab, setSelectedTab }: { selectedTab: string, setSelectedTab: React.Dispatch<SetStateAction<Product["status"]>> }) => {
+const ProductTabStatus = ({ selectedTab, setSelectedTab }: { selectedTab: string, setSelectedTab: React.Dispatch<SetStateAction<Product["status"]>> }) => {
     const handleValueChange = (value: string) => {
         setSelectedTab(value as Product["status"]);
     }
@@ -30,4 +30,4 @@ const TabProductStatus = ({ selectedTab, setSelectedTab }: { selectedTab: string
     )
 }
 
-export default TabProductStatus
+export default ProductTabStatus

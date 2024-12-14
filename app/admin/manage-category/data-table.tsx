@@ -26,7 +26,6 @@ import { GrFormPrevious, GrFormNext } from 'react-icons/gr'
 import { BiFirstPage, BiLastPage } from 'react-icons/bi'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { StatusDropdown, CategoryDropdown, ProductFilterArea, ProductDialog } from "@/components/admin/manage-product";
 import { DataTableProps, PaginationType } from "@/interfaces/data-table"
 import { PaginationSelection } from "@/components"
 
@@ -62,13 +61,11 @@ export function DataTableProduct<TData, TValue>({
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
-    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
     useEffect(() => {
         setColumnFilters((prev) => {
-            // Remove both status and categories filters
             const baseFilter = prev.filter(
-                (filter) => filter.id !== "status" && filter.id !== "category"
+                (filter) => filter.id !== "status"
             );
             const newFilter = [...baseFilter];
 
@@ -80,16 +77,9 @@ export function DataTableProduct<TData, TValue>({
                 })
             }
 
-            // Add category filter if there are selected categories
-            if (selectedStatuses.length > 0) {
-                newFilter.push({
-                    id: "category",
-                    value: selectedCategories
-                })
-            }
             return newFilter;
         })
-    }, [selectedStatuses, selectedCategories])
+    }, [selectedStatuses])
 
 
     const table = useReactTable({
@@ -117,32 +107,26 @@ export function DataTableProduct<TData, TValue>({
                 <CardHeader className="flex justify-between p-2 px-6">
                     <div className="mb-7 flex items-center justify-between">
                         <div>
-                            <CardTitle className="text-[23px] font-bold">Sản phẩm</CardTitle>
-                            <p className="text-sm text-slate-600">{data.length} sản phẩm</p>
+                            <CardTitle className="text-[23px] font-bold">Danh mục</CardTitle>
+                            <p className="text-sm text-slate-600">{data.length} danh mục</p>
                         </div>
-                        <ProductDialog />
+                        {/* <ProductDialog /> */}
                     </div>
                     <div className="flex flex-col gap-3">
                         {/* Search Input and Dropdown */}
                         <div className="flex items-center justify-between gap-4">
-                            <Input placeholder="Tìm kiếm sản phẩm" className="h-10 flex-1"
+                            <Input placeholder="Tìm kiếm danh mục" className="h-10 flex-1"
                                 value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
                                 onChange={(event) =>
                                     table.getColumn("name")?.setFilterValue(event.target.value)
                                 }
                             />
-                            <StatusDropdown selectedStatuses={selectedStatuses} setSelectedStatuses={setSelectedStatuses} />
-                            <CategoryDropdown selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} />
+                            {/* <StatusDropdown selectedStatuses={selectedStatuses} setSelectedStatuses={setSelectedStatuses} /> */}
                         </div>
                         {/* Buttons */}
                         <div className="mt-2 flex gap-4">
 
-                            <ProductFilterArea
-                                selectedStatuses={selectedStatuses}
-                                setSelectedStatuses={setSelectedStatuses}
-                                selectedCategories={selectedCategories}
-                                setSelectedCategories={setSelectedCategories}
-                            />
+
                         </div>
                     </div>
 

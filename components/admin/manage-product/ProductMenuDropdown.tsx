@@ -7,11 +7,11 @@ import { Row } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
 import { FaRegEdit } from 'react-icons/fa';
 import { MdOutlineDelete } from 'react-icons/md';
-import AlertDeleteProduct from './AlertDeleteProduct'; // Import component xóa
 import { BaseService } from '@/services/baseService';
 import { useToast } from '@/hooks/use-toast';
+import AlertDelete from '../AlertDelete';
 
-const ProductDropdown = ({ row }: { row: Row<Product> }) => {
+const ProductMenuDropdown = ({ row }: { row: Row<Product> }) => {
     const [isDialogOpen, setDialogOpen] = useState(false);
     const { toast } = useToast();
     const dialogCloseRef = useRef<HTMLButtonElement | null>(null)
@@ -19,15 +19,26 @@ const ProductDropdown = ({ row }: { row: Row<Product> }) => {
     const handleDelete = async () => {
         console.log("Xóa sản phẩm: ", row.original);
         const deleteRow = row.original.id;
-        const response = await BaseService.delete({ url: `/api/produts/${deleteRow}` });
-        if (response) {
+        try {
+            const response = await BaseService.delete({ url: `/api/produts/${deleteRow}` });
+            if (response) {
+                toast({
+                    title: 'Thành công',
+                    description: 'Sản phẩm đã được xóa thành công',
+                });
+                dialogCloseRef.current?.click();
+            }
+        } catch (error) {
+            console.log(error);
             toast({
-                title: 'Thành công',
-                description: 'Sản phẩm đã được xóa thành công',
-            });
-            dialogCloseRef.current?.click();
+                variant: "destructive",
+                title: "Ồ không! Có gì đó không ổn.",
+                description: "Đã có vấn đề xảy ra với yêu cầu của bạn.",
+            })
+        } finally {
+            setDialogOpen(false);
         }
-        setDialogOpen(false); // Đóng dialog sau khi xóa
+
     };
 
     return (
@@ -61,7 +72,8 @@ const ProductDropdown = ({ row }: { row: Row<Product> }) => {
 
             {/* Hiển thị AlertDeleteProduct khi mở dialog */}
             {isDialogOpen && (
-                <AlertDeleteProduct
+                <AlertDelete
+                    entityName='Sản phẩm'
                     isOpen={isDialogOpen}
                     onClose={() => setDialogOpen(false)}
                     onDelete={handleDelete}
@@ -71,4 +83,4 @@ const ProductDropdown = ({ row }: { row: Row<Product> }) => {
     );
 };
 
-export default ProductDropdown;
+export default ProductMenuDropdown;

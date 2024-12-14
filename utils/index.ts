@@ -14,3 +14,26 @@ export const scrollToTop = (position = 0, behavior: ScrollBehavior = 'smooth') =
         behavior,
     });
 };
+
+export const getVietnameseStatus = (status: string, type: string) => {
+    const statusMap: Record<string, Record<string, string>> = {
+        product: {
+            published: 'Công khai',
+            inactive: 'Ngưng bán',
+            draft: 'Nháp',
+        },
+        category: {
+            published: 'Công khai',
+            inactive: 'Ẩn',
+            draft: 'Nháp',
+        },
+        blog: {
+            published: 'Công khai',
+            inactive: 'Ẩn',
+            draft: 'Nháp',
+        },
+
+    };
+
+    return statusMap[type]?.[status] || 'Nháp';
+};
