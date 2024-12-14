@@ -10,7 +10,7 @@ import Link from "next/link";
 const homePageImage = "/assets/images/homepage.png";
 
 export const generateMetadata = async (): Promise<Metadata> => ({
-  title: 'Trang chủ - Pawbloom',
+  title: 'Trang chủ | Pawbloom',
   description: 'Pawbloom – Nơi kết nối những trái tim yêu thương với những chú thú cưng cần được yêu thương. Chúng tôi giúp tạo dựng mái ấm mới và mang lại cơ hội thứ hai cho thú cưng từ các trạm cứu trợ.',
   keywords: ['Pawbloom', 'nhận nuôi thú cưng', 'trạm cứu trợ', 'yêu thương thú cưng', 'mái ấm thú cưng'],
   openGraph: {
@@ -216,7 +216,7 @@ export default function Home() {
         <h1 className="mb-10 text-center text-4xl font-semibold text-brand-200">Tin Tức</h1>
         <div className="">
           <FeaturePost />
-          <div className="text-center">
+          <div className="mt-4 text-center">
             <WatchMoreButton href={Path.BLOG} />
           </div>
         </div>

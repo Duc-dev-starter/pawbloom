@@ -12,7 +12,7 @@ const posts = [
         category: "Nature",
         createdAt: "2023-12-01",
         title: "Exploring the Beauty of Mountain Reflection",
-        slug: "/posts/mountain-reflection",
+        slug: "/blog/mountain-reflection",
     },
     {
         id: 2,
@@ -20,7 +20,7 @@ const posts = [
         category: "Travel",
         createdAt: "2023-11-15",
         title: "Hikers on the Mountain Ridge at Dusk",
-        slug: "/posts/hikers-at-dusk",
+        slug: "/blog/hikers-at-dusk",
     },
     {
         id: 3,
@@ -28,7 +28,7 @@ const posts = [
         category: "Architecture",
         createdAt: "2023-11-10",
         title: "Colonial Red Door in Guanajuato, Mexico",
-        slug: "/posts/colonial-red-door",
+        slug: "/blog/colonial-red-door",
     },
     {
         id: 4,
@@ -36,7 +36,7 @@ const posts = [
         category: "Street",
         createdAt: "2023-10-30",
         title: "A Narrow Street with Buildings and Cars",
-        slug: "/posts/narrow-street",
+        slug: "/blog/narrow-street",
     },
 ];
 

@@ -1,7 +1,6 @@
 "use client"
-import Images from '@/constants/image'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React from 'react'
 import {
     Sheet,
     SheetContent,
@@ -17,13 +16,11 @@ import { Button } from './ui/button'
 
 
 const MobileNavigation = () => {
-    const [open, setOpen] = useState(false);
     const pathName = usePathname();
     return (
         <header className='mobile-header'>
-            {/* <Image src={Images.LOGO} alt='logo' width={120} height={52} className='h-auto' /> */}
 
-            <Sheet open={open} onOpenChange={setOpen}>
+            <Sheet >
                 <SheetTrigger>
                     <Image src="/assets/icons/menu.svg" alt='search' width={30} height={30} />
                 </SheetTrigger>

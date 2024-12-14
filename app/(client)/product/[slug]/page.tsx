@@ -1,4 +1,5 @@
 import MultiImages from '@/components/MultiImages';
+import ProductComments from '@/sections/product/ProductComments';
 import RelatedProduct from '@/sections/product/RelatedProduct';
 import { notFound } from 'next/navigation';
 import React from 'react';
@@ -83,6 +84,7 @@ const ProductDetail = async ({ params }: { params: { slug: string } }) => {
                     </div>
                 </div>
             </div>
+            <ProductComments />
             <RelatedProduct />
         </>
 

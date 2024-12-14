@@ -15,7 +15,9 @@ export const generateMetadata = async (): Promise<Metadata> => ({
 
 const About = () => {
     return (
-        <div>hello</div>
+        <div>
+
+        </div>
     )
 }
 export default About;
