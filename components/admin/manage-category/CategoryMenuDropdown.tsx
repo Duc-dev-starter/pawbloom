@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Product } from '@/types/product';
 import { DropdownMenuSeparator } from '@radix-ui/react-dropdown-menu';
 import { Row } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
@@ -9,22 +8,24 @@ import { FaRegEdit } from 'react-icons/fa';
 import { MdOutlineDelete } from 'react-icons/md';
 import { BaseService } from '@/services/baseService';
 import { useToast } from '@/hooks/use-toast';
+import { Category } from '@/types/category';
 import AlertDelete from '../AlertDelete';
+import { API } from '@/constants/api';
 
-const ProductMenuDropdown = ({ row }: { row: Row<Product> }) => {
+const CategoryDropdown = ({ row }: { row: Row<Category> }) => {
     const [isDialogOpen, setDialogOpen] = useState(false);
     const { toast } = useToast();
     const dialogCloseRef = useRef<HTMLButtonElement | null>(null)
 
     const handleDelete = async () => {
-        console.log("Xóa sản phẩm: ", row.original);
+        console.log("Xóa danh mục: ", row.original);
         const deleteRow = row.original.id;
         try {
-            const response = await BaseService.delete({ url: `/api/produts/${deleteRow}` });
+            const response = await BaseService.delete({ url: `${API.GET_UPDATE_DELETE_CATEGORY}/${deleteRow}` });
             if (response) {
                 toast({
                     title: 'Thành công',
-                    description: 'Sản phẩm đã được xóa thành công',
+                    description: 'Danh mục đã được xóa thành công',
                 });
                 dialogCloseRef.current?.click();
             }
@@ -51,29 +52,26 @@ const ProductMenuDropdown = ({ row }: { row: Row<Product> }) => {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    {/* Sửa sản phẩm */}
                     <DropdownMenuItem className="flex cursor-pointer items-center gap-1 p-[10px]">
                         <FaRegEdit />
-                        <span>Sửa sản phẩm</span>
+                        <span>Sửa danh mục</span>
                     </DropdownMenuItem>
 
                     <DropdownMenuSeparator />
 
-                    {/* Xóa sản phẩm */}
                     <DropdownMenuItem
                         onClick={() => setDialogOpen(true)}
                         className="flex cursor-pointer items-center gap-1 p-[10px] text-red-600"
                     >
                         <MdOutlineDelete className="text-lg" />
-                        <span>Xóa sản phẩm</span>
+                        <span>Xóa danh mục</span>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Hiển thị AlertDeleteProduct khi mở dialog */}
             {isDialogOpen && (
                 <AlertDelete
-                    entityName='sản phẩm'
+                    entityName='danh mục'
                     isOpen={isDialogOpen}
                     onClose={() => setDialogOpen(false)}
                     onDelete={handleDelete}
@@ -83,4 +81,4 @@ const ProductMenuDropdown = ({ row }: { row: Row<Product> }) => {
     );
 };
 
-export default ProductMenuDropdown;
+export default CategoryDropdown;

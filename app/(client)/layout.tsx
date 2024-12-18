@@ -1,7 +1,16 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import { Footer, Header } from "@/components/common";
 import MobileNavigation from "@/components/MobileNavigation";
+import { Metadata } from "next";
 import React from "react";
+
+
+export const metadata: Metadata = {
+    title: {
+        default: "Pawbloom",
+        template: "%s | Pawbloom",
+    },
+    description: "Pawbloom - Cơ hội thứ hai, mái ấm mãi mãi",
+};
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
     return (

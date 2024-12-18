@@ -8,11 +8,11 @@ import { FaRegEdit } from 'react-icons/fa';
 import { MdOutlineDelete } from 'react-icons/md';
 import { BaseService } from '@/services/baseService';
 import { useToast } from '@/hooks/use-toast';
-import { Category } from '@/types/category';
 import AlertDelete from '../AlertDelete';
 import { API } from '@/constants/api';
+import { Blog } from '@/types/blog';
 
-const CategoryDropdown = ({ row }: { row: Row<Category> }) => {
+const BlogMenuDropdown = ({ row }: { row: Row<Blog> }) => {
     const [isDialogOpen, setDialogOpen] = useState(false);
     const { toast } = useToast();
     const dialogCloseRef = useRef<HTMLButtonElement | null>(null)
@@ -21,11 +21,11 @@ const CategoryDropdown = ({ row }: { row: Row<Category> }) => {
         console.log("Xóa danh mục: ", row.original);
         const deleteRow = row.original.id;
         try {
-            const response = await BaseService.delete({ url: `${API.GET_UPDATE_DELETE_CATEGORY}/${deleteRow}` });
+            const response = await BaseService.delete({ url: `${API.GET_UPDATE_DELETE_BLOG}/${deleteRow}` });
             if (response) {
                 toast({
                     title: 'Thành công',
-                    description: 'Danh mục đã được xóa thành công',
+                    description: 'Bài báo đã được xóa thành công',
                 });
                 dialogCloseRef.current?.click();
             }
@@ -54,7 +54,7 @@ const CategoryDropdown = ({ row }: { row: Row<Category> }) => {
                 <DropdownMenuContent>
                     <DropdownMenuItem className="flex cursor-pointer items-center gap-1 p-[10px]">
                         <FaRegEdit />
-                        <span>Sửa danh mục</span>
+                        <span>Sửa bài báo</span>
                     </DropdownMenuItem>
 
                     <DropdownMenuSeparator />
@@ -64,14 +64,14 @@ const CategoryDropdown = ({ row }: { row: Row<Category> }) => {
                         className="flex cursor-pointer items-center gap-1 p-[10px] text-red-600"
                     >
                         <MdOutlineDelete className="text-lg" />
-                        <span>Xóa danh mục</span>
+                        <span>Xóa bài báo</span>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
 
             {isDialogOpen && (
                 <AlertDelete
-                    entityName='Danh mục'
+                    entityName='bài báo'
                     isOpen={isDialogOpen}
                     onClose={() => setDialogOpen(false)}
                     onDelete={handleDelete}
@@ -81,4 +81,4 @@ const CategoryDropdown = ({ row }: { row: Row<Category> }) => {
     );
 };
 
-export default CategoryDropdown;
+export default BlogMenuDropdown;

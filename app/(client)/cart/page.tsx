@@ -1,6 +1,6 @@
 "use client";
 
-import DeleteWithDialog from "@/components/DeleteWithDialog";
+import { DeleteWithDialog } from "@/components/common";
 import Image from "next/image";
 import React, { useState } from "react";
 

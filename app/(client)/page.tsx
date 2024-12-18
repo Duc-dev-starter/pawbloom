@@ -5,7 +5,6 @@ import Path from "@/constants/paths";
 import EventCard from "@/sections/home/EventCard";
 import { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 
 const homePageImage = "/assets/images/homepage.png";
 

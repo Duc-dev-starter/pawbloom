@@ -1,45 +1,22 @@
 "use client"
 import React, { useState } from 'react'
-import { FaCheck } from 'react-icons/fa6'
-import { IoClose } from 'react-icons/io5'
-import { FaInbox } from 'react-icons/fa'
+
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Button } from '@/components/ui/button'
 import { LuGitPullRequestDraft } from 'react-icons/lu'
 import { Command, CommandGroup, CommandItem, CommandList } from '@/components/ui/command'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Separator } from '@/components/ui/separator'
+import { Status } from '@/types/status'
 
-type Status = {
-    value: string;
-    label: string;
-    icon: React.ReactNode;
-}
-
-const statuses: Status[] = [
-    {
-        value: 'published',
-        label: 'Công khai',
-        icon: <FaCheck />
-    },
-    {
-        value: 'inactive',
-        label: 'Ngưng bán',
-        icon: <IoClose />
-    },
-    {
-        value: 'draft',
-        label: 'Nháp',
-        icon: <FaInbox />
-    },
-]
 
 type StatusDropdownProps = {
     selectedStatuses: string[];
     setSelectedStatuses: React.Dispatch<React.SetStateAction<string[]>>;
+    statuses: Status[]; // Truyền mảng statuses làm prop
 }
 
-const StatusDropdown = ({ selectedStatuses, setSelectedStatuses }: StatusDropdownProps) => {
+const StatusDropdown = ({ selectedStatuses, setSelectedStatuses, statuses }: StatusDropdownProps) => {
     const [open, setOpen] = useState(false);
 
     const statusColor = (status: string) => {
@@ -111,4 +88,4 @@ const StatusDropdown = ({ selectedStatuses, setSelectedStatuses }: StatusDropdow
     )
 }
 
-export default StatusDropdown
+export default StatusDropdown;

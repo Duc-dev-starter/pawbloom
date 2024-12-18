@@ -1,13 +1,14 @@
 "use client"
 
 import { Column, ColumnDef } from "@tanstack/react-table"
+//  import { statusProduct } from "@/constants/status-product";
 import React, { ReactNode } from 'react';
 import { FaCheck, FaInbox } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import { getVietnameseStatus } from "@/utils";
-import { Category } from "@/types/category";
 import SortableHeader from "@/components/admin/SortableHeader";
-import CategoryMenuDropdown from '@/components/admin/manage-category/CategoryMenuDropdown';
+import { Blog } from "@/types/blog";
+import BlogMenuDropdown from "@/components/admin/manage-blog/BlogMenuDropdown";
 
 
 
@@ -16,25 +17,29 @@ import CategoryMenuDropdown from '@/components/admin/manage-category/CategoryMen
 // );
 
 
-
-export const columns: ColumnDef<Category>[] = [
+export const columns: ColumnDef<Blog>[] = [
     {
-        accessorKey: 'name',
-        header: ({ column }: { column: Column<Category> }) => <SortableHeader<Category> column={column} label="Danh mục" />
+        accessorKey: 'title',
+        header: ({ column }: { column: Column<Blog, unknown> }) => <SortableHeader column={column} label="Tiêu đề" />
+    },
+    {
+        accessorKey: 'category',
+        header: ({ column }: { column: Column<Blog, unknown> }) => <SortableHeader column={column} label="Danh mục" />,
+        filterFn: "multiSelect"
     },
     {
         accessorKey: 'author',
-        header: ({ column }: { column: Column<Category, unknown> }) => <SortableHeader column={column} label="Người tạo" />
+        header: ({ column }: { column: Column<Blog, unknown> }) => <SortableHeader column={column} label="Tác giả" />
     },
     {
         accessorKey: 'description',
-        header: ({ column }: { column: Column<Category, unknown> }) => <SortableHeader column={column} label="Mô tả" />
+        header: ({ column }: { column: Column<Blog, unknown> }) => <SortableHeader column={column} label="Mô tả" />
     },
     {
         accessorKey: "status",
         header: "Trạng thái",
         filterFn: "multiSelect",
-        cell: ({ row }: { row: { original: Category } }) => {
+        cell: ({ row }: { row: { original: Blog } }) => {
             const status = row.original.status;
             let colorClass;
             let icon: ReactNode;
@@ -60,7 +65,7 @@ export const columns: ColumnDef<Category>[] = [
             return (
                 <span className={`rounded-full px-3 py-[2px] font-medium ${colorClass} flex w-fit items-center gap-1`}>
                     {icon}
-                    <span className="text-sm">{getVietnameseStatus(status, "category")}</span>
+                    <span className="text-sm">{getVietnameseStatus(status, "blog")}</span>
                 </span>
             )
         }
@@ -68,7 +73,7 @@ export const columns: ColumnDef<Category>[] = [
     },
     {
         accessorKey: 'createdAt',
-        header: ({ column }: { column: Column<Category, unknown> }) => <SortableHeader column={column} label="Ngày tạo" />,
+        header: ({ column }: { column: Column<Blog, unknown> }) => <SortableHeader column={column} label="Ngày tạo" />,
         cell: ({ getValue }) => {
             const value = getValue() as string;
             const date = value ? new Date(value) : undefined;
@@ -85,10 +90,9 @@ export const columns: ColumnDef<Category>[] = [
             );
         }
     },
-
     {
         accessorKey: 'updatedAt',
-        header: ({ column }: { column: Column<Category, unknown> }) => <SortableHeader column={column} label="Ngày cập nhật" />,
+        header: ({ column }: { column: Column<Blog, unknown> }) => <SortableHeader column={column} label="Ngày cập nhật" />,
         cell: ({ getValue }) => {
             const value = getValue() as string;
             const date = value ? new Date(value) : undefined;
@@ -109,7 +113,7 @@ export const columns: ColumnDef<Category>[] = [
     {
         id: "actions",
         cell: ({ row }) => {
-            return <CategoryMenuDropdown row={row} />
+            return <BlogMenuDropdown row={row} />
         }
     },
 ]

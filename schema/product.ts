@@ -4,7 +4,7 @@ export const ProductSchema = z.object({
   name: z
     .string()
     .min(1, "Cần điền tên sản phẩm" )
-    .max(50, { message: "Tên sản phẩm tối đa 50 ký tự" }),
+    .max(50, "Tên sản phẩm tối đa 50 ký tự" ),
   supplier: z
     .string()
     .min(1, "Cần điền tên nhà cung cấp" )

@@ -2,7 +2,6 @@
 
 import {
     ColumnFiltersState,
-    FilterFn,
     flexRender,
     getCoreRowModel,
     getFilteredRowModel,
@@ -21,32 +20,12 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { GrFormPrevious, GrFormNext } from 'react-icons/gr'
-import { BiFirstPage, BiLastPage } from 'react-icons/bi'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { DataTableProps, PaginationType } from "@/interfaces/data-table"
-import { PaginationSelection } from "@/components"
-
-
-// Define the custom filter types
-declare module "@tanstack/table-core" {
-    interface FilterFns {
-        multiSelect: FilterFn<unknown>
-    }
-}
-
-// Define the custom filter function
-const multiSelectFilter: FilterFn<unknown> = (
-    row,
-    columnId,
-    filterValue: string[]
-) => {
-    const rowValue = (row.getValue(columnId) as string).toLowerCase();
-    const lowerCaseFilterValues = filterValue.map((val) => val.toLowerCase());
-    return filterValue.length === 0 || lowerCaseFilterValues.includes(rowValue);
-};
+import PaginationSelection from "@/components/common/PaginationSelection"
+import { multiSelectFilter } from "@/utils"
+import PaginationControls from "@/components/common/PaginationControls"
 
 
 
@@ -179,28 +158,15 @@ export function DataTableProduct<TData, TValue>({
                     </div>
                     <div className="mt-5 flex items-center justify-between">
                         <PaginationSelection pagination={pagination} setPagination={setPagination} />
-                        <div className="flex items-center gap-6">
-                            <span className="text-sm text-gray-500">
-                                Trang {pagination.pageIndex + 1} trên {Math.max(1, table.getPageCount())}
-                            </span>
-                            <div className="flex items-center justify-end space-x-2 py-4">
-                                <Button variant="outline" className="size-9 w-12" size="sm" onClick={() => table.setPageIndex(0)} disabled={!table.getCanPreviousPage()}>
-                                    <BiFirstPage />
-                                </Button>
-
-                                <Button variant="outline" className="size-9 w-12" size="sm" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-                                    <GrFormPrevious />
-                                </Button>
-
-                                <Button variant="outline" className="size-9 w-12" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-                                    <GrFormNext />
-                                </Button>
-
-                                <Button variant="outline" className="size-9 w-12" size="sm" onClick={() => table.setPageIndex(table.getPageCount() - 1)} disabled={!table.getCanNextPage()}>
-                                    <BiLastPage />
-                                </Button>
-                            </div>
-                        </div>
+                        <PaginationControls
+                            pageIndex={pagination.pageIndex}
+                            pageCount={table.getPageCount()}
+                            canPreviousPage={table.getCanPreviousPage()}
+                            canNextPage={table.getCanNextPage()}
+                            goToPage={table.setPageIndex}
+                            nextPage={table.nextPage}
+                            previousPage={table.previousPage}
+                        />
                     </div>
                 </CardContent>
             </Card>

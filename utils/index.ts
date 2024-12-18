@@ -1,3 +1,4 @@
+import { FilterFn } from "@tanstack/react-table";
 // Helper to clean up payload params
 export const cleanParams = (params: any) => {
     for (const key in params) {
@@ -37,3 +38,27 @@ export const getVietnameseStatus = (status: string, type: string) => {
 
     return statusMap[type]?.[status] || 'Nháp';
 };
+
+
+// Define the custom filter types
+declare module "@tanstack/table-core" {
+    interface FilterFns {
+        multiSelect: FilterFn<unknown>
+    }
+}
+
+// Define the custom filter function
+export const multiSelectFilter: FilterFn<unknown> = (
+    row,
+    columnId,
+    filterValue: string[]
+) => {
+    const rowValue = (row.getValue(columnId) as string).toLowerCase();
+    const lowerCaseFilterValues = filterValue.map((val) => val.toLowerCase());
+    return filterValue.length === 0 || lowerCaseFilterValues.includes(rowValue);
+};
+
+
+export const firstLetterCapitialize = (value: string) => {
+    return value.charAt(0).toUpperCase() + value.slice(1);
+}

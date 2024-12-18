@@ -16,7 +16,7 @@ import {
     InputOTPSlot,
 } from "@/components/ui/input-otp"
 import Image from "next/image";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 const OTPModal = ({ email }: { email: string }) => {
     const [isOpen, setIsOpen] = useState(true);

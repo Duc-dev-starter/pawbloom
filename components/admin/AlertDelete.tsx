@@ -9,6 +9,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { firstLetterCapitialize } from "@/utils";
 
 interface AlertDeleteProps {
     isOpen: boolean;
@@ -24,7 +25,7 @@ const AlertDelete: React.FC<AlertDeleteProps> = ({ isOpen, onClose, onDelete, en
                 <AlertDialogHeader>
                     <AlertDialogTitle>Bạn có chắc chắn muốn xóa {entityName} này?</AlertDialogTitle>
                     <AlertDialogDescription>
-                        Hành động này không thể hoàn tác. {entityName} sẽ bị xóa vĩnh viễn.
+                        Hành động này không thể hoàn tác. {firstLetterCapitialize(entityName)} sẽ bị xóa vĩnh viễn.
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>

@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import { ToastContainer } from "react-toastify";
@@ -11,10 +10,6 @@ const poppins = Poppins({
   variable: '--font-poppins'
 })
 
-export const metadata: Metadata = {
-  title: "Pawbloom",
-  description: "Pawbloom - Cơ hội thứ hai, mái ấm mãi mãi",
-};
 
 export default function RootLayout({
   children,

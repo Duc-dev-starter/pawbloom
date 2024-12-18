@@ -32,9 +32,9 @@ import { Status } from "@/types/status"
 import { StatusDropdown } from "@/components/admin"
 import { PaginationControls, PaginationSelection } from "@/components/common"
 
-const productStatuses: Status[] = [
+const blogStatuses: Status[] = [
     { value: 'published', label: 'Công khai', icon: <FaCheck /> },
-    { value: 'inactive', label: 'Ngưng bán', icon: <IoClose /> },
+    { value: 'inactive', label: 'Ẩn', icon: <IoClose /> },
     { value: 'draft', label: 'Nháp', icon: <FaInbox /> },
 ];
 
@@ -106,8 +106,8 @@ export function DataTableProduct<TData, TValue>({
                 <CardHeader className="flex justify-between p-2 px-6">
                     <div className="mb-7 flex items-center justify-between">
                         <div>
-                            <CardTitle className="text-[23px] font-bold">Sản phẩm</CardTitle>
-                            <p className="text-sm text-slate-600">{data.length} sản phẩm</p>
+                            <CardTitle className="text-[23px] font-bold">Tin tức</CardTitle>
+                            <p className="text-sm text-slate-600">{data.length} tin tức</p>
                         </div>
                         <ProductDialog />
                     </div>
@@ -120,8 +120,9 @@ export function DataTableProduct<TData, TValue>({
                                     table.getColumn("name")?.setFilterValue(event.target.value)
                                 }
                             />
-                            <StatusDropdown selectedStatuses={selectedStatuses} setSelectedStatuses={setSelectedStatuses} statuses={productStatuses} />
+                            <StatusDropdown selectedStatuses={selectedStatuses} setSelectedStatuses={setSelectedStatuses} statuses={blogStatuses} />
                             <CategoryDropdown selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} />
+
                         </div>
                         {/* Buttons */}
                         <div className="mt-2 flex gap-4">

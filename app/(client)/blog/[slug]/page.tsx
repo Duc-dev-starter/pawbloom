@@ -1,8 +1,38 @@
+import { API } from '@/constants/api'
 import Images from '@/constants/image'
 import BlogComments from '@/sections/blog/BlogComments'
+import { BaseService } from '@/services/baseService'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+
+interface BlogPostPageProps {
+    params: { slug: string }
+}
+
+export async function generateMetadata({
+    params: { slug },
+}: BlogPostPageProps): Promise<Metadata> {
+    const response = await BaseService.getById({ url: API.GET_UPDATE_DELETE_BLOG, id: slug });
+    return {
+        title: response.data.title,
+        description: response.data.description,
+        openGraph: {
+            images: [
+                {
+                    url: response.data.images[0]
+                }
+            ]
+        }
+    }
+}
+
+export async function generateStaticParams() {
+    const blogPosts = 
+}
+
+
 
 const BlogDetail = () => {
     return (

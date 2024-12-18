@@ -13,7 +13,7 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import OTPModal from "@/components/OTPModal";
+import OTPModal from './OTPModal';
 
 type FormType = "sign-in" | "sign-out" | "sign-up"
 

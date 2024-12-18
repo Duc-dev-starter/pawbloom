@@ -1,5 +1,5 @@
 import React from 'react';
-import { TooltipTrigger, TooltipContent } from './ui/tooltip';
+import { TooltipTrigger, TooltipContent } from '../ui/tooltip';
 import { Trash2Icon } from 'lucide-react';
 import {
     AlertDialog,
@@ -11,7 +11,7 @@ import {
     AlertDialogFooter,
     AlertDialogCancel,
     AlertDialogAction,
-} from './ui/alert-dialog';
+} from '../ui/alert-dialog';
 
 interface DeleteWithDialogProps {
     tooltipContent: string;
