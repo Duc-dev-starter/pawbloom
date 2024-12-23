@@ -28,13 +28,13 @@ export async function generateMetadata({
     }
 }
 
-export async function generateStaticParams() {
-    const blogPosts = 
-}
+// export async function generateStaticParams() {
+//     const blogPosts = 
+// }
 
 
 
-const BlogDetail = () => {
+const BlogPageDetail = () => {
     return (
         <div className='flex flex-col gap-8 p-16'>
             <div className='flex gap-8'>
@@ -78,4 +78,4 @@ const BlogDetail = () => {
     )
 }
 
-export default BlogDetail
+export default BlogPageDetail

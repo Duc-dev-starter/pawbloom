@@ -15,7 +15,7 @@ export const generateMetadata = async (): Promise<Metadata> => ({
     },
 });
 
-const Blog = () => {
+const BlogPage = () => {
     return (
         <div className='lx:px-32 px-4 md:px-8 lg:px-16 2xl:px-64'>
             <div className='mt-5'>
@@ -26,4 +26,4 @@ const Blog = () => {
     )
 }
 
-export default Blog
+export default BlogPage

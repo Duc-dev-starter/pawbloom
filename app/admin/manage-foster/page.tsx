@@ -1,39 +1,37 @@
 import React from 'react'
 import { columns } from './columns'
-import { Blog } from '@/types/blog'
-import { DataTableBlog } from './data-table'
+import { Foster } from '@/types/user'
+import { DataTableFoster } from './data-table'
 import { Metadata } from 'next'
 
-async function getDataBlog(): Promise<Blog[]> {
+async function getDataFoster(): Promise<Foster[]> {
     // Fetch data from your API here.
     return [
         {
             id: "1",
-            title: "sản phẩm cho mèo",
-            status: "draft",
-            description: '',
+            name: "Johne Doe",
+            status: "operational",
+            address: "",
+            phoneNumber: '',
+            description: "",
             createdAt: "2024-12-01T10:30:00.000Z", // Example ISO 8601 date
             updatedAt: "2024-12-01T10:30:00.000Z",
-            author: 'duc',
-            content: '',
-            category: ''
         },
         {
             id: "2",
-            title: "sản phẩm cho chó",
-            status: "draft",
-            description: '',
+            name: "sản phẩm cho chó",
+            status: "operational",
+            phoneNumber: '',
+            address: "",
+            description: "",
             createdAt: "2024-12-01T10:30:00.000Z", // Example ISO 8601 date
             updatedAt: "2024-12-01T10:30:00.000Z",
-            author: 'duc',
-            content: '',
-            category: ''
         },
     ]
 }
 
 export const generateMetadata = async (): Promise<Metadata> => ({
-    title: 'Quản lí tin tức',
+    title: 'Quản lí trạm cứu hộ',
     description: 'Pawbloom – Nơi kết nối những trái tim yêu thương với những chú thú cưng cần được yêu thương. Chúng tôi giúp tạo dựng mái ấm mới và mang lại cơ hội thứ hai cho thú cưng từ các trạm cứu trợ.',
     keywords: ['Pawbloom', 'nhận nuôi thú cưng', 'trạm cứu trợ', 'yêu thương thú cưng', 'mái ấm thú cưng'],
     openGraph: {
@@ -45,11 +43,12 @@ export const generateMetadata = async (): Promise<Metadata> => ({
     },
 });
 
-const ManageBlogs = async () => {
-    const blogs = await getDataBlog()
+
+const ManageFosterPage = async () => {
+    const fosters = await getDataFoster()
     return (
-        <DataTableBlog columns={columns} data={blogs} />
+        <DataTableFoster columns={columns} data={fosters} />
     )
 }
 
-export default ManageBlogs;
+export default ManageFosterPage;

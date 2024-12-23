@@ -1,10 +1,19 @@
-export type UserStatus = ""
-
 export type User = {
     id: string;
     name: string;
-    googleId? : string;
+    phoneNumber: string;
+    googleId?: string;
     password?: string;
     createdAt: string;
     updatedAt: string;
-}
+};
+
+export type Client = User & {
+    status: "active" | "inactive" | "banned"; 
+};
+
+export type Foster = User & {
+    status: "operational" | "closed" | "under_review"; 
+    address: string;
+    description: string;
+};

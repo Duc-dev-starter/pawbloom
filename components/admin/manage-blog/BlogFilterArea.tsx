@@ -5,15 +5,18 @@ import { getVietnameseStatus } from '@/utils'
 import React, { SetStateAction } from 'react'
 import { IoClose } from 'react-icons/io5'
 
-const CategoryFilterArea = ({ selectedStatuses, setSelectedStatuses, selectedAuthors, setSelectedAuthors }: {
+const BlogFilterArea = ({ selectedStatuses, setSelectedStatuses, selectedCategories, setSelectedCategories, selectedAuthors, setSelectedAuthors }: {
     selectedStatuses: string[],
     setSelectedStatuses: React.Dispatch<SetStateAction<string[]>>,
+    selectedCategories: string[],
+    setSelectedCategories: React.Dispatch<SetStateAction<string[]>>,
     selectedAuthors: string[],
     setSelectedAuthors: React.Dispatch<SetStateAction<string[]>>,
 }) => {
 
     const resetFilter = () => {
         setSelectedStatuses([]);
+        setSelectedCategories([]);
         setSelectedAuthors([]);
     }
 
@@ -28,7 +31,7 @@ const CategoryFilterArea = ({ selectedStatuses, setSelectedStatuses, selectedAut
                             <>
                                 {selectedStatuses.map((status, index) => (
                                     <Badge variant="secondary" key={index}>
-                                        {getVietnameseStatus(status, 'category')}
+                                        {getVietnameseStatus(status, 'product')}
                                     </Badge>
                                 ))}
                             </>
@@ -40,6 +43,27 @@ const CategoryFilterArea = ({ selectedStatuses, setSelectedStatuses, selectedAut
                 </div>
             )}
 
+
+            {selectedCategories.length > 0 && (
+                <div className='flex items-center gap-2 rounded-sm border border-dashed p-1 px-2 text-sm'>
+                    <span className='text-gray-600'>Danh mục</span>
+                    <Separator orientation='vertical' />
+                    <div className='flex items-center gap-2'>
+                        {selectedCategories.length < 3 ? (
+                            <>
+                                {selectedCategories.map((category, index) => (
+                                    <Badge variant="secondary" key={index}>
+                                        {category}
+                                    </Badge>
+                                ))}
+                            </>
+                        ) : (
+                            <Badge variant="secondary">Đã chọn 3</Badge>
+                        )}
+
+                    </div>
+                </div>
+            )}
 
             {selectedAuthors.length > 0 && (
                 <div className='flex items-center gap-2 rounded-sm border border-dashed p-1 px-2 text-sm'>
@@ -61,7 +85,7 @@ const CategoryFilterArea = ({ selectedStatuses, setSelectedStatuses, selectedAut
                     </div>
                 </div>
             )}
-            {selectedAuthors.length > 0 || selectedStatuses.length > 0 && (
+            {selectedCategories.length > 0 || selectedStatuses.length > 0 || selectedAuthors.length > 0 && (
                 <Button variant="ghost" className='p-1 px-2' onClick={resetFilter}>
                     <span>Reset</span>
                     <IoClose />
@@ -75,4 +99,4 @@ const CategoryFilterArea = ({ selectedStatuses, setSelectedStatuses, selectedAut
     )
 }
 
-export default CategoryFilterArea
+export default BlogFilterArea

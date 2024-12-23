@@ -14,39 +14,43 @@ const authors: User[] = [
         name: 'John',
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
+        phoneNumber: ''
     },
     {
         id: "2",
         name: 'John2',
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
+        phoneNumber: ''
     },
     {
         id: "3",
         name: 'John3',
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
+        phoneNumber: ''
     },
     {
         id: "4",
         name: 'John4',
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
+        phoneNumber: ''
     },
 ]
 
 type AuthorDropdownProps = {
-    selectedAuthor: string[];
-    setSelectedAuthor: React.Dispatch<React.SetStateAction<string[]>>;
+    selectedAuthors: string[];
+    setSelectedAuthors: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-const AuthorDropdown = ({ selectedAuthor, setSelectedAuthor }: AuthorDropdownProps) => {
+const AuthorDropdown = ({ selectedAuthors, setSelectedAuthors }: AuthorDropdownProps) => {
     const [open, setOpen] = useState(false);
 
     const handleCheckboxChange = (value: string) => {
-        setSelectedAuthor((prev) => {
+        setSelectedAuthors((prev) => {
             const updatedAuthor = prev.includes(value)
-                ? prev.filter((category) => category !== value)
+                ? prev.filter((author) => author !== value)
                 : [...prev, value];
 
             return updatedAuthor;
@@ -54,7 +58,7 @@ const AuthorDropdown = ({ selectedAuthor, setSelectedAuthor }: AuthorDropdownPro
     }
 
     const clearFilters = () => {
-        setSelectedAuthor([]);
+        setSelectedAuthors([]);
     }
 
     return (
@@ -77,7 +81,7 @@ const AuthorDropdown = ({ selectedAuthor, setSelectedAuthor }: AuthorDropdownPro
                                 {authors.map(author => (
                                     <CommandItem key={author.name} value={author.name}>
                                         <Checkbox className='size-4 rounded-[4px]'
-                                            checked={selectedAuthor.includes(author.name)}
+                                            checked={selectedAuthors.includes(author.name)}
                                             onClick={() => handleCheckboxChange(author.name)}
                                         />
                                         <div className='flex items-center gap-1 rounded-lg p-1 px-3 text-sm'>

@@ -8,11 +8,11 @@ import { FaRegEdit } from 'react-icons/fa';
 import { MdOutlineDelete } from 'react-icons/md';
 import { BaseService } from '@/services/baseService';
 import { useToast } from '@/hooks/use-toast';
-import { Category } from '@/types/category';
 import AlertDelete from '../AlertDelete';
 import { API } from '@/constants/api';
+import { Foster } from '@/types/user';
 
-const CategoryMenuDropdown = ({ row }: { row: Row<Category> }) => {
+const FosterMenuDropdown = ({ row }: { row: Row<Foster> }) => {
     const [isDialogOpen, setDialogOpen] = useState(false);
     const { toast } = useToast();
     const dialogCloseRef = useRef<HTMLButtonElement | null>(null)
@@ -81,4 +81,4 @@ const CategoryMenuDropdown = ({ row }: { row: Row<Category> }) => {
     );
 };
 
-export default CategoryMenuDropdown;
+export default FosterMenuDropdown;

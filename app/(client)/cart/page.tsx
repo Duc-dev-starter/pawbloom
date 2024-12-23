@@ -21,7 +21,7 @@ const cartData = [
     },
 ];
 
-const Cart = () => {
+const CartPage = () => {
     const [cart, setCart] = useState(cartData);
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
@@ -164,4 +164,4 @@ const Cart = () => {
     );
 };
 
-export default Cart;
+export default CartPage;

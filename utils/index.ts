@@ -1,5 +1,6 @@
 import { FilterFn } from "@tanstack/react-table";
 // Helper to clean up payload params
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const cleanParams = (params: any) => {
     for (const key in params) {
         if (params[key] === '' && params[key] !== 0) {
@@ -9,6 +10,7 @@ export const cleanParams = (params: any) => {
     return params;
 };
 
+// eslint-disable-next-line no-undef
 export const scrollToTop = (position = 0, behavior: ScrollBehavior = 'smooth') => {
     window.scrollTo({
         top: position,
@@ -33,7 +35,16 @@ export const getVietnameseStatus = (status: string, type: string) => {
             inactive: 'Ẩn',
             draft: 'Nháp',
         },
-
+        client: {
+            active: 'Hoạt động',
+            inactive: 'Ngưng hoạt động',
+            banned: 'Bị cấm'
+        },
+        foster: {
+            active: 'Hoạt động',
+            inactive: 'Ngưng hoạt động',
+            banned: 'Bị cấm'
+        }
     };
 
     return statusMap[type]?.[status] || 'Nháp';

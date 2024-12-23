@@ -24,22 +24,19 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { DataTableProps, PaginationType } from "@/interfaces/data-table"
 import { multiSelectFilter } from "@/utils"
-import AuthorDropdown from "@/components/admin/manage-category/AuthorDropdown"
-import { Status } from "@/types/status"
+import { StatusDropdown } from "@/components/admin"
 import { FaCheck, FaInbox } from "react-icons/fa6"
 import { IoClose } from "react-icons/io5"
-import { StatusDropdown } from "@/components/admin"
-import CategoryFilterArea from "@/components/admin/manage-category/CategoryFilterArea"
+import { Status } from "@/types/status"
 import { PaginationControls, PaginationSelection } from "@/components/common"
 
-const categoryStatuses: Status[] = [
+const fosterStatuses: Status[] = [
     { value: 'published', label: 'Công khai', icon: <FaCheck /> },
     { value: 'inactive', label: 'Ẩn', icon: <IoClose /> },
     { value: 'draft', label: 'Nháp', icon: <FaInbox /> },
 ];
 
-
-export function DataTableCategory<TData, TValue>({
+export function DataTableFoster<TData, TValue>({
     columns,
     data,
 }: DataTableProps<TData, TValue>) {
@@ -50,13 +47,11 @@ export function DataTableCategory<TData, TValue>({
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
-    const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
 
     useEffect(() => {
         setColumnFilters((prev) => {
-            // Remove both status and categories filters
             const baseFilter = prev.filter(
-                (filter) => filter.id !== "status" && filter.id !== "author"
+                (filter) => filter.id !== "status"
             );
             const newFilter = [...baseFilter];
 
@@ -68,16 +63,9 @@ export function DataTableCategory<TData, TValue>({
                 })
             }
 
-            // Add author filter if there are selected authors
-            if (selectedAuthors.length > 0) {
-                newFilter.push({
-                    id: "author",
-                    value: selectedAuthors
-                })
-            }
             return newFilter;
         })
-    }, [selectedStatuses, selectedAuthors])
+    }, [selectedStatuses])
 
 
     const table = useReactTable({
@@ -105,8 +93,8 @@ export function DataTableCategory<TData, TValue>({
                 <CardHeader className="flex justify-between p-2 px-6">
                     <div className="mb-7 flex items-center justify-between">
                         <div>
-                            <CardTitle className="text-[23px] font-bold">Danh mục</CardTitle>
-                            <p className="text-sm text-slate-600">{data.length} danh mục</p>
+                            <CardTitle className="text-[23px] font-bold">Trạm cứu trợ</CardTitle>
+                            <p className="text-sm text-slate-600">{data.length} trạm cứu trợ</p>
                         </div>
                         {/* <ProductDialog /> */}
                     </div>
@@ -119,18 +107,12 @@ export function DataTableCategory<TData, TValue>({
                                     table.getColumn("name")?.setFilterValue(event.target.value)
                                 }
                             />
-                            <StatusDropdown selectedStatuses={selectedStatuses} setSelectedStatuses={setSelectedStatuses} statuses={categoryStatuses} />
-                            <AuthorDropdown selectedAuthors={selectedAuthors} setSelectedAuthors={setSelectedAuthors} />
+                            <StatusDropdown selectedStatuses={selectedStatuses} setSelectedStatuses={setSelectedStatuses} statuses={fosterStatuses} />
                         </div>
                         {/* Buttons */}
                         <div className="mt-2 flex gap-4">
 
-                            <CategoryFilterArea
-                                selectedStatuses={selectedStatuses}
-                                setSelectedStatuses={setSelectedStatuses}
-                                selectedAuthors={selectedAuthors}
-                                setSelectedAuthors={setSelectedAuthors}
-                            />
+
                         </div>
                     </div>
 

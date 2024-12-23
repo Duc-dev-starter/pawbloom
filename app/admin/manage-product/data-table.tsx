@@ -141,7 +141,7 @@ export function DataTableProduct<TData, TValue>({
                         <Table>
                             <TableHeader>
                                 {table.getHeaderGroups().map((headerGroup) => (
-                                    <TableRow key={headerGroup.id}>
+                                    <TableRow key={headerGroup.id} className="text-center">
                                         {headerGroup.headers.map((header) => {
                                             return (
                                                 <TableHead key={header.id}>
@@ -165,7 +165,7 @@ export function DataTableProduct<TData, TValue>({
                                             data-state={row.getIsSelected() && "selected"}
                                         >
                                             {row.getVisibleCells().map((cell) => (
-                                                <TableCell key={cell.id}>
+                                                <TableCell key={cell.id} className="text-center">
                                                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                                 </TableCell>
                                             ))}

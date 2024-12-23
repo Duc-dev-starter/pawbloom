@@ -25,7 +25,7 @@ const BlogMenuDropdown = ({ row }: { row: Row<Blog> }) => {
             if (response) {
                 toast({
                     title: 'Thành công',
-                    description: 'Bài báo đã được xóa thành công',
+                    description: 'Tin tức đã được xóa thành công',
                 });
                 dialogCloseRef.current?.click();
             }
@@ -54,7 +54,7 @@ const BlogMenuDropdown = ({ row }: { row: Row<Blog> }) => {
                 <DropdownMenuContent>
                     <DropdownMenuItem className="flex cursor-pointer items-center gap-1 p-[10px]">
                         <FaRegEdit />
-                        <span>Sửa bài báo</span>
+                        <span>Sửa tin tức</span>
                     </DropdownMenuItem>
 
                     <DropdownMenuSeparator />
@@ -64,14 +64,14 @@ const BlogMenuDropdown = ({ row }: { row: Row<Blog> }) => {
                         className="flex cursor-pointer items-center gap-1 p-[10px] text-red-600"
                     >
                         <MdOutlineDelete className="text-lg" />
-                        <span>Xóa bài báo</span>
+                        <span>Xóa tin tức</span>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
 
             {isDialogOpen && (
                 <AlertDelete
-                    entityName='bài báo'
+                    entityName='tin túc'
                     isOpen={isDialogOpen}
                     onClose={() => setDialogOpen(false)}
                     onDelete={handleDelete}

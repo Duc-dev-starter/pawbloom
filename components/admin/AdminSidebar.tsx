@@ -17,8 +17,8 @@ import {
     SidebarHeader,
     SidebarRail,
 } from "@/components/ui/sidebar"
-import { NavMain } from "./NavMain"
-import { NavUser } from './NavUser'
+import { NavMain } from "../common/NavMain"
+import { NavUser } from '../common/NavUser'
 import Image from "next/image"
 import Link from "next/link"
 import Path from "@/constants/paths"
@@ -35,7 +35,7 @@ const data = {
     navMain: [
         {
             title: "Dashboard",
-            url: "#",
+            url: "/dashboard",
             icon: LayoutDashboard,
             isActive: false,
         },
@@ -47,30 +47,36 @@ const data = {
             items: [
                 {
                     title: "Quản lý người nhận nuôi",
-                    url: "#",
+                    url: "/admin/manage-client",
                 },
                 {
                     title: "Quản lý trạm cứu trợ",
-                    url: "#",
+                    url: "/admin/manage-foster",
                 },
 
             ],
         },
         {
             title: "Quản lý blog",
-            url: "#",
+            url: "/admin/manage-blog",
             icon: BookOpen,
             isActive: false,
         },
         {
             title: "Quản lý danh mục",
-            url: "#",
+            url: "/admin/manage-category",
             icon: Map,
             isActive: false,
         },
         {
             title: "Quản lý chi phí",
             url: "#",
+            icon: PieChart,
+            isActive: false,
+        },
+        {
+            title: "Quản lý sản phẩm",
+            url: "/admin/manage-product",
             icon: PieChart,
             isActive: false,
         },
@@ -101,7 +107,7 @@ const data = {
 
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AdminSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>

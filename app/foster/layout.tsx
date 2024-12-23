@@ -1,4 +1,3 @@
-
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -14,22 +13,22 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar"
 import React from 'react'
+import { AppSidebar } from '@/components/admin/AdminSidebar'
 import { Metadata } from "next"
-import { AdminSidebar } from "@/components/admin/AdminSidebar"
 
 export const metadata: Metadata = {
     title: {
         default: "Pawbloom",
-        template: "%s | Admin Pawbloom",
+        template: "%s | Pawbloom",
     },
     description: "Pawbloom - Cơ hội thứ hai, mái ấm mãi mãi",
 };
 
 
-const Layout = ({ children, currentPage }: { children: React.ReactNode, currentPage: string }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <SidebarProvider>
-            <AdminSidebar />
+            <AppSidebar />
             <SidebarInset>
                 <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
                     <div className="flex items-center gap-2 px-4">
@@ -38,13 +37,13 @@ const Layout = ({ children, currentPage }: { children: React.ReactNode, currentP
                         <Breadcrumb>
                             <BreadcrumbList>
                                 <BreadcrumbItem className="hidden md:block">
-                                    <BreadcrumbLink href="/admin/dashboard">
-                                        Dashboard
+                                    <BreadcrumbLink href="#">
+                                        Building Your Application
                                     </BreadcrumbLink>
                                 </BreadcrumbItem>
                                 <BreadcrumbSeparator className="hidden md:block" />
                                 <BreadcrumbItem>
-                                    <BreadcrumbPage>{currentPage}</BreadcrumbPage>
+                                    <BreadcrumbPage>Data Fetching</BreadcrumbPage>
                                 </BreadcrumbItem>
                             </BreadcrumbList>
                         </Breadcrumb>
