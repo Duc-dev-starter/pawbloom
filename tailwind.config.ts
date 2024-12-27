@@ -12,8 +12,8 @@ const config: Config = {
     		colors: {
     			brand: {
     				'100': '#FC8484',
-    				DEFAULT: '#F5BFC1',
-					'200': '#E65F61'
+    				'200': '#E65F61',
+    				DEFAULT: '#F5BFC1'
     			},
     			customRed: '#FF7474',
     			error: '#b80000',
@@ -83,7 +83,9 @@ const config: Config = {
     			}
     		},
     		fontFamily: {
-    			poppins: ["var(--font-poppins)"]
+    			poppins: [
+    				'var(--font-poppins)'
+    			]
     		},
     		boxShadow: {
     			'drop-1': '0px 10px 30px 0px rgba(66, 71, 97, 0.1)',
@@ -119,13 +121,40 @@ const config: Config = {
     				to: {
     					height: '0'
     				}
+    			},
+    			gradient: {
+    				to: {
+    					backgroundPosition: 'var(--bg-size) 0'
+    				}
+    			},
+    			marquee: {
+    				from: {
+    					transform: 'translateX(0)'
+    				},
+    				to: {
+    					transform: 'translateX(calc(-100% - var(--gap)))'
+    				}
+    			},
+    			'marquee-vertical': {
+    				from: {
+    					transform: 'translateY(0)'
+    				},
+    				to: {
+    					transform: 'translateY(calc(-100% - var(--gap)))'
+    				}
     			}
     		},
     		animation: {
     			'caret-blink': 'caret-blink 1.25s ease-out infinite',
     			'accordion-down': 'accordion-down 0.2s ease-out',
-    			'accordion-up': 'accordion-up 0.2s ease-out'
-    		}
+    			'accordion-up': 'accordion-up 0.2s ease-out',
+    			gradient: 'gradient 8s linear infinite',
+    			marquee: 'marquee var(--duration) infinite linear',
+    			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite'
+    		},
+			screens:{
+				xs: '480px'
+			}
     	}
     },
 	// eslint-disable-next-line @typescript-eslint/no-require-imports

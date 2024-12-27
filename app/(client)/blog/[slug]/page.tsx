@@ -7,13 +7,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-interface BlogPostPageProps {
+interface BlogDetailPageProps {
     params: { slug: string }
 }
 
 export async function generateMetadata({
     params: { slug },
-}: BlogPostPageProps): Promise<Metadata> {
+}: BlogDetailPageProps): Promise<Metadata> {
     const response = await BaseService.getById({ url: API.GET_UPDATE_DELETE_BLOG, id: slug });
     return {
         title: response.data.title,
