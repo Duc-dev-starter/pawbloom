@@ -3,7 +3,6 @@ import AnimatedGradientText from '@/components/ui/animated-gradient-text'
 import { faqs } from '@/constants/about'
 import { cn } from '@/lib/utils'
 import { ChevronRight } from 'lucide-react'
-import React from 'react'
 
 const Question = ({ question, answer }: { question: string, answer: string }) => {
     return <AccordionItem value={question}>
@@ -16,7 +15,7 @@ const Question = ({ question, answer }: { question: string, answer: string }) =>
 
 const Faqs = () => {
     return (
-        <section id='faqs' className='w-full py-32 px-6 xs:px-8 sm:px-0 sm:mx-8 lg:mx-auto flex flex-col items-center justify-center overflow-hidden'>
+        <section id='faqs' className='w-full pt-20 pb-28 px-6 xs:px-8 sm:px-0 sm:mx-8 lg:mx-auto flex flex-col items-center justify-center overflow-hidden'>
             <AnimatedGradientText>
                 🎉 <hr className="mx-2 h-4 w-px shrink-0 bg-gray-300" />{" "}
                 <span

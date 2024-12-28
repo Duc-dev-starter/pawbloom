@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 import { ChevronRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import { CSSProperties } from 'react'
 import { FaStar } from 'react-icons/fa6'
 
 
@@ -21,7 +21,7 @@ const MarqueeColumn = ({
     return <Marquee reverse={reverse} pauseOnHover vertical className={cn("w-full relative h-full flex flex-col justify-center items-center", className)}
         style={{
             "--duration": duration
-        }}
+        } as CSSProperties}
     >
         {
             heroImages.sort(() => Math.random() - 0.5).map((image, index) => (

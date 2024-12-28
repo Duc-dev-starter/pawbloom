@@ -4,7 +4,6 @@ import { reviews } from '@/constants/about';
 import { cn } from '@/lib/utils'
 import { ChevronRight } from 'lucide-react'
 import Image from 'next/image';
-import React from 'react'
 
 
 
@@ -46,7 +45,7 @@ const ReviewCard = ({
 
 const Testimonials = () => {
     return (
-        <section id='testimonials' className='flex w-full flex-col items-center justify-center overflow-hidden py-28'>
+        <section id='testimonials' className='flex w-full flex-col items-center justify-center overflow-hidden pt-20 pb-28'>
             <AnimatedGradientText>
                 🎉 <hr className="mx-2 h-4 w-px shrink-0 bg-gray-300" />{" "}
                 <span
