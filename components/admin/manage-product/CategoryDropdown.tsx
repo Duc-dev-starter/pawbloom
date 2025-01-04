@@ -1,41 +1,49 @@
 "use client"
 import React, { useState } from 'react'
 import { LuGitPullRequestDraft } from 'react-icons/lu'
-import ICategory from '@/interfaces/ICategory'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Button } from '@/components/ui/button'
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Separator } from '@/components/ui/separator'
+import { Category } from '@/types/category'
 
-const categories: ICategory[] = [
+const categories: Category[] = [
     {
-        id: 1,
-        label: "Thức ăn cho chó",
-        value: "dog-food",
+        id: "1",
+        name: "Thức ăn cho chó",
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
+        author: '',
+        status: 'published',
+        description: ''
     },
     {
-        id: 2,
-        label: "Thức ăn cho mèo",
-        value: "cat-food",
+        id: "2",
+        name: "Thức ăn cho mèo",
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
+        author: '',
+        status: 'published',
+        description: ''
     },
     {
-        id: 3,
-        label: "Phụ kiện cho chó",
-        value: "dog-accessories",
+        id: "3",
+        name: "Phụ kiện cho chó",
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
+        author: '',
+        status: 'published',
+        description: ''
     },
     {
-        id: 4,
-        label: "Phụ kiện cho mèo",
-        value: "cat-accessories",
+        id: "4",
+        name: "Phụ kiện cho mèo",
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
+        author: '',
+        status: 'published',
+        description: ''
     },
 ]
 
@@ -79,13 +87,13 @@ const CategoryDropdown = ({ selectedCategories, setSelectedCategories }: Categor
                             </CommandEmpty>
                             <CommandGroup>
                                 {categories.map(category => (
-                                    <CommandItem key={category.value} value={category.value}>
+                                    <CommandItem key={category.name} value={category.name}>
                                         <Checkbox className='size-4 rounded-[4px]'
-                                            checked={selectedCategories.includes(category.value)}
-                                            onClick={() => handleCheckboxChange(category.value)}
+                                            checked={selectedCategories.includes(category.name)}
+                                            onClick={() => handleCheckboxChange(category.name)}
                                         />
                                         <div className='flex items-center gap-1 rounded-lg p-1 px-3 text-sm'>
-                                            {category.label}
+                                            {category.name}
                                         </div>
                                     </CommandItem>
                                 ))}

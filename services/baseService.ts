@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AxiosResponse } from "axios";
 import { axiosInstance } from "./axiosInstance";
 import { cleanParams } from "@/utils";
-import IApiRequest from "@/interfaces/IApiRequest";
+import ApiRequest from "@/interfaces/api";
 
 
 export const BaseService = {
-    async get<T = any>({ url, payload, headers }: IApiRequest): Promise<AxiosResponse<T>> {
+    async get<T = any>({ url, payload, headers }: ApiRequest): Promise<AxiosResponse<T>> {
         if (!url) {
             throw new Error("URL is required for GET request");
         }
@@ -23,7 +24,7 @@ export const BaseService = {
         } 
     },
 
-    async post<T = any>({ url, payload, headers }: IApiRequest): Promise<AxiosResponse<T>> {
+    async post<T = any>({ url, payload, headers }: ApiRequest): Promise<AxiosResponse<T>> {
         if (!url) {
             throw new Error("URL is required for POST request");
         }
@@ -37,7 +38,7 @@ export const BaseService = {
             throw error;
         } 
     },
-    async put<T = any>({ url, payload, headers }: IApiRequest): Promise<AxiosResponse<T>> {
+    async put<T = any>({ url, payload, headers }: ApiRequest): Promise<AxiosResponse<T>> {
         if (!url) {
             throw new Error("URL is required for PUT request");
         }
@@ -52,7 +53,7 @@ export const BaseService = {
         } 
     },
 
-    async delete<T = any>({ url, payload, headers }: IApiRequest): Promise<AxiosResponse<T>> {
+    async delete<T = any>({ url, payload, headers }: ApiRequest): Promise<AxiosResponse<T>> {
         if (!url) {
             throw new Error("URL is required for DELETE request");
         }

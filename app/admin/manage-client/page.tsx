@@ -1,30 +1,8 @@
 import React from 'react'
-import { columns } from './columns'
-import { Client } from '@/types/user'
-import { DataTableClient } from './data-table'
 import { Metadata } from 'next'
+import ManageClientsComponent from './component';
 
-async function getDataClient(): Promise<Client[]> {
-    // Fetch data from your API here.
-    return [
-        {
-            id: "1",
-            name: "Johne Doe",
-            status: "active",
-            phoneNumber: '',
-            createdAt: "2024-12-01T10:30:00.000Z", // Example ISO 8601 date
-            updatedAt: "2024-12-01T10:30:00.000Z",
-        },
-        {
-            id: "2",
-            name: "sản phẩm cho chó",
-            status: "active",
-            phoneNumber: '',
-            createdAt: "2024-12-01T10:30:00.000Z", // Example ISO 8601 date
-            updatedAt: "2024-12-01T10:30:00.000Z",
-        },
-    ]
-}
+
 
 export const generateMetadata = async (): Promise<Metadata> => ({
     title: 'Quản lí khách hàng',
@@ -40,11 +18,10 @@ export const generateMetadata = async (): Promise<Metadata> => ({
 });
 
 
-const ManageClient = async () => {
-    const clients = await getDataClient()
+const ManageClientsPage = async () => {
     return (
-        <DataTableClient columns={columns} data={clients} />
+        <ManageClientsComponent />
     )
 }
 
-export default ManageClient;
+export default ManageClientsPage;

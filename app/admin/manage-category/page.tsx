@@ -1,32 +1,8 @@
 import React from 'react'
-import { columns } from './columns'
-import { Category } from '@/types/category'
-import { DataTableCategory } from './data-table'
 import { Metadata } from 'next'
+import ManageCategoriesComponent from './component';
 
-async function getDataCategory(): Promise<Category[]> {
-    // Fetch data from your API here.
-    return [
-        {
-            id: "1",
-            name: "sản phẩm cho mèo",
-            status: "draft",
-            description: '',
-            createdAt: "2024-12-01T10:30:00.000Z", // Example ISO 8601 date
-            updatedAt: "2024-12-01T10:30:00.000Z",
-            author: 'John'
-        },
-        {
-            id: "2",
-            name: "sản phẩm cho chó",
-            status: "draft",
-            description: '',
-            createdAt: "2024-12-01T10:30:00.000Z", // Example ISO 8601 date
-            updatedAt: "2024-12-01T10:30:00.000Z",
-            author: 'duc'
-        },
-    ]
-}
+
 
 export const generateMetadata = async (): Promise<Metadata> => ({
     title: 'Quản lí danh mục',
@@ -42,11 +18,10 @@ export const generateMetadata = async (): Promise<Metadata> => ({
 });
 
 
-const ManageCategory = async () => {
-    const categories = await getDataCategory()
+const ManageCategoriesPage = async () => {
     return (
-        <DataTableCategory columns={columns} data={categories} />
+        <ManageCategoriesComponent />
     )
 }
 
-export default ManageCategory;
+export default ManageCategoriesPage;

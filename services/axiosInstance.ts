@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export const axiosInstance = axios.create({
-  baseURL: "http://localhost",
+  baseURL: "https://6778ddd2482f42b62e8fc781.mockapi.io/api",
   headers: {
     'Content-Type': 'application/json',
   },

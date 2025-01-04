@@ -42,7 +42,7 @@ const posts = [
 
 const FeaturePost = () => {
     return (
-        <div className="mt-8 flex flex-col gap-10 lg:flex-row">
+        <div className="my-8 flex flex-col gap-10 lg:flex-row">
             {/* First */}
             <div className="flex w-full flex-col gap-4 lg:w-1/2">
                 {/* image */}

@@ -1,36 +1,8 @@
 import React from 'react'
-import { columns } from './columns'
-import { Blog } from '@/types/blog'
-import { DataTableBlog } from './data-table'
 import { Metadata } from 'next'
+import ManageBlogsComponent from './component';
 
-async function getDataBlog(): Promise<Blog[]> {
-    // Fetch data from your API here.
-    return [
-        {
-            id: "1",
-            title: "sản phẩm cho mèo",
-            status: "draft",
-            description: '',
-            createdAt: "2024-12-01T10:30:00.000Z", // Example ISO 8601 date
-            updatedAt: "2024-12-01T10:30:00.000Z",
-            author: 'duc',
-            content: '',
-            category: ''
-        },
-        {
-            id: "2",
-            title: "sản phẩm cho chó",
-            status: "draft",
-            description: '',
-            createdAt: "2024-12-01T10:30:00.000Z", // Example ISO 8601 date
-            updatedAt: "2024-12-01T10:30:00.000Z",
-            author: 'duc',
-            content: '',
-            category: ''
-        },
-    ]
-}
+
 
 export const generateMetadata = async (): Promise<Metadata> => ({
     title: 'Quản lí tin tức',
@@ -45,11 +17,11 @@ export const generateMetadata = async (): Promise<Metadata> => ({
     },
 });
 
-const ManageBlogs = async () => {
-    const blogs = await getDataBlog()
+
+const ManageBlogsPage = async () => {
     return (
-        <DataTableBlog columns={columns} data={blogs} />
+        <ManageBlogsComponent />
     )
 }
 
-export default ManageBlogs;
+export default ManageBlogsPage;

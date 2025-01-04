@@ -6,25 +6,30 @@ export const API = {
     LOGOUT: '/api/auth/logout',
 
     // USER
-    CHANGE_PASSWORD: '/api/user/change-password',
-    REGISTER: '/api/user/register',
-    CHANGE_STATUS: '/api/user/change-status',
-    CHANGE_ROLE: '/api/user/change-role',
-    GET_UPDATE_DELETE: '/api/user',
+    GET_USERS: '/api/users/search',
+    CHANGE_PASSWORD: '/api/users/change-password',
+    REGISTER: '/api/users/register',
+    CHANGE_STATUS: '/api/users/change-status',
+    CHANGE_ROLE: '/api/users/change-role',
+    GET_UPDATE_DELETE_USER: '/api/users',
 
     // CATEGORY
-    CREATE_CATEGORY: '/api/category/create',
-    GET_CATEGORIES: '/api/category/search',
-    GET_UPDATE_DELETE_CATEGORY: '/api/category',
+    CREATE_CATEGORY: '/api/categories/create',
+    GET_CATEGORIES: '/api/categories/search',
+    GET_UPDATE_DELETE_CATEGORY: '/api/categories',
 
     // BLOG
-    CREATE_BLOG: '/api/blog/create',
-    GET_BLOGS: '/api/blog/search',
+    CREATE_BLOG: '/api/blogs/create',
+    GET_BLOGS: '/api/blogs/search',
     GET_UPDATE_DELETE_BLOG: '/api/blog',
 
-    
+    // PRODUCT
+    CREATE_PRODUCT: '/api/products/create',
+    GET_PRODUCTS: '/api/products/search',
+    GET_UPDATE_DELETE_PRODUCT: '/api/products',
 
-
-    GET_PRODUCTS: '/api/products',
-    GET_PRODUCT_DETAIL: '/api/products/:id',
+    // PET
+    CREATE_PET: '/api/pets/create',
+    GET_PETS: '/api/pets/search',
+    GET_UPDATE_DELETE_PET: '/api/products',
 }
