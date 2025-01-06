@@ -6,11 +6,10 @@ import { Row } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
 import { FaRegEdit } from 'react-icons/fa';
 import { MdOutlineDelete } from 'react-icons/md';
-import { BaseService } from '@/services/baseService';
 import { useToast } from '@/hooks/use-toast';
 import { Category } from '@/types/category';
 import AlertDelete from '../AlertDelete';
-import { API } from '@/constants/api';
+import { deleteCategory } from '@/services/category';
 
 const CategoryMenuDropdown = ({ row }: { row: Row<Category> }) => {
     const [isDialogOpen, setDialogOpen] = useState(false);
@@ -21,7 +20,7 @@ const CategoryMenuDropdown = ({ row }: { row: Row<Category> }) => {
         console.log("Xóa danh mục: ", row.original);
         const deleteRow = row.original.id;
         try {
-            const response = await BaseService.delete({ url: `${API.GET_UPDATE_DELETE_CATEGORY}/${deleteRow}` });
+            const response = await deleteCategory(deleteRow);
             if (response) {
                 toast({
                     title: 'Thành công',

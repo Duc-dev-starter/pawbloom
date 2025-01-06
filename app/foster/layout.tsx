@@ -19,7 +19,7 @@ import { FosterSidebar } from "@/components/foster/FosterSidebar"
 export const metadata: Metadata = {
     title: {
         default: "Pawbloom",
-        template: "%s | Pawbloom",
+        template: "%s | Foster Pawbloom",
     },
     description: "Pawbloom - Cơ hội thứ hai, mái ấm mãi mãi",
 };

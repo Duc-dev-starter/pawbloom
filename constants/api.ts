@@ -21,7 +21,12 @@ export const API = {
     // BLOG
     CREATE_BLOG: '/api/blogs/create',
     GET_BLOGS: '/api/blogs/search',
-    GET_UPDATE_DELETE_BLOG: '/api/blog',
+    GET_UPDATE_DELETE_BLOG: '/api/blogs',
+
+    // POST
+    CREATE_POST: '/api/posts/create',
+    GET_POSTS: '/api/posts/search',
+    GET_UPDATE_DELETE_POST: '/api/posts',
 
     // PRODUCT
     CREATE_PRODUCT: '/api/products/create',
@@ -31,5 +36,5 @@ export const API = {
     // PET
     CREATE_PET: '/api/pets/create',
     GET_PETS: '/api/pets/search',
-    GET_UPDATE_DELETE_PET: '/api/products',
+    GET_UPDATE_DELETE_PET: '/api/pets',
 }

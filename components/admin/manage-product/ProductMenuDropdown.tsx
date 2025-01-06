@@ -7,9 +7,9 @@ import { Row } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
 import { FaRegEdit } from 'react-icons/fa';
 import { MdOutlineDelete } from 'react-icons/md';
-import { BaseService } from '@/services/baseService';
 import { useToast } from '@/hooks/use-toast';
 import AlertDelete from '../AlertDelete';
+import { deleteProduct } from '@/services/product';
 
 const ProductMenuDropdown = ({ row }: { row: Row<Product> }) => {
     const [isDialogOpen, setDialogOpen] = useState(false);
@@ -20,7 +20,7 @@ const ProductMenuDropdown = ({ row }: { row: Row<Product> }) => {
         console.log("Xóa sản phẩm: ", row.original);
         const deleteRow = row.original.id;
         try {
-            const response = await BaseService.delete({ url: `/api/produts/${deleteRow}` });
+            const response = await deleteProduct(deleteRow);
             if (response) {
                 toast({
                     title: 'Thành công',

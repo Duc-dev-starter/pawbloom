@@ -1,10 +1,8 @@
-import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   /* config options here */
   images: {
     domains: ['images.pexels.com', 'avatar.vercel.sh'],
   },
 };
-
-export default nextConfig;
+module.exports = nextConfig;

@@ -6,11 +6,10 @@ import { Row } from '@tanstack/react-table';
 import { MoreHorizontal } from 'lucide-react';
 import { FaRegEdit } from 'react-icons/fa';
 import { MdOutlineDelete } from 'react-icons/md';
-import { BaseService } from '@/services/baseService';
 import { useToast } from '@/hooks/use-toast';
 import AlertDelete from '../AlertDelete';
-import { API } from '@/constants/api';
 import { Blog } from '@/types/blog';
+import { deleteBlog } from '@/services/blog';
 
 const BlogMenuDropdown = ({ row }: { row: Row<Blog> }) => {
     const [isDialogOpen, setDialogOpen] = useState(false);
@@ -21,7 +20,7 @@ const BlogMenuDropdown = ({ row }: { row: Row<Blog> }) => {
         console.log("Xóa danh mục: ", row.original);
         const deleteRow = row.original.id;
         try {
-            const response = await BaseService.delete({ url: `${API.GET_UPDATE_DELETE_BLOG}/${deleteRow}` });
+            const response = await deleteBlog(deleteRow);
             if (response) {
                 toast({
                     title: 'Thành công',
