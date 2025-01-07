@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import OTPModal from './OTPModal';
+import { useToast } from '@/hooks/use-toast';
 
 type FormType = "sign-in" | "sign-out" | "sign-up"
 
@@ -59,6 +60,7 @@ const authFormSchema = () => {
 
 
 const AuthForm = ({ type }: { type: FormType }) => {
+    const [loading, setLoading] = useState(false);
     const formSchema = authFormSchema();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -70,6 +72,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
             phoneNumber: "",
         },
     });
+
+    const { toast } = useToast();
 
     const onSubmit = (values: z.infer<typeof formSchema>) => {
         console.log(values);
@@ -86,6 +90,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
                 <FormField
                     control={form.control}
                     name="email"
+                    disabled={loading}
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Email</FormLabel>
@@ -101,6 +106,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
                 <FormField
                     control={form.control}
                     name="password"
+                    disabled={loading}
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Mật khẩu</FormLabel>
@@ -121,6 +127,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
                     <FormField
                         control={form.control}
                         name="confirmPassword"
+                        disabled={loading}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Xác nhận mật khẩu</FormLabel>
@@ -142,6 +149,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
                     <FormField
                         control={form.control}
                         name="fullName"
+                        disabled={loading}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Họ và tên</FormLabel>
@@ -159,6 +167,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
                     <FormField
                         control={form.control}
                         name="phoneNumber"
+                        disabled={loading}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Số điện thoại</FormLabel>

@@ -88,10 +88,10 @@ export default function Home() {
     { value: "200+", label: "Sản phẩm" },
   ];
 
-  const svgDecorations = [
-    { src: "/assets/icons/dots.svg", alt: "dot", style: { top: "10%", left: "5%" } },
-    { src: "/assets/icons/paw.svg", alt: "paw", style: { top: "50%", left: "10%" } },
-  ];
+  // const svgDecorations = [
+  //   { src: "/assets/icons/dots.svg", alt: "dot", style: { top: "10%", left: "5%" } },
+  //   { src: "/assets/icons/paw.svg", alt: "paw", style: { top: "50%", left: "10%" } },
+  // ];
 
 
 

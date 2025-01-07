@@ -1,4 +1,4 @@
-import { Bell, Calendar, Home, Inbox, Search, Settings, User } from "lucide-react"
+import { Bell, Home, User } from "lucide-react"
 
 import {
     Sidebar,
@@ -10,7 +10,6 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
     SidebarProvider,
-    SidebarTrigger,
 } from "@/components/ui/sidebar"
 import Image from "next/image";
 import { Label } from "@/components/ui/label";
@@ -56,7 +55,7 @@ const otherItems = [
 
 export default async function Profile({ params }: ProfileProps) {
     const { slug } = await params;
-    console.log(params)
+    console.log(slug)
     // // Fetch dữ liệu phía server
     // const res = await axios.get(`https://api.example.com/profiles/${slug}`)
 
