@@ -1,20 +1,27 @@
-import { Label } from '@/components/ui/label';
+// import { Label } from '@/components/ui/label';
 import React from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Input } from "@/components/ui/input"
+import { Label } from '@/components/ui/label';
+
 
 const ProductInputImages = () => {
-    const { register } = useFormContext();
+    // const { register } = useFormContext();
 
     return (
-        <div className="flex flex-col">
+        <div className="mt-4 flex flex-col gap-2">
             <Label htmlFor='images' className='text-slate-600'>Hình ảnh sản phẩm</Label>
-            <input
+            {/* <input
                 id="images"
                 type="file"
                 accept="image/*"
                 multiple
-                {...register('images')} // Đảm bảo trường này được đăng ký với React Hook Form
+                {...register('images')}
                 className="rounded-md border p-2"
+            /> */}
+            <Input
+                placeholder="Picture"
+                type="file"
+                accept="image/*, application/pdf"
             />
         </div>
     );

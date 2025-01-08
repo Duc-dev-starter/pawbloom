@@ -99,7 +99,7 @@ const ProductDialog = () => {
                         }}
                     >
                         <div className='mt-1 flex flex-col gap-2'>
-                            <div className='grid grid-cols-2 gap-7'>
+                            <div className='grid grid-cols-2 items-center gap-7'>
                                 <ProductInputName />
                                 <ProductInputImages />
                             </div>

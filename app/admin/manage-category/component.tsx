@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react'
 import { columns } from './columns'
 import { getCategories } from '@/services/category'
-import { Skeleton } from '@/components/ui/skeleton'
 import { DataTableCategory } from './data-table'
 import { Category } from '@/types/category'
+import SkeletonCustom from '@/components/SekeletonTable'
 
 const ManageCategoriesComponent = () => {
     const [blogs, setBlogs] = useState<Category[]>([]);
@@ -25,9 +25,7 @@ const ManageCategoriesComponent = () => {
     }, [])
 
     if (loading) {
-        return <>
-            <Skeleton />
-        </>;
+        return <><SkeletonCustom columns={columns} /></>
     }
     return (
         <DataTableCategory columns={columns} data={blogs} />
