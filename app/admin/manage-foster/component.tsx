@@ -5,6 +5,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { Foster } from '@/types/user'
 import { getUsers } from '@/services/user'
 import { DataTableFoster } from './data-table'
+import SkeletonCustom from '@/components/SekeletonTable'
 
 const ManageFostersComponent = () => {
     const [fosters, setFosters] = useState<Foster[]>([]);
@@ -25,9 +26,7 @@ const ManageFostersComponent = () => {
     }, [])
 
     if (loading) {
-        return <>
-            <Skeleton />
-        </>;
+        return <div><SkeletonCustom columns={columns} /></div>;
     }
     return (
         <DataTableFoster columns={columns} data={fosters} />

@@ -4,6 +4,8 @@ import { columns } from './columns'
 import { DataTableProduct } from './data-table'
 import { Product } from '@/types/product'
 import { getProducts } from '@/services/product'
+import SkeletonCustom from '@/components/SekeletonTable'
+
 
 const ManageProductsComponent = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -24,7 +26,7 @@ const ManageProductsComponent = () => {
     }, [])
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div><SkeletonCustom columns={columns} /></div>;
     }
     return (
         <DataTableProduct columns={columns} data={products} />

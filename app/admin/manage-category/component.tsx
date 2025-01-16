@@ -5,6 +5,7 @@ import { getCategories } from '@/services/category'
 import { Skeleton } from '@/components/ui/skeleton'
 import { DataTableCategory } from './data-table'
 import { Category } from '@/types/category'
+import SkeletonCustom from '@/components/SekeletonTable'
 
 const ManageCategoriesComponent = () => {
     const [blogs, setBlogs] = useState<Category[]>([]);
@@ -25,9 +26,8 @@ const ManageCategoriesComponent = () => {
     }, [])
 
     if (loading) {
-        return <>
-            <Skeleton />
-        </>;
+        return <div><SkeletonCustom columns={columns} /></div>;
+
     }
     return (
         <DataTableCategory columns={columns} data={blogs} />
