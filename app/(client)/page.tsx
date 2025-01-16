@@ -1,8 +1,8 @@
 import FeaturePost from "@/components/blog/FeaturePost";
-import ProductCard from "@/components/product/ProductCard";
 import WatchMoreButton from "@/components/WatchMoreButton";
 import Path from "@/constants/paths";
 import EventCard from "@/sections/home/EventCard";
+import ProductList from "@/sections/home/ProductList";
 import { Metadata } from "next";
 import Image from "next/image";
 
@@ -186,10 +186,8 @@ export default function Home() {
 
       <section className="border-t-2 border-brand p-16">
         <h1 className="mb-10 text-center text-4xl font-semibold text-brand-200">Sản phẩm</h1>
-        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        <div className="">
+          <ProductList />
         </div>
         <div className="text-center">
           <WatchMoreButton href={Path.PRODUCT} />
@@ -220,7 +218,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
     </>
   );
 }

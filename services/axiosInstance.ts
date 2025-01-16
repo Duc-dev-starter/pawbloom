@@ -64,8 +64,8 @@ axiosInstance.interceptors.response.use(
             break;
           }
 
-        //   case HttpStatus.NotFound:
-        //     toast.error(data.message || data.Message);
+          case HttpStatus.NotFound:
+            toast.error(data.message || data.Message);
         //     switch(user.role){
         //       case "member":
         //         window.location.href = Path.NOTFOUND;
@@ -81,8 +81,7 @@ axiosInstance.interceptors.response.use(
         //         window.location.href = Path.HOME;
         //         break;
         //     }
-            
-        //     break;
+            break;
 
           case HttpStatus.InternalServerError:
             toast.error(data.message || data.Message);

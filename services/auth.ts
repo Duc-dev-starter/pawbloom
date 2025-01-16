@@ -2,7 +2,7 @@ import { API } from "@/constants/api"
 import { BaseService } from "./baseService"
 import { User } from "@/types/user"
 
-export const register = async (data: User) => {
+export const register = async (data: Partial<User>) => {
     const response = await BaseService.post({url: API.REGISTER, payload: data});
     return response;
 }

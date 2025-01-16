@@ -3,6 +3,8 @@ import { Poppins } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import React from "react";
 import { Tooltip, TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "@/components/ui/toaster";
+import 'swiper/css';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -27,6 +29,7 @@ export default function RootLayout({
           </Tooltip>
         </TooltipProvider>
         <ToastContainer />
+        <Toaster />
 
       </body>
     </html>
