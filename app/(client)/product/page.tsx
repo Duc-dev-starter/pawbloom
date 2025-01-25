@@ -13,13 +13,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-type Product = {
-    id: string;
-    name: string;
-    price: number;
-    description: string;
-    slug: string;
-};
+
 
 // // Dữ liệu giả
 // const mockProducts: Product[] = [

@@ -54,6 +54,7 @@ const ProductDialog = () => {
             supplier: data.supplier,
             name: data.name,
             price: data.price,
+            images: [],
             quantity: data.quantity,
             description: data.description,
             status: selectedTab,

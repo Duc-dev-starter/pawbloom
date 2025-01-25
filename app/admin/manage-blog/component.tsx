@@ -4,8 +4,7 @@ import { columns } from './columns'
 import { Blog } from '@/types/blog'
 import { DataTableBlog } from './data-table'
 import { getBlogs } from '@/services/blog'
-import { Skeleton } from '@/components/ui/skeleton'
-import SkeletonCustom from '@/components/SekeletonTable'
+import SkeletonCustom from '@/components/SkeletonTable'
 
 const ManageBlogsComponent = () => {
     const [blogs, setBlogs] = useState<Blog[]>([]);

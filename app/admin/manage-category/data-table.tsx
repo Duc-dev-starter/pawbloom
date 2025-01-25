@@ -31,6 +31,7 @@ import { IoClose } from "react-icons/io5"
 import { StatusDropdown } from "@/components/admin"
 import CategoryFilterArea from "@/components/admin/manage-category/CategoryFilterArea"
 import { PaginationControls, PaginationSelection } from "@/components/common"
+import CategoryDialog from "@/components/admin/manage-category/CategoryDialog"
 
 const categoryStatuses: Status[] = [
     { value: 'published', label: 'Công khai', icon: <FaCheck /> },
@@ -108,7 +109,7 @@ export function DataTableCategory<TData, TValue>({
                             <CardTitle className="text-[23px] font-bold">Danh mục</CardTitle>
                             <p className="text-sm text-slate-600">{data.length} danh mục</p>
                         </div>
-                        {/* <ProductDialog /> */}
+                        <CategoryDialog />
                     </div>
                     <div className="flex flex-col gap-3">
                         {/* Search Input and Dropdown */}

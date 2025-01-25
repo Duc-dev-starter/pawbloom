@@ -4,7 +4,7 @@ import { columns } from './columns'
 import { DataTableProduct } from './data-table'
 import { Product } from '@/types/product'
 import { getProducts } from '@/services/product'
-import SkeletonCustom from '@/components/SekeletonTable'
+import SkeletonCustom from '@/components/SkeletonTable'
 
 
 const ManageProductsComponent = () => {

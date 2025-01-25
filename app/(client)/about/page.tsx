@@ -1,7 +1,6 @@
 import React, { CSSProperties } from 'react'
 
 import { Metadata } from 'next';
-import { Faqs, Features, HeroSections, Testimonials } from '@/sections/about';
 import Marquee from '@/components/ui/marquee';
 import { avatar, faqs, heroImages, reviews } from '@/constants/about';
 import Image from 'next/image';
@@ -169,8 +168,8 @@ const AboutPage = () => {
                 </div>
             </section>
 
-            <section id='features' className='w-full py-32 flex flex-col items-center justify-center'>
-                <div className='container px-6 xs:px-8 sm:px-0 sm:mx-8 lg:mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 relative'>
+            <section id='features' className='flex w-full flex-col items-center justify-center py-32'>
+                <div className='container relative grid grid-cols-1 gap-8 px-6 xs:px-8 sm:mx-8 sm:px-0 lg:mx-auto lg:grid-cols-2'>
                     <div className='col-span-full space-y-4'>
                         <AnimatedGradientText className='ml-0 bg-background backdrop-blur-0'>
                             <span
@@ -201,11 +200,11 @@ const AboutPage = () => {
                     </div>
 
                     <div className={cn("h-fit lg:sticky top-32 pl-16 pt-16 rounded-lg border border-r-gray-300 border-b-gray-300 animate-gradient bg-gradient-to-r from-[#627fab] via-[#b95480] to-[#627fab] bg-[length:var(--bg-size)_100%] [--bg-size:400%] order-1 lg:order-2")}>
-                        <Image src="/assets/images/homepage.png" alt='test' width={120} height={120} className='w-full h-auto rounded-tl-lg' />
+                        <Image src="/assets/images/homepage.png" alt='test' width={120} height={120} className='h-auto w-full rounded-tl-lg' />
                     </div>
                 </div>
             </section>
-            <section id='testimonials' className='flex w-full flex-col items-center justify-center overflow-hidden pt-20 pb-28'>
+            <section id='testimonials' className='flex w-full flex-col items-center justify-center overflow-hidden pb-28 pt-20'>
                 <AnimatedGradientText>
                     🎉 <hr className="mx-2 h-4 w-px shrink-0 bg-gray-300" />{" "}
                     <span
@@ -234,7 +233,7 @@ const AboutPage = () => {
                     <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background sm:w-1/4"></div>
                 </div>
             </section>
-            <section id='faqs' className='w-full pt-20 pb-28 px-6 xs:px-8 sm:px-0 sm:mx-8 lg:mx-auto flex flex-col items-center justify-center overflow-hidden'>
+            <section id='faqs' className='flex w-full flex-col items-center justify-center overflow-hidden px-6 pb-28 pt-20 xs:px-8 sm:mx-8 sm:px-0 lg:mx-auto'>
                 <AnimatedGradientText>
                     🎉 <hr className="mx-2 h-4 w-px shrink-0 bg-gray-300" />{" "}
                     <span
@@ -249,7 +248,7 @@ const AboutPage = () => {
                 <h2 className='mt-4 text-2xl font-bold xs:text-3xl sm:text-4xl'>Những câu hỏi thường gặp</h2>
                 <p className='mt-4 text-center text-base text-muted-foreground lg:max-w-[75%]'>Đây là 1 số câu hỏi mà chúng tôi thường gặp</p>
 
-                <Accordion type='single' collapsible className='w-full max-w-4xl mx-auto mt-16'>
+                <Accordion type='single' collapsible className='mx-auto mt-16 w-full max-w-4xl'>
                     {
                         faqs.map((faq) => (
                             <Question key={faq.question} {...faq} />

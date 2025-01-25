@@ -1,11 +1,10 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import { columns } from './columns'
-import { Skeleton } from '@/components/ui/skeleton'
 import { Foster } from '@/types/user'
 import { getUsers } from '@/services/user'
 import { DataTableFoster } from './data-table'
-import SkeletonCustom from '@/components/SekeletonTable'
+import SkeletonCustom from '@/components/SkeletonTable'
 
 const ManageFostersComponent = () => {
     const [fosters, setFosters] = useState<Foster[]>([]);

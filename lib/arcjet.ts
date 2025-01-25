@@ -1,7 +1,7 @@
-import arcjet, { protectSignup } from "@arcjet/next";
-console.log(process.env.ARCJET_KEY)
+import { config } from "@/config";
+import arcjet, { detectBot, protectSignup, shield, validateEmail } from "@arcjet/next";
 const aj = arcjet({
-    key: process.env.ARCJET_KEY || '',
+    key: config.ARCJET_KEY || '',
     rules: [
         protectSignup({
             email: {
@@ -27,10 +27,19 @@ const aj = arcjet({
 });
 
 export const loginRules = arcjet({
-    key: process.env.ARCJET_KEY || '',
+    key: config.ARCJET_KEY || '',
     characteristics: ['ip.src'],
     rules: [
-       
+       validateEmail({
+        mode: "LIVE",
+        block: ["DISPOSABLE", "INVALID", "NO_MX_RECORDS"]
+       }),
+       shield({mode: "LIVE",}),
+       detectBot({
+        mode: "LIVE",
+       allow: []
+ 
+       })
     ],
 })
 

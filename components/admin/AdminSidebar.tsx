@@ -57,7 +57,7 @@ const data = {
             ],
         },
         {
-            title: "Quản lý blog",
+            title: "Quản lý tin tức",
             url: "/admin/manage-blog",
             icon: BookOpen,
             isActive: false,

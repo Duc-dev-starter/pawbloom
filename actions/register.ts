@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server"
+import { HttpStatus } from "@/enum/https";
 import aj from "@/lib/arcjet";
 import { authFormSchema } from "@/schema/auth";
 import { register } from "@/services/auth";
@@ -13,24 +14,24 @@ export async function registerUserAction(entries: any) {
     });
 
     console.log([...formData.entries()]); 
-    const validatedField = authFormSchema.safeParse({
+    const validatedFields = authFormSchema.safeParse({
         fullName: formData.get('fullName'),
         email: formData.get('email'),
         password: formData.get('password'),
         phoneNumber: formData.get('phoneNumber'),
     });
 
-    console.log(validatedField);
+    console.log(validatedFields);
     console.log(formData);
     
-    if (!validatedField.success) {
+    if (!validatedFields.success) {
         return {
-            error: validatedField.error.errors[0].message,
+            error: validatedFields.error.errors[0].message,
             status: 400,
         };
     }
 
-    const { fullName, password, email, phoneNumber } = validatedField.data;
+    const { fullName, password, email, phoneNumber } = validatedFields.data;
     try {
         const req = await request();
         const decision = await aj.protect(req, { email });
@@ -41,38 +42,38 @@ export async function registerUserAction(entries: any) {
                 if(emailTypes.includes('DISPOSABLE')){
                     return {
                         error: 'Không được phép sử dụng địa chỉ email dùng một lần.',
-                        status: 403,
+                        status: HttpStatus.Forbidden,
                     };
                 }
                 else if(emailTypes.includes('INVALID')){
                     return {
                         error: 'Địa chỉ email không hợp lệ.',
-                        status: 403,
+                        status: HttpStatus.Forbidden,
                     };
                 }
                 else if(emailTypes.includes('NO_MX_RECORDS')){
                     return {
                         error: 'Tên miền email không có bản ghi MX hợp lệ.',
-                        status: 403,
+                        status: HttpStatus.Forbidden,
                     }; 
                 }
                 else {
                     return {
                         error: 'Địa chỉ email không được chấp nhận! Vui lòng thử lại.',
-                        status: 403,
+                        status: HttpStatus.Forbidden,
                     }; 
                 }
             } 
             else if(decision.reason.isBot()){
                 return {
                     error: 'Phát hiện hoạt động của bot',
-                    status: 403,
+                    status: HttpStatus.Forbidden,
                 }
             }
             else if(decision.reason.isRateLimit()){
                 return {
                     error: 'Quá nhiều yêu cầu! Vui lòng thử lại sau.',
-                    status: 403,
+                    status: HttpStatus.Forbidden,
                 }
             }
         }
@@ -86,19 +87,19 @@ export async function registerUserAction(entries: any) {
           if (result) {
             return {
               success: "Đăng kí người dùng thành công",
-              status: 201,
+              status: HttpStatus.Created,
             };
           } else {
             return {
               error: "Hệ thống đang gặp sự cố",
-              status: 500,
+              status: HttpStatus.InternalServerError,
             };
           }
     } catch (error) {
         console.error(error);
         return {
             error: 'Hệ thống đang gặp sự cố',
-            status: 500,
+            status: HttpStatus.InternalServerError,
         };
     }
 }
