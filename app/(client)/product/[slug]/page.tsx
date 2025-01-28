@@ -36,8 +36,6 @@ async function fetchProduct(slug: string) {
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda odit eius omnis, distinctio laudantium facere praesentium corrupti ullam asperiores cumque vel, officiis eveniet voluptas veniam soluta itaque illum quibusdam ducimus?',
     };
 
-    // Giả lập nếu slug không khớp
-    if (slug !== 'mountain-retreat') return null;
 
     return productData;
 }

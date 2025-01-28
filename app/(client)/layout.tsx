@@ -1,4 +1,4 @@
-import { Footer, Header } from "@/components/common";
+import { Footer, Header, ScrollToTopButton } from "@/components/common";
 import MobileNavigation from "@/components/MobileNavigation";
 import { Metadata } from "next";
 import React from "react";
@@ -21,6 +21,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     <Header />
                     <div className="flex-1">{children}</div>
                     <Footer />
+                    <ScrollToTopButton />
                 </section>
             </main>
         </>
