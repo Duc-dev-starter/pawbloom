@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import ProductSkeleton from "./ProductSkeleton";
 import ProductCard from "./ProductCard";
 
-const ProductList = () => {
+const ProductList = ({ sortOrder }: { sortOrder: "newest" | "oldest" }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -13,6 +13,7 @@ const ProductList = () => {
             try {
                 const response = await axios.get("https://fakestoreapi.com/products");
                 setProducts(response.data);
+                console.log(response)
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching products:", error);
@@ -20,7 +21,7 @@ const ProductList = () => {
         };
 
         fetchProducts();
-    }, []);
+    }, [sortOrder]);
 
     return (
         <>
@@ -30,6 +31,8 @@ const ProductList = () => {
                         <ProductSkeleton key={index} />
                     ))
                     : products.map((product) => (
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        // @ts-expect-error
                         <ProductCard key={product.id} product={product} />
                     ))}
             </div>

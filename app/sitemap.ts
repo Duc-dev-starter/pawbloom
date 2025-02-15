@@ -5,9 +5,9 @@ import { Product } from '@/types/product';
 import type { MetadataRoute } from 'next'
  
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const blogsData = await fetch(`http://localhost:7192/${API.GET_BLOGS}`);
+    const blogsData = await fetch(`http://localhost:5000/${API.GET_BLOGS}`);
     const blogsRespone: Blog[] = await blogsData.json();
-    const productsData = await fetch(`http://localhost:7192/${API.GET_PRODUCTS}`);
+    const productsData = await fetch(`http://localhost:5000/${API.GET_PRODUCTS}`);
     const productsRespone: Product[] = await productsData.json();
 
     const blogEntries : MetadataRoute.Sitemap = blogsRespone.map(({id}) => ({

@@ -21,40 +21,6 @@ export const generateMetadata = async (): Promise<Metadata> => ({
   },
 });
 
-const products = [
-  {
-    id: "1",
-    name: "Tai Nghe Không Dây",
-    price: "89.99",
-    image: "/assets/images/homepage.png",
-    rating: 4,
-    reviews: 121,
-  },
-  {
-    id: "2",
-    name: "Loa Bluetooth",
-    price: "119.99",
-    image: "/assets/images/homepage.png",
-    rating: 5,
-    reviews: 200,
-  },
-  {
-    id: "3",
-    name: "Đồng Hồ Thông Minh",
-    price: "299.99",
-    image: "/assets/images/homepage.png",
-    rating: 4,
-    reviews: 87,
-  },
-  {
-    id: "4",
-    name: "Bàn Phím Cơ",
-    price: "49.99",
-    image: "/assets/images/homepage.png",
-    rating: 3,
-    reviews: 60,
-  },
-];
 
 const eventData = [
   {
@@ -115,8 +81,8 @@ export default function Home() {
             <h2 className="text-center font-medium italic text-brand-200 lg:text-left">
               #cơ hội thứ 2, mái ấm mãi mãi
             </h2>
-            <h1 className="text-center text-3xl font-bold md:text-5xl lg:text-left">
-              Tìm Kiếm Thú Cưng Cho Bạn
+            <h1 className="text-center text-3xl font-semibold md:text-5xl lg:text-left">
+              Tìm kiếm thú cưng cho bạn
             </h1>
             <p className="text-center text-lg font-medium text-gray-500 md:text-xl lg:text-left">
               Pawbloom – Nơi kết nối những trái tim yêu thương với những chú thú cưng cần được yêu thương.
@@ -158,8 +124,8 @@ export default function Home() {
 
           {/* Nội dung bên phải */}
           <div className="flex flex-1 flex-col justify-center gap-4">
-            <h2 className="text-center text-3xl font-semibold md:text-left">
-              Vì Một Tương Lai Tốt Đẹp Cho Những Người Bạn Bốn Chân
+            <h2 className="text-center text-3xl leading-normal font-semibold md:text-left">
+              Vì một tương lai tốt đẹp cho những người bạn bốn chân
             </h2>
             <p className="text-center text-xl font-medium text-gray-500 md:text-left">
               PawBloom được thành lập với mục tiêu kết nối những trạm cứu trợ động vật với những người có lòng yêu thương,

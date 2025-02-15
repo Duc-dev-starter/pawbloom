@@ -2,16 +2,23 @@ export const API = {
     // AUTH
     LOGIN: '/api/auth/login',
     GET_CURRENT_USER: '/api/auth',
-    FORGOT_PASSWORD: '/api/auth/forgot-password',
+    REGISTER: '/api/auth/register',
+    SOCIAL_LOGIN: '/api/auth/social-login',
     LOGOUT: '/api/auth/logout',
 
     // USER
     GET_USERS: '/api/users/search',
     CHANGE_PASSWORD: '/api/users/change-password',
-    REGISTER: '/api/users/register',
     CHANGE_STATUS: '/api/users/change-status',
     CHANGE_ROLE: '/api/users/change-role',
+    RESEND_VERIFICATION_EMAIL: '/api/users/resend-verification-email',
     GET_UPDATE_DELETE_USER: '/api/users',
+    RESET_PASSWORD: '/api/users/reset-password',
+
+    // BLOG CATEGORIES
+    CREATE_BLOG_CATEGORY: '/api/blogCategories',
+    GET_BLOG_CATEGORIES: '/api/blogCategories',
+    GET_UPDATE_DELETE_BLOG_CATEGORY: '/api/blogCategories',
 
     // CATEGORY
     CREATE_CATEGORY: '/api/categories/create',
@@ -19,8 +26,8 @@ export const API = {
     GET_UPDATE_DELETE_CATEGORY: '/api/categories',
 
     // BLOG
-    CREATE_BLOG: '/api/blogs/create',
-    GET_BLOGS: '/api/blogs/search',
+    CREATE_BLOG: '/api/blogPosts',
+    GET_BLOGS: '/api/blogPosts',
     GET_UPDATE_DELETE_BLOG: '/api/blogs',
 
     // POST
@@ -34,7 +41,8 @@ export const API = {
     GET_UPDATE_DELETE_PRODUCT: '/api/products',
 
     // PET
-    CREATE_PET: '/api/pets/create',
+    CREATE_PET: '/api/pets',
     GET_PETS: '/api/pets/search',
     GET_UPDATE_DELETE_PET: '/api/pets',
+    UPDATE_STATUS_PET: '/api/pets'
 }

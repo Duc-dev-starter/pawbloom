@@ -8,6 +8,7 @@ import {
 import React from 'react'
 import { Metadata } from "next"
 import { AdminSidebar } from "@/components/admin/AdminSidebar"
+import { AdminSearchbar } from "@/components/admin/dashboard"
 
 export const metadata: Metadata = {
     title: {
@@ -29,6 +30,7 @@ const Layout = ({ children }: { children: React.ReactNode, currentPage: string }
                         <Separator orientation="vertical" className="mr-2 h-4" />
                         <Breadcrumbs />
                     </div>
+                    <AdminSearchbar />
                 </header>
                 {/* <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
                     <div className="grid auto-rows-min gap-4 md:grid-cols-3">
