@@ -32,7 +32,7 @@ const ProductList = ({ sortOrder }: { sortOrder: "newest" | "oldest" }) => {
                     ))
                     : products.map((product) => (
                         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                        // @ts-expect-error
+                        // @ts-expect-error 
                         <ProductCard key={product.id} product={product} />
                     ))}
             </div>

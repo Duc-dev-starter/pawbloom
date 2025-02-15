@@ -3,7 +3,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { User } from '@/types/user';
 import React, { SetStateAction, useEffect } from 'react'
 
-const BlogSelectAuthor = ({ selectedAuthor, setSelectedAuthor }: { selectedAuthor: string, setSelectedAuthor: React.Dispatch<SetStateAction<User["name"]>> }) => {
+const BlogSelectAuthor = ({ selectedAuthor, setSelectedAuthor }: { selectedAuthor: string, setSelectedAuthor: React.Dispatch<SetStateAction<User["fullName"]>> }) => {
     const authors = [
         "J97",
         "trinh tran phuong tuan",
@@ -14,7 +14,7 @@ const BlogSelectAuthor = ({ selectedAuthor, setSelectedAuthor }: { selectedAutho
     }, [])
 
     const handleValueChange = (value: string) => {
-        setSelectedAuthor(value as User["name"]);
+        setSelectedAuthor(value as User["fullName"]);
     }
 
     return (
