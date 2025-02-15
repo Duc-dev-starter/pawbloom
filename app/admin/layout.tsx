@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 
-const Layout = ({ children }: { children: React.ReactNode, currentPage: string }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <SidebarProvider>
             <AdminSidebar />
