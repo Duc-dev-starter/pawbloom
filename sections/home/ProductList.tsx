@@ -12,7 +12,8 @@ const ProductList = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             const response = await getProducts();
-            // @ts-ignore
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
             const products = response.slice(0, 7);
             setNewProducts(products);
         }

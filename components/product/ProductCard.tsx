@@ -6,7 +6,8 @@ import CustomCard from "./CustomCard";
 
 
 
-const ProductCard = ({ product }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ProductCard = ({ product }: { product: any }) => {
     return (
         <CustomCard className="cursor-pointer">
             <Link href={`/product/${product.id}`}>

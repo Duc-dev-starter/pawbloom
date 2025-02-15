@@ -11,31 +11,35 @@ import { User } from '@/types/user'
 const authors: User[] = [
     {
         id: "1",
-        name: 'John',
+        fullName: 'John',
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
-        phoneNumber: ''
+        phoneNumber: '',
+        email: ''
     },
     {
         id: "2",
-        name: 'John2',
+        fullName: 'John2',
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
-        phoneNumber: ''
+        phoneNumber: '',
+        email: ''
     },
     {
         id: "3",
-        name: 'John3',
+        fullName: 'John3',
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
-        phoneNumber: ''
+        phoneNumber: '',
+        email: ''
     },
     {
         id: "4",
-        name: 'John4',
+        fullName: 'John4',
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
-        phoneNumber: ''
+        phoneNumber: '',
+        email: ''
     },
 ]
 
@@ -79,13 +83,13 @@ const AuthorDropdown = ({ selectedAuthors, setSelectedAuthors }: AuthorDropdownP
                             </CommandEmpty>
                             <CommandGroup>
                                 {authors.map(author => (
-                                    <CommandItem key={author.name} value={author.name}>
+                                    <CommandItem key={author.fullName} value={author.fullName}>
                                         <Checkbox className='size-4 rounded-[4px]'
-                                            checked={selectedAuthors.includes(author.name)}
-                                            onClick={() => handleCheckboxChange(author.name)}
+                                            checked={selectedAuthors.includes(author.fullName)}
+                                            onClick={() => handleCheckboxChange(author.fullName)}
                                         />
                                         <div className='flex items-center gap-1 rounded-lg p-1 px-3 text-sm'>
-                                            {author.name}
+                                            {author.fullName}
                                         </div>
                                     </CommandItem>
                                 ))}

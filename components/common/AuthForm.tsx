@@ -21,6 +21,7 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import Path from '@/constants/paths';
 import { useRouter } from 'next/navigation';
+import { login } from '@/services/auth';
 
 type FormType = "sign-in" | "sign-up"
 
@@ -64,7 +65,29 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                     throw new Error(result?.error || 'Có lỗi xảy ra')
                 }
             } else {
-                // Handle sign-in logic here
+                const response = await login(values);
+                console.log(response);
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-expect-error
+                if (response.success) {
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-expect-error
+                    switch (response.role) {
+                        case 'admin':
+                            router.push(Path.ADMIN_DASHBOARD);
+                            break;
+                        case 'foster':
+                            router.push(Path.FOSTER_DASHBOARD);
+                            break;
+                        default:
+                            router.push(Path.HOME);
+                            break;
+                    }
+                } else {
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-expect-error
+                    throw new Error(response?.error || 'Có lỗi xảy ra')
+                }
             }
         } catch (error) {
             console.log(error);

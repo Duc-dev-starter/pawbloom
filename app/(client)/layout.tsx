@@ -1,5 +1,4 @@
 import { Footer, Header, ScrollToTopButton } from "@/components/common";
-import MobileNavigation from "@/components/MobileNavigation";
 import { Metadata } from "next";
 import React from "react";
 

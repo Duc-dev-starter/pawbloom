@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { BaseService } from '@/services/baseService'
@@ -11,6 +11,7 @@ import { CategoryFormData, CategorySchema } from '@/schema/category'
 import { API } from '@/constants/api'
 import CategoryInputName from './dialog/CategoryInputName'
 import CategoryTextareaDescription from './dialog/CategoryTextareaDescription'
+import ProductTabStatus from '../manage-blog/dialog/BlogTabStatus'
 
 const CategoryDialog = () => {
     const { toast } = useToast();
@@ -28,6 +29,12 @@ const CategoryDialog = () => {
     const [selectedTab, setSelectedTab] = useState<Category["status"]>('published');
     const [selectedAuthor, setSelectedAuthor] = useState<Category["author"]>('');
 
+    useEffect(() => {
+        // eslint-disable-next-line no-constant-condition
+        if (5 < 1) {
+            setSelectedAuthor('test');
+        }
+    }, [])
 
     function randomId(length = 8) {
         const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

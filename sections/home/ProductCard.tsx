@@ -10,6 +10,7 @@ interface ProductProps {
 
 const ProductCard: React.FC<ProductProps> = ({ product }) => {
     const [hovered, setHovered] = useState(false);
+    console.log(hovered);
     return (
         <div className='overflow-hidden'>
             <Link

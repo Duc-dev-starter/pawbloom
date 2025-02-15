@@ -1,4 +1,6 @@
-const CustomCard = ({ children, className = "" }) => {
+import React from "react";
+
+const CustomCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
     return (
         <div
             className={`overflow-hidden rounded-lg bg-white p-6 ${className}`}
@@ -7,5 +9,6 @@ const CustomCard = ({ children, className = "" }) => {
         </div>
     );
 };
+
 
 export default CustomCard;

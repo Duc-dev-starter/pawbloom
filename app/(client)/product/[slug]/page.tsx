@@ -36,7 +36,7 @@ async function fetchProduct(slug: string) {
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda odit eius omnis, distinctio laudantium facere praesentium corrupti ullam asperiores cumque vel, officiis eveniet voluptas veniam soluta itaque illum quibusdam ducimus?',
     };
 
-
+    console.log(slug);
     return productData;
 }
 

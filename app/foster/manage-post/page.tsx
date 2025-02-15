@@ -3,6 +3,7 @@ import { columns } from './columns'
 import { Metadata } from 'next'
 import { DataTablePosts } from './data-table';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function getDataPost(): Promise<any[]> {
     // Fetch data from your API here.
     return [
