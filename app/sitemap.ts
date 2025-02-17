@@ -6,9 +6,9 @@ import { Product } from '@/types/product';
 import type { MetadataRoute } from 'next'
  
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const blogsData = await fetch(`${config.MOCKAPI_URL}/${API.GET_BLOGS}`);
+    const blogsData = await fetch(`${config.MOCKAPI_URL}/${API.GET_UPDATE_DELETE_BLOG}`);
     const blogsRespone: Blog[] = await blogsData.json();
-    const productsData = await fetch(`${config.MOCKAPI_URL}/${API.GET_PRODUCTS}`);
+    const productsData = await fetch(`${config.MOCKAPI_URL}/${API.GET_UPDATE_DELETE_CATEGORY}`);
     const productsRespone: Product[] = await productsData.json();
 
     const blogEntries : MetadataRoute.Sitemap = blogsRespone.map(({id}) => ({
