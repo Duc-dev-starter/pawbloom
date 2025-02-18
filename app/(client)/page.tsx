@@ -67,18 +67,8 @@ export default function Home() {
     <>
 
       <section className=" md:px-28 md:py-16">
-        {/* {svgDecorations.map((item, index) => (
-        <Image
-          key={index}
-          src={item.src}
-          alt={item.alt}
-          width={50} // Adjust size as needed
-          height={50}
-          className="absolute z-0 opacity-80"
-        />
-      ))} */}
+
         <div className="absolute inset-0 size-full">
-          {/* Background Flicker covering the entire container */}
           <LayoutBGFlicker
             className=" z-0 [mask-image:radial-gradient(450px_circle_at_center,white,transparent)]"
             squareSize={6}
@@ -90,7 +80,6 @@ export default function Home() {
         </div>
         <div className="relative flex flex-col gap-5 lg:flex-row lg:gap-x-10">
 
-          {/* Content starts here */}
           <div className="relative z-10 flex flex-1 flex-col gap-6">
             <h2 className="text-center font-medium italic text-brand-200 lg:text-left">
               #cơ hội thứ 2, mái ấm mãi mãi
@@ -103,7 +92,6 @@ export default function Home() {
               Chúng tôi giúp tạo dựng mái ấm mới, mang lại cơ hội thứ hai cho thú cưng từ các trạm cứu trợ.
             </p>
 
-            {/* Render stats */}
             <div className="flex justify-center gap-10 lg:justify-start">
               {stats.map((stat, index) => (
                 <div key={index} className="flex flex-col items-center gap-2 lg:items-start">
@@ -114,7 +102,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right side with image */}
           <div className="relative z-10 flex flex-1 justify-center">
             <Image
               src={homePageImage}
@@ -132,7 +119,6 @@ export default function Home() {
       <section className="border-t-2 border-brand p-10">
         <h1 className="mb-10 text-center text-4xl font-semibold text-brand-200">Về Chúng Tôi</h1>
         <div className="flex flex-col items-center gap-10 md:flex-row">
-          {/* Hình ảnh */}
           <div className="flex flex-1 justify-center">
             <Image src={homePageImage} alt="pet" width={500} height={500} className="rounded-md object-cover" />
           </div>
