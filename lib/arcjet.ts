@@ -1,5 +1,5 @@
 import { config } from "@/config";
-import arcjet, { detectBot, protectSignup, shield, validateEmail } from "@arcjet/next";
+import arcjet, { protectSignup } from "@arcjet/next";
 const aj = arcjet({
     key: config.ARCJET_KEY || '',
     rules: [
@@ -26,21 +26,6 @@ const aj = arcjet({
     ],
 });
 
-export const loginRules = arcjet({
-    key: config.ARCJET_KEY || '',
-    characteristics: ['ip.src'],
-    rules: [
-       validateEmail({
-        mode: "LIVE",
-        block: ["DISPOSABLE", "INVALID", "NO_MX_RECORDS"]
-       }),
-       shield({mode: "LIVE",}),
-       detectBot({
-        mode: "LIVE",
-       allow: []
- 
-       })
-    ],
-})
+
 
 export default aj;

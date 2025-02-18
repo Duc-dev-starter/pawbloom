@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from 'react'
+import { jwtDecode } from "jwt-decode";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,12 +23,15 @@ import Link from 'next/link';
 import Path from '@/constants/paths';
 import { useRouter } from 'next/navigation';
 import { login } from '@/services/auth';
+import { JwtPayload } from '@/types/auth';
 
 type FormType = "sign-in" | "sign-up"
 
 interface AuthFormProps extends React.ComponentPropsWithoutRef<"form"> {
     type: FormType;
 }
+
+
 
 const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
     const [loading, setLoading] = useState(false);
@@ -42,6 +46,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
         },
     });
     const { toast } = useToast();
+
 
     const onSubmit = async (values: z.infer<typeof authFormSchema>) => {
         console.log(values);
@@ -70,14 +75,14 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-expect-error
                 if (response.success) {
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    // @ts-expect-error
-                    switch (response.role) {
-                        case 'admin':
-                            router.push(Path.ADMIN_DASHBOARD);
+                    const token = response.data.token;
+                    const decodedToken: JwtPayload = jwtDecode(token);
+                    switch (decodedToken.role) {
+                        case "user":
+                            router.push(Path.HOME);
                             break;
-                        case 'foster':
-                            router.push(Path.FOSTER_DASHBOARD);
+                        case "admin":
+                            router.push(Path.ADMIN_DASHBOARD);
                             break;
                         default:
                             router.push(Path.HOME);
