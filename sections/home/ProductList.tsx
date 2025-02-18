@@ -47,7 +47,7 @@ const ProductList = () => {
                     },
                 }}
                 modules={[Autoplay]}
-                className='h-[399px] mt-5'
+                className='mt-5 h-[399px]'
             >
                 {
                     newProducts.map((product) => (

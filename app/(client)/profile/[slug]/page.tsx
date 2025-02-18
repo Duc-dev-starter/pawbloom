@@ -63,9 +63,9 @@ export default async function Profile({ params }: ProfileProps) {
 
     return (
         <SidebarProvider>
-            <div className="relative flex size-full">
+            <div className="relative flex">
                 {/* Sidebar */}
-                <Sidebar className="sidebar-profile-border absolute w-64">
+                <Sidebar className="sidebar-profile-border absolute h-full w-64">
                     <SidebarContent>
                         <SidebarGroup>
                             <SidebarGroupLabel className="text-base">Chung</SidebarGroupLabel>
@@ -109,18 +109,18 @@ export default async function Profile({ params }: ProfileProps) {
                     <div className="flex flex-col">
                         <div className="flex flex-col justify-center gap-1 border-b-2 border-brand">
                             <h2 className="h2">Tài khoản</h2>
-                            <p className="text-gray-400 text-base mb-4">Quản lí tài khoản của bạn</p>
+                            <p className="mb-4 text-base text-gray-400">Quản lí tài khoản của bạn</p>
                         </div>
                         {/* Avatar */}
 
-                        <div className="flex justify-between items-center">
-                            <div className="flex mt-3 gap-3">
+                        <div className="flex items-center justify-between">
+                            <div className="mt-3 flex gap-3">
                                 <div>
                                     <Image src="/assets/images/homepage.png" alt="test" width={150} height={150} className="rounded-full" />
                                 </div>
                                 <div className="flex flex-col justify-center gap-4">
                                     <h3 className="h3">John Doe</h3>
-                                    <p className="text-gray-400 text-sm">PNG, JPG lên tới 5MB</p>
+                                    <p className="text-sm text-gray-400">PNG, JPG lên tới 5MB</p>
                                     <p className="text-xl text-brand">Cập nhật</p>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@ export default async function Profile({ params }: ProfileProps) {
 
                         <div className="mt-10">
                             <h2 className="h2">Chi tiết</h2>
-                            <div className="flex flex-col gap-8 justify-center">
+                            <div className="flex flex-col justify-center gap-8">
                                 <div className="grid grid-cols-2 gap-10">
                                     <div>
                                         <Label htmlFor='name' className='text-slate-600'>Tên</Label>
@@ -153,15 +153,15 @@ export default async function Profile({ params }: ProfileProps) {
                                         <Label htmlFor='name' className='text-slate-600'>Số điện thoại</Label>
                                         <Input type="text" placeholder="0898320059" />
                                     </div>
-                                    <Button className="rounded-3xl bg-brand w-1/4">Lưu</Button>
+                                    <Button className=" w-1/4 rounded-3xl bg-brand">Lưu</Button>
                                 </div>
 
                             </div>
                         </div>
 
-                        <div className="mt-10 mb-3">
+                        <div className="mb-3 mt-10">
                             <h2 className="h2">Đổi mật khẩu</h2>
-                            <div className="flex flex-col gap-8 justify-center">
+                            <div className="flex flex-col justify-center gap-8">
                                 <div className="w-1/3">
                                     <Label htmlFor='oldPassword' className='text-slate-600'>Mật khẩu cũ</Label>
                                     <Input type="password" />

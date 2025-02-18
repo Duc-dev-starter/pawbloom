@@ -1,4 +1,6 @@
+import { LayoutBGFlicker } from "@/components/bg";
 import FeaturePost from "@/components/blog/FeaturePost";
+import { CarouselCustom } from "@/components/customCarousel";
 import WatchMoreButton from "@/components/WatchMoreButton";
 import Path from "@/constants/paths";
 import EventCard from "@/sections/home/EventCard";
@@ -64,7 +66,7 @@ export default function Home() {
   return (
     <>
 
-      <section className="p-16 md:px-28 md:py-16">
+      <section className=" md:px-28 md:py-16">
         {/* {svgDecorations.map((item, index) => (
         <Image
           key={index}
@@ -75,9 +77,21 @@ export default function Home() {
           className="absolute z-0 opacity-80"
         />
       ))} */}
-        <div className="flex flex-col gap-5 lg:flex-row lg:gap-x-10">
-          {/* Phần bên trái */}
-          <div className="flex flex-1 flex-col gap-6">
+        <div className="absolute inset-0 size-full">
+          {/* Background Flicker covering the entire container */}
+          <LayoutBGFlicker
+            className=" z-0 [mask-image:radial-gradient(450px_circle_at_center,white,transparent)]"
+            squareSize={6}
+            gridGap={1}
+            color="#f5bfc1"
+            maxOpacity={0.5}
+            flickerChance={0.1}
+          />
+        </div>
+        <div className="relative flex flex-col gap-5 lg:flex-row lg:gap-x-10">
+
+          {/* Content starts here */}
+          <div className="relative z-10 flex flex-1 flex-col gap-6">
             <h2 className="text-center font-medium italic text-brand-200 lg:text-left">
               #cơ hội thứ 2, mái ấm mãi mãi
             </h2>
@@ -88,7 +102,8 @@ export default function Home() {
               Pawbloom – Nơi kết nối những trái tim yêu thương với những chú thú cưng cần được yêu thương.
               Chúng tôi giúp tạo dựng mái ấm mới, mang lại cơ hội thứ hai cho thú cưng từ các trạm cứu trợ.
             </p>
-            {/* Render từ mảng stats */}
+
+            {/* Render stats */}
             <div className="flex justify-center gap-10 lg:justify-start">
               {stats.map((stat, index) => (
                 <div key={index} className="flex flex-col items-center gap-2 lg:items-start">
@@ -99,8 +114,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Phần bên phải */}
-          <div className="relative flex flex-1 justify-center">
+          {/* Right side with image */}
+          <div className="relative z-10 flex flex-1 justify-center">
             <Image
               src={homePageImage}
               alt="pet"
@@ -124,7 +139,7 @@ export default function Home() {
 
           {/* Nội dung bên phải */}
           <div className="flex flex-1 flex-col justify-center gap-4">
-            <h2 className="text-center text-3xl leading-normal font-semibold md:text-left">
+            <h2 className="text-center text-3xl font-semibold leading-normal md:text-left">
               Vì một tương lai tốt đẹp cho những người bạn bốn chân
             </h2>
             <p className="text-center text-xl font-medium text-gray-500 md:text-left">
@@ -162,13 +177,19 @@ export default function Home() {
 
       <section className="border-t-2 border-brand p-16">
         <h1 className="mb-10 text-center text-4xl font-semibold text-brand-200">Sự Kiện</h1>
-        <div className="mx-auto grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {eventData.map((event) => (
-            <EventCard
-              key={event.id}
-              event={event}
-            />
-          ))}
+
+        <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
+          <CarouselCustom
+            pauseOnHover
+            className="[--duration:60s]"
+          >
+            {eventData.map((event) => (
+              <EventCard
+                key={event.id}
+                event={event}
+              />
+            ))}
+          </CarouselCustom>
         </div>
         <div className="text-center">
           <WatchMoreButton href="/event" />
