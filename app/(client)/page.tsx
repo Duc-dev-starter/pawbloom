@@ -66,16 +66,17 @@ export default function Home() {
   return (
     <>
 
-      <section className=" md:px-28 md:py-16">
+      <section className="md:px-28 md:py-16">
 
-        <div className="absolute inset-0 size-full">
+        <div className="absolute">
           <LayoutBGFlicker
-            className=" z-0 [mask-image:radial-gradient(450px_circle_at_center,white,transparent)]"
-            squareSize={6}
+            className=" inset-0 z-0 size-full [mask-image:radial-gradient(450px_circle_at_center,white,transparent)]"
+            squareSize={4}
             gridGap={1}
             color="#f5bfc1"
             maxOpacity={0.5}
             flickerChance={0.1}
+            height={450}
           />
         </div>
         <div className="relative flex flex-col gap-5 lg:flex-row lg:gap-x-10">
