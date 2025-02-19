@@ -16,7 +16,7 @@ const ProductCard: React.FC<ProductProps> = ({ product }) => {
             <Link
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
-                href={`/product/${product.slug || product.id}`} className='flex items-center justify-center p-2 bg-[#F5F5F5] overflow-hidden relative'>
+                href={`/product/${product.slug || product.id}`} className='flex-center p-2 bg-[#F5F5F5] overflow-hidden relative'>
                 <Image src={'https://loremflickr.com/640/480/animals'
                     // || product.images.length > 1 && hovered ? product.images[1] : product.images[0]
                 }

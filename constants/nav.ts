@@ -7,3 +7,10 @@ export const navItems = [
     { name: "Quản lí doanh mục", icon: "/assets/icons/dashboard.svg", url: "/admin/dashboard" },
     { name: "Quản lí tin tức", icon: "/assets/icons/news.svg", url: "/admin/dashboard" },
 ]
+
+export const userNavItems = [
+    { title: 'Nhận nuôi', icon: '/assets/icons/home.svg', link: '/adopt' },
+    { title: 'Trạm cứu trợ', icon: '/assets/icons/tram.svg', link: '/adopt' },
+    { title: 'Sản phẩm', icon: '/assets/icons/product.svg', link: '/product' },
+    { title: 'Tin tức', icon: '/assets/icons/news.svg', link: '/blog' },
+]

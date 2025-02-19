@@ -556,6 +556,10 @@
   .thumbnail-image {
     @apply size-full object-cover object-center !important;
   }
+
+  .header-menu-item {
+    @apply hover:bg-gray-100 cursor-pointer
+  }
 }
 
 @layer base {

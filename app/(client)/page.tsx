@@ -95,8 +95,8 @@ export default function Home() {
             <div className="flex justify-center gap-10 lg:justify-start">
               {stats.map((stat, index) => (
                 <div key={index} className="flex flex-col items-center gap-2 lg:items-start">
-                  <h1 className="text-3xl font-semibold text-brand md:text-4xl">{stat.value}</h1>
-                  <p className="text-sm text-gray-600 md:text-base">{stat.label}</p>
+                  <h1 className="text-3xl font-bold text-brand md:text-4xl">{stat.value}</h1>
+                  <p className="text-sm text-gray-600 font-medium md:text-base">{stat.label}</p>
                 </div>
               ))}
             </div>

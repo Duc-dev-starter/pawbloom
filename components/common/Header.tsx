@@ -26,14 +26,9 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip"
 import MobileNavigation from '../MobileNavigation'
+import { userNavItems } from '@/constants/nav'
+import { CircleHelp, DoorClosed, History, MessageSquareWarning, Settings } from 'lucide-react'
 
-
-const NAV_LINKS = [
-    { title: 'Nhận nuôi', icon: '/assets/icons/home.svg', link: '/adopt' },
-    { title: 'Trạm cứu trợ', icon: '/assets/icons/tram.svg', link: '/adopt' },
-    { title: 'Sản phẩm', icon: '/assets/icons/product.svg', link: '/product' },
-    { title: 'Tin tức', icon: '/assets/icons/news.svg', link: '/blog' },
-]
 
 const Header = () => {
     const user = true;
@@ -55,7 +50,7 @@ const Header = () => {
                     <MobileNavigation />
                     <nav className='hidden lg:block'>
                         <ul className="flex gap-6 pl-5">
-                            {NAV_LINKS.map((item) => (
+                            {userNavItems.map((item) => (
                                 <li key={item.title}>
                                     <Link
                                         href={item.link}
@@ -96,8 +91,14 @@ const Header = () => {
                             </DropdownMenuTrigger>
 
                             {/* Dropdown content */}
-                            <DropdownMenuContent className="w-56">
-                                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                            <DropdownMenuContent className="mr-5 w-56">
+                                <DropdownMenuLabel className='flex cursor-pointer items-center hover:bg-gray-100'>
+                                    <p>Username</p>
+                                    <Avatar className='ml-auto'>
+                                        <AvatarImage src="https://github.com/shadcn.png" />
+                                        <AvatarFallback>CN</AvatarFallback>
+                                    </Avatar>
+                                </DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuGroup>
                                     <DropdownMenuItem>
@@ -112,14 +113,10 @@ const Header = () => {
                                         Settings
                                         <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                                     </DropdownMenuItem>
-                                    <DropdownMenuItem>
-                                        Keyboard shortcuts
-                                        <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
-                                    </DropdownMenuItem>
-                                </DropdownMenuGroup>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuGroup>
-                                    <DropdownMenuItem>Team</DropdownMenuItem>
+                                    <div className='flex items-center py-[6px] header-menu-item'>
+                                        <History className='ml-2 mr-1' size={20} />
+                                        <DropdownMenuItem>Lịch sử</DropdownMenuItem>
+                                    </div>
                                     <DropdownMenuSub>
                                         <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
                                         <DropdownMenuPortal>
@@ -131,20 +128,30 @@ const Header = () => {
                                             </DropdownMenuSubContent>
                                         </DropdownMenuPortal>
                                     </DropdownMenuSub>
-                                    <DropdownMenuItem>
-                                        New Team
-                                        <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-                                    </DropdownMenuItem>
                                 </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>GitHub</DropdownMenuItem>
-                                <DropdownMenuItem>Support</DropdownMenuItem>
-                                <DropdownMenuItem disabled>API</DropdownMenuItem>
+                                <DropdownMenuGroup>
+                                    <div className='flex items-center py-[6px] header-menu-item'>
+                                        <CircleHelp className='ml-2 mr-1' size={20} />
+                                        <DropdownMenuItem>Trợ giúp</DropdownMenuItem>
+                                    </div>
+
+                                    <div className='flex items-center py-[6px] header-menu-item'>
+                                        <MessageSquareWarning className='ml-2 mr-1' size={20} />
+                                        <DropdownMenuItem>Feedback</DropdownMenuItem>
+                                    </div>
+                                </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>
-                                    Log out
-                                    <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-                                </DropdownMenuItem>
+                                <div className='flex items-center py-[6px] header-menu-item'>
+                                    <Settings className='ml-2 mr-1' size={20} />
+                                    <DropdownMenuItem>Cài đặt</DropdownMenuItem>
+                                </div>
+
+                                <DropdownMenuSeparator />
+                                <div className='flex items-center py-[6px] header-menu-item'>
+                                    <DoorClosed className='ml-2 mr-1' size={20} />
+                                    <DropdownMenuItem>Đăng xuất</DropdownMenuItem>
+                                </div>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     )}
