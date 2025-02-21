@@ -1,10 +1,9 @@
 "use client"
 import { sidebarPolicies } from '@/constants/terms';
 import { usePathname } from 'next/navigation';
-import { ReactNode } from 'react';
 import React from 'react';
 interface TermsLayoutProps {
-    children: ReactNode;
+    children: React.ReactNode;
 }
 
 const TermsLayout: React.FC<TermsLayoutProps> = ({ children }) => {
