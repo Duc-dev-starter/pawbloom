@@ -2,7 +2,7 @@
 import { sidebarPolicies } from '@/constants/terms';
 import { usePathname } from 'next/navigation';
 import { ReactNode } from 'react';
-
+import React from 'react';
 interface TermsLayoutProps {
     children: ReactNode;
 }

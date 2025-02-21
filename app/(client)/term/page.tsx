@@ -24,7 +24,7 @@ const TermPage = () => {
                         </p>
                         <p className='p_line_height mt-4'>If you post a course on the Pawbloom platform, you must also agree to Terms for Instructors. We also provide details about our processing of personal data of students and lecturers in Privacy policy of us</p>
                         <p className='p_line_height mt-4'>Our website and applications cause communications about your web and application browsing activities and application usage to be sent from you to third parties that provide services to Pawbloom. By using our Services, you agree to these communications.</p>
-                        <h2 className='mt-8 mb-2 font-semibold text-[1.5rem] text-xl sm:text-2xl'>Categories</h2>
+                        <h2 className='mt-8 mb-2 font-semibold text-xl sm:text-2xl'>Categories</h2>
                         <ul className='list-none p-0'>
                             {terms.map(term => (
                                 <li className='list-disc ml-[2.5rem] text-[1.2rem] leading-loose' key={term.id}>
@@ -34,7 +34,7 @@ const TermPage = () => {
                         </ul>
 
 
-                        <h2 id='section1' className='mt-8 font-semibold text-[1.5rem] text-xl sm:text-2xl'>1. Tài khoản</h2>
+                        <h2 id='section1' className='mt-8 font-semibold text-xl sm:text-2xl'>1. Tài khoản</h2>
                         <div className='border-l-4 border-solid border-[#ffcc00] bg-[#f9f9f9] p-4 my-4 mx-0'>
                             <p className='p_line_height'>You need an account for most activities on our platform. Please be sure to keep your password in a safe place, as you are responsible for all activities related to your account. If you suspect someone is using your account, please let us know by contacting Support Group ours. You must be of legal age to consent to online services in your country to use Pawbloom.</p>
                         </div>
@@ -46,7 +46,7 @@ const TermPage = () => {
                         <p className='p_line_height mt-3'>Students and instructors must be 18 years of age to create an account on Pawbloom and use the Services. If you are under 18 but over the age required to consent to use online services where you live (for example, 13 in the US or 16 in Ireland), you cannot set up an account but We encourage you to ask a parent or guardian to open an account and help you access appropriate content. If you are not old enough to consent to the use of these online services, you may not create a Pawbloom account. If we discover that you have created an account in violation of these rules, we will terminate your account.</p>
 
 
-                        <h2 id='section2' className='mt-8 font-semibold text-[1.5rem] text-xl sm:text-2xl'>2. Content Subscription and Lifetime Access</h2>
+                        <h2 id='section2' className='mt-8 font-semibold text-xl sm:text-2xl'>2. Content Subscription and Lifetime Access</h2>
                         <div className='border-l-4 border-solid border-[#ffcc00] bg-[#f9f9f9] p-4 my-4 mx-0'>
                             <p className='p_line_height'>When you enroll in a course or other content, you receive a license from us to view that content through the Pawbloom Services and not use it for any other purpose. Please do not attempt to transfer or resell the content in any way. We generally grant you a lifetime access license, unless we have to disable content for legal or policy reasons or for Subscription subscriptions.</p>
                         </div>
@@ -59,7 +59,7 @@ const TermPage = () => {
                         <p className='p_line_height mt-3'>
                             Instructors may not directly grant access to their content to students, and any such direct license is void and violates these Terms.</p>
 
-                        <h2 id='section3' className='mt-8 font-semibold text-[1.5rem] text-xl sm:text-2xl'>3. Payments, Offers and Refunds</h2>
+                        <h2 id='section3' className='mt-8 font-semibold text-xl sm:text-2xl'>3. Payments, Offers and Refunds</h2>
                         <div className='border-l-4 border-solid border-[#ffcc00] bg-[#f9f9f9] p-4 my-4 mx-0'>
                             <p className='p_line_height'>When paying, you agree to use a valid payment method. If you're not satisfied with the content, Pawbloom offers a 30-day refund or offer on most content purchases.</p>
                         </div>
@@ -71,7 +71,7 @@ const TermPage = () => {
 
                         <p className='p_line_height mt-3'>Pawbloom or our partners may offer promotional codes and gifts to students. Some codes can be redeemed for gifts or promotional offers applicable to your Pawbloom account, which can then be used to eligible purchase content on our platform, subject to our terms and conditions. clause that acccompanies that code. Other codes can be redeemed directly for specific content. You cannot use gift and promotional offers to make purchases in our mobile or TV apps.</p>
 
-                        <h2 id='section4' className='mt-8 font-semibold text-[1.5rem] text-xl sm:text-2xl'>4. Content and behavior rules</h2>
+                        <h2 id='section4' className='mt-8 font-semibold text-xl sm:text-2xl'>4. Content and behavior rules</h2>
                         <div className='border-l-4 border-solid border-[#ffcc00] bg-[#f9f9f9] p-4 my-4 mx-0'>
                             <p className='p_line_height'>You may only use Pawbloom for lawful purposes. You are responsible for all content you post on our platform. You should ensure that the reviews, questions, posts, courses and other content you upload comply with our Trust & Safety Guidelines and the law, and respect intellectual property rights. wisdom of others. We may ban your account for repeated or serious violations. Please notify us if you believe someone is violating your copyright on our platform.</p>
                         </div>
@@ -81,7 +81,7 @@ const TermPage = () => {
 
                         <p className='p_line_height mt-3'>If you are an instructor, you can submit content to post on the platform, and you can also contact students enrolled in your course or other content. In both cases, you must comply with the law and respect the rights of others: you may not post any courses, questions, answers, reviews or other content that violates local laws or regulations. applicable local or national law in your country of residence. You are solely responsible for any courses, content and actions you post or take through the platform and Services and their consequences. Make sure you understand all applicable copyright restrictions</p>
 
-                        <h2 id='section5' className='mt-8 font-semibold text-[1.5rem] text-xl sm:text-2xl'>5. Pawbloom's rights to the content you post</h2>
+                        <h2 id='section5' className='mt-8 font-semibold text-xl sm:text-2xl'>5. Pawbloom's rights to the content you post</h2>
                         <div className='border-l-4 border-solid border-[#ffcc00] bg-[#f9f9f9] p-4 my-4 mx-0'>
                             <p className='p_line_height'>You maintain ownership of the content you post to our platform, including your courses. We are permitted to share your content with anyone else through any media, including promoting it through advertising on other websites.</p>
                         </div>
@@ -90,7 +90,7 @@ const TermPage = () => {
 
                         <p className='p_line_height mt-3'>In legal terms, by submitting or posting content on or through the platforms, you grant us a worldwide, non-exclusive, royalty-free license (with the right to sublicense) to use, copy, reproduce, process, adapt, modify, post, transmit, display and distribute your content (including your name and likeness) in any and all media or method of distribution (existing or later developed). This includes providing your content to other companies, organizations or individuals that partner with Pawbloom to syndicate, broadcast, distribute or post the content in other media, as well as using the content your content for marketing purposes. You also waive any rights of privacy, publicity or other rights of a similar nature applicable to all such uses, to the extent permitted under applicable law. You represent and warrant that you have all necessary rights, power and authority to authorize us to use any content you submit. You also agree to the use of your content as mentioned above without any compensation to you.</p>
 
-                        <h2 id='section6' className='mt-8 font-semibold text-[1.5rem] text-xl sm:text-2xl'>6. Use Pawbloom at your own risk</h2>
+                        <h2 id='section6' className='mt-8 font-semibold text-xl sm:text-2xl'>6. Use Pawbloom at your own risk</h2>
                         <div className='border-l-4 border-solid border-[#ffcc00] bg-[#f9f9f9] p-4 my-4 mx-0'>
                             <p className='p_line_height'>Anyone can use Pawbloom to create and post content as well as instructors and we enable instructors and students to interact to teach and learn. Like other platforms where people can post content and interact, mistakes can happen and you use Pawbloom at your own risk.</p>
                         </div>
@@ -105,14 +105,14 @@ const TermPage = () => {
 
                         <p className='p_line_height mt-3'>When you use our Services, you will find links to other websites that we do not own or control. We are not responsible for the content or any other aspect of these third party websites, including their collection of information about you. You should also read their terms and conditions, as well as their privacy policy.</p>
 
-                        <h2 id='section7' className='mt-8 font-semibold text-[1.5rem] text-xl sm:text-2xl'>7. Pawbloom Permissions</h2>
+                        <h2 id='section7' className='mt-8 font-semibold text-xl sm:text-2xl'>7. Pawbloom Permissions</h2>
                         <div className='border-l-4 border-solid border-[#ffcc00] bg-[#f9f9f9] p-4 my-4 mx-0'>
                             <p className='p_line_height'>We own the Pawbloom platform and Services, including the website, current or future applications and services, and things like logos, APIs, code, and content created by our employees. You may not tamper with them or use them without permission.</p>
                         </div>
 
                         <p className='p_line_height mt-3'>All rights, title and interest in and to the Pawbloom platform and Services, including current or future websites, applications, APIs, databases and content that its employees or Our partners submit or make available through our Services (but excluding content provided by instructors and students) are and will remain the exclusive property of Pawbloom and its licensors. Pawbloom. Our platforms and services are protected by copyright, trademark, and other laws of both the United States and foreign countries. There are no rights granted to you to use the Pawbloom name or any Pawbloom trademarks, logos, domain names, and other distinctive brand features. Any feedback, comments or suggestions you may provide regarding Pawbloom or the Services are entirely voluntary and we will be free to use such feedback, comments or suggestions as we see fit and without have any obligations to you.</p>
 
-                        <h2 id='section8' className='mt-8 font-semibold text-[1.5rem] text-xl sm:text-2xl'>8. Subscription package terms</h2>
+                        <h2 id='section8' className='mt-8 font-semibold text-xl sm:text-2xl'>8. Subscription package terms</h2>
                         <p className='p_line_height mt-3'>As part of your subscription to a Subscription, you will receive a limited, non-exclusive, non-transferable license from us to access and view the content contained in that Subscription through the Services. Except for the granting of lifetime access licenses, the terms contained in the “Content Enrollment and Lifetime Access” section above will apply to students enrolled through a Subscription Plan.</p>
 
                         <p className='p_line_height mt-3'>We reserve the right to revoke any license to use content in our Subscription Plans for legal or policy reasons at any time and in our sole discretion, for example if we no longer has the right to provide content through the Subscription Plan. Additional information about our revocation rights is provided in the “Content Enrollment and Lifetime Access” section.</p>
@@ -125,7 +125,7 @@ const TermPage = () => {
 
                         <p className='p_line_height mt-3'>We reserve the right to change Subscription Plans or adjust prices for our Services at our sole discretion. Any changes in price or to your subscription plan will be effective upon our notice to you, unless otherwise required by applicable law.</p>
 
-                        <h2 id='section9' className='mt-8 font-semibold text-[1.5rem] text-xl sm:text-2xl'>9. Other legal terms</h2>
+                        <h2 id='section9' className='mt-8 font-semibold text-xl sm:text-2xl'>9. Other legal terms</h2>
                         <div className='border-l-4 border-solid border-[#ffcc00] bg-[#f9f9f9] p-4 my-4 mx-0'>
                             <p className='p_line_height'>These Terms are like any other contract, containing boring but important legal terms that protect us from a myriad of things that could happen and clarify the legal relationship between us and you.</p>
                         </div>
@@ -136,7 +136,7 @@ const TermPage = () => {
 
                         <p className='p_line_height mt-3'>If you behave in a way that puts us in legal trouble, we may take legal action against you. You agree to indemnify, defend (if required by us) and hold harmless Pawbloom, our group companies and their officers, directors, suppliers, partners and agents us against any third party claim, demand, loss, damage or expense (including reasonable attorneys' fees) arising out of: (a) content you post or submit; (b) your use of the Services; (c) your violation of these Terms or (d) your violation of any third party rights. Your indemnification obligation will survive termination of these Terms and your use of the Services.</p>
 
-                        <h2 id='section10' className='mt-8 font-semibold text-[1.5rem] text-xl sm:text-2xl'>10. Dispute resolution</h2>
+                        <h2 id='section10' className='mt-8 font-semibold text-xl sm:text-2xl'>10. Dispute resolution</h2>
                         <div className='border-l-4 border-solid border-[#ffcc00] bg-[#f9f9f9] p-4 my-4 mx-0'>
                             <p className='p_line_height'>If there is a dispute, our Support Team is always happy to help resolve the issue. If this doesn't work and you live in the United States or Canada, you may choose to sue in small claims court or file a claim in binding individual arbitration; You may not sue in another court or participate in a class, non-individual action against us.</p>
                         </div>
@@ -152,11 +152,11 @@ const TermPage = () => {
 
                         <p className='p_line_height mt-3'>As the only alternative to small claims court, you and Pawbloom have the right to resolve Disputes through individual arbitration. Although there is no judge or jury in arbitration, the arbitrator has the same authority to award individual relief and must follow the agreement of the parties in the same way as a court would. . If either party brings the Dispute to a court other than a small claims court, the other party may ask the court to order the parties to arbitration. Either party may also ask the court to stay the court proceedings while the arbitration proceedings are ongoing. In the event any cause of action or claim cannot be resolved in arbitration, you and Pawbloom agree that all court proceedings will be pending resolution in arbitration. of all causes of action and claims. Nothing in this Dispute Resolution Agreement is intended to limit individual relief available to either party in arbitration or small claims court.</p>
 
-                        <h2 id='section11' className='mt-8 font-semibold text-[1.5rem] text-xl sm:text-2xl'>11. Cập nhật những điều khoản</h2>
+                        <h2 id='section11' className='mt-8 font-semibold text-xl sm:text-2xl'>11. Cập nhật những điều khoản</h2>
                         <p className='p_line_height mt-3'>Thỉnh thoảng, chúng tôi có thể cập nhật các Điều khoản này để làm rõ các hoạt động của mình hoặc để phản ánh các hoạt động mới hoặc khác (chẳng hạn như khi thêm các tính năng mới) và Pawbloom có ​​toàn quyền quyết định. quyền, theo quyết định riêng của chúng tôi, để sửa đổi và/hoặc thực hiện các thay đổi đối với các Điều khoản này bất kỳ lúc nào. Nếu chúng tôi thực hiện các thay đổi đáng kể, chúng tôi sẽ thông báo cho bạn bằng các phương tiện ưu tiên, chẳng hạn như thông báo qua email được gửi đến địa chỉ email được chỉ định trong tài khoản của bạn hoặc bằng cách đăng thông báo qua các dịch vụ của Chúng tôi. Các sửa đổi sẽ có hiệu lực vào ngày đăng trừ khi có quy định khác.</p>
                         <p className='p_line_height mt-3'>Your continued use of our Services after changes take effect means you accept those changes. Any revised Terms will supersede all prior Terms.</p>
 
-                        <h2 id='section12' className='mt-8 font-semibold text-[1.5rem] text-xl sm:text-2xl'>12. Làm sao để liên hệ chúng tôi</h2>
+                        <h2 id='section12' className='mt-8 font-semibold text-xl sm:text-2xl'>12. Làm sao để liên hệ chúng tôi</h2>
                         <p className='p_line_height mt-3'>Qua email: <a href="mailto:support@pawbloom.com">support@pawbloom.com</a></p>
                         <p className='p_line_height mt-1 mb-8'>Qua số điện thoại: +84 123 456 789</p>
                     </div>
