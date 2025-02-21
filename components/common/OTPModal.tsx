@@ -41,7 +41,7 @@ const OTPModal = ({ email }: { email: string }) => {
 
     return (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-            <AlertDialogTrigger>Open</AlertDialogTrigger>
+            {/* <AlertDialogTrigger>Open</AlertDialogTrigger> */}
             <AlertDialogContent className="shad-alert-dialog">
                 <AlertDialogHeader className="relative flex justify-center">
                     <AlertDialogTitle className="h2 text-center">Nhập mã OTP</AlertDialogTitle>

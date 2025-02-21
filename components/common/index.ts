@@ -6,3 +6,4 @@ export { default as Footer } from './Footer';
 export { default as AuthForm } from './AuthForm';
 export { default as OTPModal } from './OTPModal';
 export { default as ScrollToTopButton } from './ScrollToTopButton';
+export { default as CalendarPicker } from './Calendars';

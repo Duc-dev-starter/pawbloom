@@ -17,7 +17,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                         />
                     </Link>
 
-                    <div className="space-y-5 text-white">
+                    <div className="text-white">
                         <h1 className="h1">Tìm những thú cưng thích hợp với bạn</h1>
                         <p className="body-1">
                             Đây là nơi bạn có thể tìm thấy thú cưng ở trên địa bàn TPHCM.
@@ -26,8 +26,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     <Image
                         src="/assets/images/files.png"
                         alt="Files"
-                        width={342}
-                        height={342}
+                        width={250}
+                        height={250}
                         className="transition-all hover:rotate-2 hover:scale-105"
                     />
                 </div>

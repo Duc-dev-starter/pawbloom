@@ -2,28 +2,32 @@
 
 import { DeleteWithDialog } from "@/components/common";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const cartData = [
     {
         id: "1",
-        name: "Product 1",
+        name: "Product 1 (Food)",
         price: 10000,
         quantity: 2,
         image: ["/assets/images/homepage.png"],
+        type: "food", // Thức ăn
     },
     {
         id: "2",
-        name: "Product 2",
+        name: "Product 2 (Pet)",
         price: 20000,
         quantity: 1,
         image: ["/assets/images/homepage.png"],
+        type: "pet", // Thú cưng
     },
 ];
 
 const CartPage = () => {
     const [cart, setCart] = useState(cartData);
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
+    const router = useRouter();
 
     const handleSelectAll = () => {
         if (selectedItems.length === cart.length) {
@@ -56,10 +60,19 @@ const CartPage = () => {
         return total + (item?.price || 0) * (item?.quantity || 0);
     }, 0);
 
+    const handleCheckout = () => {
+        // Lưu giỏ hàng vào localStorage
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        // Chuyển hướng đến trang thanh toán với order_id
+        const orderId = "ORD123456"; // Giả sử đây là mã đơn hàng
+        router.push(`/payment?order_id=${orderId}`);
+    };
+
     return (
-        <div className="border-t p-14">
-            <div className="mb-3 text-2xl">
-                <h1>Giỏ hàng của bạn</h1>
+        <div className="border-t px-10 pb-14 pt-10">
+            <div className="mb-14 text-2xl">
+                <h1 className="h1">Giỏ hàng của bạn</h1>
             </div>
 
             {/* Header */}
@@ -99,12 +112,30 @@ const CartPage = () => {
                                 <p className="text-xs font-medium sm:text-lg">{product.name}</p>
                             </div>
                         </div>
-                        <input
-                            type="number"
-                            min={1}
-                            defaultValue={product.quantity}
-                            className="max-w-10 border p-1 sm:max-w-20 sm:px-2"
-                        />
+                        {product.type === "pet" ? (
+                            <input
+                                type="number"
+                                value={product.quantity}
+                                readOnly
+                                className="max-w-10 border p-1 sm:max-w-20 sm:px-2"
+                            />
+                        ) : (
+                            <input
+                                type="number"
+                                min={1}
+                                value={product.quantity}
+                                onChange={(e) =>
+                                    setCart(
+                                        cart.map((item) =>
+                                            item.id === product.id
+                                                ? { ...item, quantity: Number(e.target.value) }
+                                                : item
+                                        )
+                                    )
+                                }
+                                className="max-w-10 border p-1 sm:max-w-20 sm:px-2"
+                            />
+                        )}
                         <p>{product.price * product.quantity} VND</p>
                         <DeleteWithDialog
                             tooltipContent="Xóa sản phẩm"
@@ -120,23 +151,24 @@ const CartPage = () => {
 
             {/* Footer */}
             <div className="my-20 flex flex-col items-end gap-4">
-                {selectedItems.length > 0 && (
+                <div className="flex gap-5">
+                    {selectedItems.length > 0 && (
+                        <button
+                            className="rounded bg-red-500 px-4 py-2 text-white"
+                            onClick={handleDeleteSelected}
+                        >
+                            Xóa sản phẩm đã chọn
+                        </button>
+                    )}
                     <button
-                        className="rounded bg-red-500 px-4 py-2 text-white"
-                        onClick={handleDeleteSelected}
+                        className="rounded bg-gray-500 px-4 py-2 text-white"
+                        onClick={handleClearCart}
                     >
-                        Xóa sản phẩm đã chọn
+                        Xóa sạch giỏ hàng
                     </button>
-                )}
-                <button
-                    className="rounded bg-gray-500 px-4 py-2 text-white"
-                    onClick={handleClearCart}
-                >
-                    Xóa sạch giỏ hàng
-                </button>
+                </div>
                 <div className="w-full sm:w-[450px]">
                     <div className="w-full">
-
                         <div className="mt-2 flex flex-col gap-2 text-sm">
                             <div className="flex justify-between">
                                 <p>Số sản phẩm được chọn</p>
@@ -152,7 +184,7 @@ const CartPage = () => {
                                     : "bg-gray-300 text-gray-500"
                                     }`}
                                 disabled={selectedItems.length === 0}
-                                onClick={() => alert("Checkout thành công!")}
+                                onClick={handleCheckout}
                             >
                                 Thanh toán
                             </button>
