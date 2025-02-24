@@ -1,3 +1,4 @@
+"use client"
 import Images from '@/constants/image'
 import Path from '@/constants/paths'
 import Image from 'next/image'
