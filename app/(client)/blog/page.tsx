@@ -34,7 +34,6 @@ export const generateMetadata = async (): Promise<Metadata> => ({
 const BlogPage = () => {
     return (
         <>
-            {/* Hero section with responsive adjustments */}
             <div className='min-h-[300px] w-full bg-[url("/assets/images/newspost.png")] bg-cover bg-center bg-no-repeat text-white md:h-[400px] lg:h-[600px]'>
                 <div className='mx-2 flex h-full flex-col items-end justify-between md:mx-6 md:flex-row'>
                     <section className='flex w-full flex-col gap-2 p-4 md:w-3/5 md:gap-4 md:p-6 lg:w-2/5 lg:p-10'>
@@ -59,7 +58,6 @@ const BlogPage = () => {
                 </div>
             </div>
 
-            {/* Main content with responsive grid */}
             <div className="mx-auto w-full px-4 md:w-11/12 lg:w-5/6">
                 <div className='mt-6 md:mt-8 lg:mt-10'>
                     <div>
@@ -68,7 +66,6 @@ const BlogPage = () => {
                     </div>
                 </div>
 
-                {/* Tabs with responsive layout */}
                 <div className='my-4 md:my-6'>
                     <Tabs defaultValue="animal" className="w-full">
                         <div className="flex flex-col justify-between gap-4 md:mb-0 md:flex-row md:items-center md:gap-0">
