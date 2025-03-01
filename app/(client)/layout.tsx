@@ -1,7 +1,6 @@
-import { Footer, Header, ScrollToTopButton } from "@/components/common";
 import { Metadata } from "next";
 import React from "react";
-
+import Layout from "./layoutProvider";
 
 export const metadata: Metadata = {
     title: {
@@ -11,20 +10,6 @@ export const metadata: Metadata = {
     description: "Pawbloom - Cơ hội thứ hai, mái ấm mãi mãi",
 };
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
-    return (
-        <>
-            <main className="flex min-h-screen flex-col">
-                <section className="flex h-full flex-1 flex-col">
-                    {/* <MobileNavigation /> */}
-                    <Header />
-                    <div className="flex-1">{children}</div>
-                    <Footer />
-                    <ScrollToTopButton />
-                </section>
-            </main>
-        </>
-    )
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+    return <Layout>{children}</Layout>;
 }
-
-export default Layout;
