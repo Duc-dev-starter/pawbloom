@@ -63,34 +63,29 @@ const HistoryList = () => {
             : historyData.filter((item) => item.status === activeTab);
 
     return (
-        <div className="p-10">
-            <div>
-                <h1 className="text-2xl font-bold">Lịch sử giao dịch</h1>
-                <p className="text-gray-600">Xem và quản lý lịch sử nhận nuôi thú cưng của bạn</p>
-            </div>
-            <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "pending" | "denied" | "approved" | "all")} className="w-full my-5">
-                <TabsList className="grid w-full grid-cols-4">
-                    <TabsTrigger value="all">Tất cả</TabsTrigger>
-                    <TabsTrigger value="pending">Đang chờ</TabsTrigger>
-                    <TabsTrigger value="approved">Chấp nhận</TabsTrigger>
-                    <TabsTrigger value="denied">Bị hủy</TabsTrigger>
-                </TabsList>
-                {['all', 'pending', 'denied', 'approved'].map((tab) => (
-                    <TabsContent key={tab} value={tab} className="mt-5 w-full">
-                        {filteredHistory.length > 0 ? (
-                            <div className="">
-                                {filteredHistory.map((history) => (
-                                    <HistoryCard key={history.id} data={history as HistoryItem} />
 
-                                ))}
-                            </div>
-                        ) : (
-                            <p className="text-center text-gray-500">Không có đơn hàng nào</p>
-                        )}
-                    </TabsContent>
-                ))}
-            </Tabs>
-        </div>
+        <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as "pending" | "denied" | "approved" | "all")} className="w-full my-5">
+            <TabsList className="grid w-full grid-cols-4">
+                <TabsTrigger value="all">Tất cả</TabsTrigger>
+                <TabsTrigger value="pending">Đang chờ</TabsTrigger>
+                <TabsTrigger value="approved">Chấp nhận</TabsTrigger>
+                <TabsTrigger value="denied">Bị hủy</TabsTrigger>
+            </TabsList>
+            {['all', 'pending', 'denied', 'approved'].map((tab) => (
+                <TabsContent key={tab} value={tab} className="mt-5 w-full">
+                    {filteredHistory.length > 0 ? (
+                        <div className="">
+                            {filteredHistory.map((history) => (
+                                <HistoryCard key={history.id} data={history as HistoryItem} />
+
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="text-center text-gray-500">Không có đơn hàng nào</p>
+                    )}
+                </TabsContent>
+            ))}
+        </Tabs>
     );
 };
 

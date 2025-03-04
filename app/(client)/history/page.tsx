@@ -1,4 +1,6 @@
 import HistoryList from '@/components/admin/history/HistoryList';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Metadata } from 'next';
 import React from 'react'
 
@@ -19,7 +21,19 @@ export const generateMetadata = async (): Promise<Metadata> => ({
 
 const HistoryPage = () => {
     return (
-        <div>
+        <div className="p-8">
+            <div>
+                <h1 className="text-2xl font-bold">Lịch sử giao dịch</h1>
+                <p className="text-gray-600">Xem và quản lý lịch sử nhận nuôi thú cưng của bạn</p>
+            </div>
+            <div className='flex flex-col gap-3 mb-8 mt-6'>
+                <div className='flex items-center justify-between'>
+                    <Input placeholder='Tìm theo mã' className='max-w-sm h-10' />
+                    <div className='flex items-center gap-4'>
+                        <Button variant={'secondary'}>Trạng thái</Button>
+                    </div>
+                </div>
+            </div>
             <HistoryList />
         </div>
     )

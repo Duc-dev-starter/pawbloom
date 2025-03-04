@@ -29,12 +29,12 @@ import {
 import MobileNavigation from '../MobileNavigation'
 import { userNavItems } from '@/constants/nav'
 import { CircleHelp, DoorClosed, History, MessageSquareWarning, Settings } from 'lucide-react'
-import { useSelector } from "react-redux";
-import { RootState } from '@/store/store'
+// import { useSelector } from "react-redux";
+// import { RootState } from '@/store/store'
 
 const Header = () => {
-    const { email, role } = useSelector((state: RootState) => state.auth);
-    console.log(email, role);
+    // const { email, role } = useSelector((state: RootState) => state.auth);
+    // console.log(email, role);
     const user = true;
     return (
         <TooltipProvider>

@@ -1,9 +1,9 @@
-import { AuthForm } from "@/components/common";
 import { Metadata } from "next";
 import React from "react";
+import SignUpComponent from "./component";
 
 export const generateMetadata = async (): Promise<Metadata> => ({
-    title: 'Đăng kí',
+    title: 'Đăng nhập',
     description: 'Pawbloom – Nơi kết nối những trái tim yêu thương với những chú thú cưng cần được yêu thương. Chúng tôi giúp tạo dựng mái ấm mới và mang lại cơ hội thứ hai cho thú cưng từ các trạm cứu trợ.',
     keywords: ['Pawbloom', 'nhận nuôi thú cưng', 'trạm cứu trợ', 'yêu thương thú cưng', 'mái ấm thú cưng'],
     openGraph: {
@@ -15,6 +15,6 @@ export const generateMetadata = async (): Promise<Metadata> => ({
     },
 });
 
-const SignUp = () => <AuthForm type="sign-up" />
+const SignUp = () => <SignUpComponent />
 
 export default SignUp;
