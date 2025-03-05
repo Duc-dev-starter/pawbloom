@@ -1,22 +1,27 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function SuccessPage() {
     const router = useRouter();
-    const searchParams = useSearchParams();
-    const transactionId = searchParams.get("transactionId"); // Giả sử thanh toán trả về mã giao dịch
+    const [transactionId, setTransactionId] = useState<string | null>(null);
 
     useEffect(() => {
-        if (!transactionId) {
-            router.replace("/not-found"); // Nếu không có mã giao dịch -> Điều hướng ngay
-        }
-    }, [transactionId, router]);
+        if (typeof window !== "undefined") {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get("transactionId");
+            setTransactionId(id);
 
-    if (!transactionId) return null; // Tránh hiển thị UI trong khoảnh khắc trước khi redirect
+            if (!id) {
+                router.replace("/not-found");
+            }
+        }
+    }, [router]);
+
+    if (!transactionId) return null; // Không hiển thị UI trước khi redirect
 
     return (
         <div className="flex flex-col items-center justify-center min-h-[60vh] p-4">
