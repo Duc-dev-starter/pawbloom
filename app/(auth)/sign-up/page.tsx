@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import React from "react";
-import SignUpComponent from "./component";
+import { AuthForm } from "@/components/common";
 
 export const generateMetadata = async (): Promise<Metadata> => ({
     title: 'Đăng nhập',
@@ -15,6 +15,6 @@ export const generateMetadata = async (): Promise<Metadata> => ({
     },
 });
 
-const SignUp = () => <SignUpComponent />
+const SignUp = () => <AuthForm type="sign-up" />
 
 export default SignUp;

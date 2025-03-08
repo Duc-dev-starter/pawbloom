@@ -25,9 +25,8 @@ import { useRouter } from 'next/navigation';
 import { login } from '@/services/auth';
 import { JwtPayload } from '@/types/auth';
 import { signInWithPopup } from "firebase/auth";
-import { auth, facebookProvider } from "@/lib/firebase";
+import { auth, facebookProvider, googleProvider } from "@/lib/firebase";
 import axios from 'axios';
-import { signIn, signOut, useSession } from "next-auth/react";
 
 
 type FormType = "sign-in" | "sign-up"
@@ -58,27 +57,42 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
         setIsClient(true);
     }, []);
 
-    const handleLoginWithFacebook = async () => {
+
+    const handleLoginWithSpecialMethod = async (providerType: "facebook" | "google") => {
         if (!isClient) return;
+
         try {
-            const result = await signInWithPopup(auth, facebookProvider);
+            let provider;
+            switch (providerType) {
+                case "facebook":
+                    provider = facebookProvider;
+                    break;
+                case "google":
+                    provider = googleProvider;
+                    break;
+                default:
+                    throw new Error("Unsupported provider");
+            }
+
+            const result = await signInWithPopup(auth, provider);
             const idToken = await result.user.getIdToken();
 
-            console.log("Facebook ID Token:", idToken);
+            console.log(`${providerType} ID Token:`, idToken);
 
             const response = await axios.post("https://your-backend.com/api/auth", {
-                provider: "facebook",
+                provider: providerType,
                 idToken,
             });
 
             console.log("Backend response:", response.data);
 
-            // Nếu đăng nhập thành công thì submit form với giá trị hợp lệ để tránh lỗi validation
-            form.clearErrors(); // Xóa lỗi validation nếu có
+            // Xóa lỗi validation nếu có
+            form.clearErrors();
         } catch (error) {
-            console.error("Facebook login error:", error);
+            console.error(`${providerType} login error:`, error);
         }
     };
+
 
 
     const onSubmit = async (values: z.infer<typeof authFormSchema>) => {
@@ -140,24 +154,6 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
             setLoading(false);
         }
     };
-    const { data: session } = useSession();
-
-    const handleLoginWithGoogle = async () => {
-        await signIn("google", { redirectTo: "/" }); // Chuyển hướng sau khi đăng nhập
-        console.log(session);
-    };
-
-    console.log(session);
-
-    if (session) {
-        return (
-            <>
-                Signed in as {session?.user?.email} <br />
-                <button onClick={() => signOut()}>Sign out</button>
-            </>
-        )
-    }
-
 
 
 
@@ -271,7 +267,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                             </svg>
                             <span className="sr-only">Login with Apple</span>
                         </Button>
-                        <Button type='button' onClick={handleLoginWithGoogle} variant="outline" className="w-full">
+                        <Button type='button' onClick={() => handleLoginWithSpecialMethod("google")} variant="outline" className="w-full">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill='#4285F4'>
                                 <path
                                     d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
@@ -280,7 +276,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                             </svg>
                             <span className="sr-only">Login with Google</span>
                         </Button>
-                        <Button type='button' onClick={handleLoginWithFacebook} variant="outline" className="w-full">
+                        <Button type='button' onClick={() => handleLoginWithSpecialMethod("facebook")} variant="outline" className="w-full">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1877F2">
                                 <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24h11.495V14.708h-3.13v-3.622h3.13V8.412c0-3.1 1.893-4.79 4.66-4.79 1.324 0 2.464.099 2.794.143v3.24h-1.917c-1.503 0-1.793.715-1.793 1.763v2.31h3.586l-.467 3.622h-3.119V24h6.116C23.407 24 24 23.407 24 22.676V1.325C24 .593 23.407 0 22.675 0z" />
                             </svg>
