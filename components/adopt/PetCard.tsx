@@ -1,42 +1,124 @@
 "use client"
-import React from 'react'
-import { Button } from '../ui/button'
-import { FaBookBookmark, FaHeart } from 'react-icons/fa6'
-import { ArrowRight } from 'lucide-react'
-import Image from 'next/image'
-import { Pet } from '@/types/pet'
-import { useRouter } from 'next/navigation'
 
-const PetCard = ({ pet }: { pet: Pet }) => {
-    const router = useRouter();
+import type React from "react"
+import Image from "next/image"
+import Link from "next/link"
+import { Heart, PawPrint } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import type { Pet } from "@/types/pet"
+import { cn } from "@/lib/utils"
+import { useFavorites } from "@/hooks/use-favorite"
+
+interface PetCardProps {
+    pet: Pet
+}
+
+export default function PetCard({ pet }: PetCardProps) {
+    const { isFavorite, toggleFavorite } = useFavorites()
+
+    const toggleFavoritePet = (e: React.MouseEvent) => {
+        e.preventDefault()
+        e.stopPropagation()
+        toggleFavorite({
+            petId: pet.petId,
+            name: pet.name,
+            photoURL: pet.photoURL,
+            breed: pet.breed,
+        })
+    }
+
+    const getPetType = (breed: string): string => {
+        const dogBreeds = ["Retriever", "Beagle", "Labrador", "Shih Tzu", "Poodle", "Bulldog", "Shepherd"]
+        return dogBreeds.some((dogBreed) => breed.includes(dogBreed)) ? "Chó" : "Mèo"
+    }
+
+    const getStatusColor = (status: string): string => {
+        switch (status) {
+            case "Available":
+                return "bg-green-500 text-white"
+            case "Pending":
+                return "bg-yellow-500 text-white"
+            case "Adopted":
+                return "bg-gray-500 text-white"
+            default:
+                return "bg-brand text-white"
+        }
+    }
+
+    const getStatusText = (status: string): string => {
+        switch (status) {
+            case "Available":
+                return "Có sẵn"
+            case "Pending":
+                return "Đang xử lý"
+            case "Adopted":
+                return "Đã nhận nuôi"
+            default:
+                return status
+        }
+    }
+
     return (
-        <div className='relative p-4 bg-white rounded-xl shadow-sm flex flex-col gap-2'>
-            <div className='flex justify-between items-center'>
-                <div className='flex gap-4 bg-white rounded-tl-xl rounded-tr-xl'>
-                    <Button className={`p-2 size-10 text-xl text-gray-300 border-gray-300 flex items-center justify-center rounded-full border-2`}><FaHeart /></Button>
-                    <Button className={`p-2 size-10 text-xl text-gray-300 border-gray-300 flex items-center justify-center rounded-full border-2`}><FaBookBookmark /></Button>
+        <Link href={`/adopt/${pet.petId}`}>
+            <Card className="h-full overflow-hidden transition-all hover:shadow-lg">
+                <div className="relative">
+                    <Image
+                        src={pet.photoURL || "/placeholder.svg"}
+                        alt={pet.name}
+                        width={400}
+                        height={300}
+                        className="h-64 w-full object-cover"
+                    />
+                    <Badge className="absolute left-3 top-3 bg-brand text-white">{getPetType(pet.breed)}</Badge>
+                    <Button
+                        variant="outline"
+                        size="icon"
+                        className="absolute right-3 top-3 rounded-full bg-white/80 hover:bg-white"
+                        onClick={toggleFavoritePet}
+                    >
+                        <Heart className={cn("h-5 w-5", isFavorite(pet.petId) ? "fill-brand text-brand" : "text-brand")} />
+                    </Button>
+                    <Badge className={cn("absolute right-3 bottom-3", getStatusColor(pet.status))}>
+                        {getStatusText(pet.status)}
+                    </Badge>
                 </div>
-                <Button className={`p-2 size-10 text-xl text-gray-300 border-gray-300 flex items-center justify-center rounded-full border-2
-                    hover:bg-[#00b894] hover:border-transparent hover:text-white transition-all duration-300 ease-in-out`}
-                    onClick={() => router.push(`/pet/${pet.id}`)}><ArrowRight /></Button>
-            </div>
-            <div className='flex gap-4'>
-                <div className='flex-1'>
-                    <Image src={pet?.images[0]} alt={pet.name} width={200} height={200} className='object-contain' />
-                </div>
-                <div className='flex-1 flex flex-col items-center justify-center gap-4'>
-                    <div className='mb-2 flex gap-2'>
-                        <p className='text-xs uppercase font-semibold text-gray-500'>50kg</p>
+                <CardContent className="p-4">
+                    <div className="mb-2 flex items-center justify-between">
+                        <h3 className="text-xl font-semibold">{pet.name}</h3>
+                        <Badge variant="outline" className="border-brand text-brand">
+                            {pet.size}
+                        </Badge>
                     </div>
-                    <h2 className='text-2xl text-gray-800 capitalize font-bold text-center'>Test</h2>
-                    <div className='flex justify-center gap-2'>
-                        <p className='text-xs uppercase font-semibold text-white px-5 py-1 rounded-full'>Husky</p>
+                    <div className="mb-3 flex flex-wrap gap-2">
+                        <Badge variant="secondary">{pet.breed}</Badge>
+                        <Badge variant="secondary">{pet.age} tuổi</Badge>
+                        <Badge variant="secondary">{pet.gender === "Male" ? "Đực" : "Cái"}</Badge>
                     </div>
-                </div>
-            </div>
-        </div>
+                    <p className="line-clamp-2 text-sm text-gray-600">{pet.description}</p>
+
+                    <div className="mt-3 flex flex-wrap gap-2">
+                        {pet.neutering && (
+                            <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                                Đã thiến/triệt sản
+                            </Badge>
+                        )}
+                        {pet.vaccinations && (
+                            <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+                                Đã tiêm phòng
+                            </Badge>
+                        )}
+                    </div>
+                </CardContent>
+                <CardFooter className="border-t p-4">
+                    <Button className="w-full bg-brand hover:bg-brand/90">
+                        <PawPrint className="mr-2 h-4 w-4" />
+                        Tìm hiểu thêm
+                    </Button>
+                </CardFooter>
+            </Card>
+        </Link>
     )
 }
 
-
-export default PetCard

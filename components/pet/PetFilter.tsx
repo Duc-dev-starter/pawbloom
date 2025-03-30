@@ -21,6 +21,7 @@ export default function PetFilter() {
         gender: "",
         status: "",
         search: "",
+        sort: ""
     })
 
     const handleChange = (field: string, value: string) => {
