@@ -1,5 +1,5 @@
+import type { Metadata, ResolvingMetadata } from "next"
 import { Bell, Home, User } from "lucide-react"
-
 import {
     Sidebar,
     SidebarContent,
@@ -7,34 +7,48 @@ import {
     SidebarGroupContent,
     SidebarGroupLabel,
     SidebarMenu,
-    SidebarMenuButton,
     SidebarMenuItem,
+    SidebarMenuButton,
     SidebarProvider,
 } from "@/components/ui/sidebar"
-import Image from "next/image";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { BiMoney, BiSupport } from "react-icons/bi";
+import { BiMoney, BiSupport } from "react-icons/bi"
+import ProfileTabs from "@/components/profile/ProfileTabs"
+
+// Định nghĩa kiểu dữ liệu cho user
+interface UserType {
+    fullName: string
+    email: string
+    phoneNumber: string | null
+    role: string
+    profilePictureUrl: string | null
+    address: string | null
+    bio: string | null
+    isActive: boolean
+    emailVerified: boolean
+    createdAt: string
+    updatedAt: string
+    lastLoginAt: string | null
+}
+
 interface ProfileProps {
-    params: { slug: string };
+    params: { slug: string }
 }
 
 // Menu items.
 const commonItems = [
     {
         title: "Thông tin tài khoản",
-        url: "#",
+        url: "#profile",
         icon: User,
     },
     {
         title: "Thông báo",
-        url: "#",
+        url: "#notifications",
         icon: Bell,
     },
     {
         title: "Chi phí",
-        url: "#",
+        url: "#expenses",
         icon: BiMoney,
     },
 ]
@@ -42,28 +56,70 @@ const commonItems = [
 const otherItems = [
     {
         title: "Mời bạn bè",
-        url: "#",
+        url: "#invite",
         icon: Home,
     },
     {
         title: "Hỗ trợ",
-        url: "#",
+        url: "#support",
         icon: BiSupport,
     },
 ]
 
+// Hàm lấy dữ liệu người dùng (giả lập API call)
+async function getUserData(userId: string): Promise<UserType> {
+    // Trong thực tế, đây sẽ là API call
+    // const res = await fetch(`https://api.example.com/users/${userId}`)
+    // return res.json()
+
+    // Giả lập dữ liệu từ API
+    return {
+        fullName: "Khoi",
+        email: "khoipham2310@gmail.com",
+        phoneNumber: null,
+        role: "Adopter",
+        profilePictureUrl: null,
+        address: null,
+        bio: null,
+        isActive: true,
+        emailVerified: false,
+        createdAt: "2/2/2025 7:54:47 AM",
+        updatedAt: "2/2/2025 2:54:47 PM",
+        lastLoginAt: null,
+    }
+}
+
+// Tạo metadata động dựa trên slug
+export async function generateMetadata({ params }: ProfileProps, parent: ResolvingMetadata): Promise<Metadata> {
+    const userId = params.slug
+
+    // Lấy dữ liệu người dùng
+    const userData = await getUserData(userId)
+
+    return {
+        title: `Hồ sơ của ${userData.fullName} | Pawbloom`,
+        description: `Quản lý thông tin tài khoản của ${userData.fullName} trên Pawbloom`,
+        openGraph: {
+            title: `Hồ sơ của ${userData.fullName} | Pawbloom`,
+            description: `Quản lý thông tin tài khoản của ${userData.fullName} trên Pawbloom`,
+            type: "profile",
+        },
+    }
+}
 
 export default async function Profile({ params }: ProfileProps) {
-    const { slug } = await params;
-    console.log(slug)
-    // // Fetch dữ liệu phía server
-    // const res = await axios.get(`https://api.example.com/profiles/${slug}`)
+    const { slug } = params
 
+    // Lấy dữ liệu người dùng từ API
+    const userData = await getUserData(slug)
 
+    // Format dates
+    const createdAtDate = new Date(userData.createdAt).toLocaleDateString("vi-VN")
+    const updatedAtDate = new Date(userData.updatedAt).toLocaleDateString("vi-VN")
 
     return (
         <SidebarProvider>
-            <div className="relative flex">
+            <div className="relative flex min-h-[90vh]">
                 {/* Sidebar */}
                 <Sidebar className="sidebar-profile-border absolute h-full w-64">
                     <SidebarContent>
@@ -108,79 +164,16 @@ export default async function Profile({ params }: ProfileProps) {
                 <main className="flex-1 px-10 py-5">
                     <div className="flex flex-col">
                         <div className="flex flex-col justify-center gap-1 border-b-2 border-brand">
-                            <h2 className="h2">Tài khoản</h2>
+                            <h2 className="text-3xl font-semibold">Tài khoản</h2>
                             <p className="mb-4 text-base text-gray-400">Quản lí tài khoản của bạn</p>
                         </div>
-                        {/* Avatar */}
 
-                        <div className="flex items-center justify-between">
-                            <div className="mt-3 flex gap-3">
-                                <div>
-                                    <Image src="/assets/images/homepage.png" alt="test" width={150} height={150} className="rounded-full" />
-                                </div>
-                                <div className="flex flex-col justify-center gap-4">
-                                    <h3 className="h3">John Doe</h3>
-                                    <p className="text-sm text-gray-400">PNG, JPG lên tới 5MB</p>
-                                    <p className="text-xl text-brand">Cập nhật</p>
-                                </div>
-                            </div>
-                            <div>
-                                <p>Ngày tạo tài khoản: 27/10/2024</p>
-                                <p>Ngày cập nhật tài khoản: 27/10/2024</p>
-                            </div>
-                        </div>
-
-                        <div className="mt-10">
-                            <h2 className="h2">Chi tiết</h2>
-                            <div className="flex flex-col justify-center gap-8">
-                                <div className="grid grid-cols-2 gap-10">
-                                    <div>
-                                        <Label htmlFor='name' className='text-slate-600'>Tên</Label>
-                                        <Input type="text" placeholder="Tên người dùng" />
-                                    </div>
-                                    <div>
-                                        <Label htmlFor='name' className='text-slate-600'>Email</Label>
-                                        <Input type="email" placeholder="email@gmail.com" />
-                                    </div>
-                                </div>
-
-                                <div className="grid grid-cols-2 gap-10">
-                                    <div>
-                                        <Label htmlFor='dob' className='text-slate-600'>Ngày tháng năm sinh</Label>
-                                        <Input type="date" placeholder="14/05/2003" />
-                                    </div>
-                                    <div>
-                                        <Label htmlFor='name' className='text-slate-600'>Số điện thoại</Label>
-                                        <Input type="text" placeholder="0898320059" />
-                                    </div>
-                                    <Button className=" w-1/4 rounded-3xl bg-brand">Lưu</Button>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div className="mb-3 mt-10">
-                            <h2 className="h2">Đổi mật khẩu</h2>
-                            <div className="flex flex-col justify-center gap-8">
-                                <div className="w-1/3">
-                                    <Label htmlFor='oldPassword' className='text-slate-600'>Mật khẩu cũ</Label>
-                                    <Input type="password" />
-                                </div>
-                                <div className="w-1/3">
-                                    <Label htmlFor='newPassword' className='text-slate-600'>Mật khẩu mới</Label>
-                                    <Input type="password" />
-                                </div>
-                                <div className="w-1/3">
-                                    <Label htmlFor='confirmPassword' className='text-slate-600'>Xác nhận mật khẩu</Label>
-                                    <Input type="password" />
-                                </div>
-                                <Button className="rounded-3xl bg-brand w-[12%]">Lưu</Button>
-
-                            </div>
-                        </div>
+                        {/* Tabs cho Profile và Password */}
+                        <ProfileTabs userData={userData} createdAtDate={createdAtDate} updatedAtDate={updatedAtDate} />
                     </div>
                 </main>
             </div>
         </SidebarProvider>
-    );
+    )
 }
+
