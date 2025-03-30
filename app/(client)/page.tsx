@@ -1,6 +1,8 @@
 import { LayoutBGFlicker } from "@/components/bg";
 import FeaturePost from "@/components/blog/FeaturePost";
 import { CarouselCustom } from "@/components/customCarousel";
+import MeetPets from "@/components/pet/MeetPet";
+import PetFilter from "@/components/pet/PetFilter";
 import WatchMoreButton from "@/components/WatchMoreButton";
 import Path from "@/constants/paths";
 import EventCard from "@/sections/home/EventCard";
@@ -146,8 +148,11 @@ export default function Home() {
           <p className="p-text-gray text-center">Nhiều động vật được chúng tôi cứu sẽ không thể được nhận nuôi vì tuổi già, vấn đề sức khỏe hoặc khuyết tật. Điều đó có nghĩa là chúng tôi cần có khả năng chi trả chi phí thức ăn, nơi trú ẩn và chăm sóc y tế cho chúng trong suốt quãng đời còn lại!</p>
           <p className="p-text-gray text-center">Bạn có thể giúp họ bằng cách trở thành nhà tài trợ hàng tháng.
             Hãy gặp gỡ những con vật của chúng tôi bên dưới!</p>
-          <div className="text-center">
-            <WatchMoreButton href="/adopt" />
+          <div>
+            <MeetPets />
+          </div>
+          <div className="mt-8 text-center">
+            <WatchMoreButton href={Path.ADOPT} />
           </div>
         </div>
       </section>
