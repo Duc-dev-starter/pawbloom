@@ -2,9 +2,10 @@ import { HttpStatus } from "@/enum/https";
 import Path from "@/constants/paths";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { config } from "@/config";
 
 export const axiosInstance = axios.create({
-  baseURL: "https://6778ddd2482f42b62e8fc781.mockapi.io/api",
+  baseURL: config.API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -51,36 +52,36 @@ axiosInstance.interceptors.response.use(
             if (!isTokenExpired) {
               isTokenExpired = true
               toast.error(data.message);
-            //   setTimeout(() => {
-            //     if (user) {
-            //       window.location.href = PATHS.HOME
-            //     } else {
-            //       return;
-            //     }
-            //     localStorage.clear();
-            //     isTokenExpired = false;
-            //   }, 1300);
+              //   setTimeout(() => {
+              //     if (user) {
+              //       window.location.href = PATHS.HOME
+              //     } else {
+              //       return;
+              //     }
+              //     localStorage.clear();
+              //     isTokenExpired = false;
+              //   }, 1300);
             }
             break;
           }
 
           case HttpStatus.NotFound:
             toast.error(data.message || data.Message);
-        //     switch(user.role){
-        //       case "member":
-        //         window.location.href = Path.NOTFOUND;
-        //         break;
-        //       case "admin":
-        //         window.location.href = '/admin/404';
-        //         break;
-             
-        //       case "staff":
-        //         window.location.href = "/staff/404";
-        //         break;
-        //       default:
-        //         window.location.href = Path.HOME;
-        //         break;
-        //     }
+            //     switch(user.role){
+            //       case "member":
+            //         window.location.href = Path.NOTFOUND;
+            //         break;
+            //       case "admin":
+            //         window.location.href = '/admin/404';
+            //         break;
+
+            //       case "staff":
+            //         window.location.href = "/staff/404";
+            //         break;
+            //       default:
+            //         window.location.href = Path.HOME;
+            //         break;
+            //     }
             break;
 
           case HttpStatus.InternalServerError:

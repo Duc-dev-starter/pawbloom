@@ -93,6 +93,11 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
         }
     };
 
+    useEffect(() => {
+        console.log("Lỗi form:", form.formState.errors);
+    }, [form.formState.errors]);
+
+
 
 
     const onSubmit = async (values: z.infer<typeof authFormSchema>) => {
@@ -135,6 +140,11 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                             router.push(Path.HOME);
                             break;
                     }
+                    toast({
+                        title: "Đăng nhập thành công",
+                        description: 'Chào mừng người dùng đã đăng nhập vào hệ thống',
+                        variant: "default"
+                    });
                 } else {
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-expect-error
