@@ -1,3 +1,4 @@
+import Path from "@/constants/paths";
 import { FilterFn } from "@tanstack/react-table";
 // Helper to clean up payload params
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -72,4 +73,18 @@ export const multiSelectFilter: FilterFn<unknown> = (
 
 export const firstLetterCapitialize = (value: string) => {
     return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+export const navigateByRole = (role: string, router: { push: (path: string) => void }) => {
+    switch (role) {
+        case "user":
+            router.push(Path.HOME);
+            break;
+        case "admin":
+            router.push(Path.ADMIN_DASHBOARD);
+            break;
+        default:
+            router.push(Path.HOME);
+            break;
+    }
 }

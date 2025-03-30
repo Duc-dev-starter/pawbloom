@@ -22,11 +22,11 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import Path from '@/constants/paths';
 import { useRouter } from 'next/navigation';
-import { login } from '@/services/auth';
+import { login, socialLogin } from '@/services/auth';
 import { JwtPayload } from '@/types/auth';
 import { signInWithPopup } from "firebase/auth";
 import { auth, facebookProvider, googleProvider } from "@/lib/firebase";
-import axios from 'axios';
+import { navigateByRole } from '@/utils';
 
 
 type FormType = "sign-in" | "sign-up"
@@ -79,15 +79,30 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
 
             console.log(`${providerType} ID Token:`, idToken);
 
-            const response = await axios.post("https://your-backend.com/api/auth", {
-                provider: providerType,
-                idToken,
-            });
+            const response = await socialLogin({ idToken, provider: providerType });
 
-            console.log("Backend response:", response.data);
+            console.log("Backend response:", response);
 
             // Xóa lỗi validation nếu có
             form.clearErrors();
+
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
+            if (response.success) {
+                const token = response.data.token;
+                const decodedToken: JwtPayload = jwtDecode(token);
+                console.log(decodedToken);
+                navigateByRole(decodedToken.role, router);
+                toast({
+                    title: "Đăng nhập thành công",
+                    description: 'Chào mừng người dùng đã đăng nhập vào hệ thống',
+                    variant: "default"
+                });
+            } else {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-expect-error
+                throw new Error(response?.error || 'Có lỗi xảy ra')
+            }
         } catch (error) {
             console.error(`${providerType} login error:`, error);
         }
@@ -129,17 +144,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                 if (response.success) {
                     const token = response.data.token;
                     const decodedToken: JwtPayload = jwtDecode(token);
-                    switch (decodedToken.role) {
-                        case "user":
-                            router.push(Path.HOME);
-                            break;
-                        case "admin":
-                            router.push(Path.ADMIN_DASHBOARD);
-                            break;
-                        default:
-                            router.push(Path.HOME);
-                            break;
-                    }
+                    navigateByRole(decodedToken.role, router);
                     toast({
                         title: "Đăng nhập thành công",
                         description: 'Chào mừng người dùng đã đăng nhập vào hệ thống',
