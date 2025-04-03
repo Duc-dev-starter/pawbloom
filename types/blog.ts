@@ -1,4 +1,4 @@
-export type BlogStatus = 'published' | 'inactive' | 'draft';
+export type BlogStatus = 'Published' | 'Inactive' | 'Draft';
 
 export type Blog = {
     id: string;

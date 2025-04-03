@@ -22,12 +22,12 @@ export const API = {
 
     // CATEGORY
     CREATE_CATEGORY: '/api/categories/create',
-    GET_CATEGORIES: '/api/categories/search',
+    GET_CATEGORIES: '/api/categories',
     GET_UPDATE_DELETE_CATEGORY: '/api/categories',
 
     // BLOG
-    CREATE_BLOG: '/api/blogPosts',
-    GET_BLOGS: '/api/blogPosts',
+    CREATE_BLOG: '/api/blogs',
+    GET_BLOGS: '/api/blogs',
     GET_UPDATE_DELETE_BLOG: '/api/blogs',
 
     // POST

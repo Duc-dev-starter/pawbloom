@@ -14,7 +14,7 @@ const ManageCategoriesComponent = () => {
             try {
                 setLoading(true);
                 const response = await getCategories();
-                setBlogs(response as unknown as Category[]);
+                setBlogs(response.data);
             } catch (error) {
                 console.log(error);
             } finally {

@@ -21,11 +21,11 @@ const StatusDropdown = ({ selectedStatuses, setSelectedStatuses, statuses }: Sta
 
     const statusColor = (status: string) => {
         switch (status) {
-            case 'published':
+            case 'Published':
                 return 'text-green-600 bg-green-100';
-            case 'inactive':
+            case 'Inactive':
                 return 'text-red-600 bg-red-100';
-            case 'draft':
+            case 'Draft':
                 return 'text-gray-600 bg-gray-100';
             default:
                 break;

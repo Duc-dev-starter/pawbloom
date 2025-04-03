@@ -24,7 +24,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { DataTableProps, PaginationType } from "@/interfaces/data-table"
 import { multiSelectFilter } from "@/utils"
-import AuthorDropdown from "@/components/admin/manage-category/AuthorDropdown"
 import { Status } from "@/types/status"
 import { FaCheck, FaInbox } from "react-icons/fa6"
 import { IoClose } from "react-icons/io5"
@@ -34,9 +33,9 @@ import { PaginationControls, PaginationSelection } from "@/components/common"
 import CategoryDialog from "@/components/admin/manage-category/CategoryDialog"
 
 const categoryStatuses: Status[] = [
-    { value: 'published', label: 'Công khai', icon: <FaCheck /> },
-    { value: 'inactive', label: 'Ẩn', icon: <IoClose /> },
-    { value: 'draft', label: 'Nháp', icon: <FaInbox /> },
+    { value: 'Published', label: 'Công khai', icon: <FaCheck /> },
+    { value: 'Inactive', label: 'Ẩn', icon: <IoClose /> },
+    { value: 'Draft', label: 'Nháp', icon: <FaInbox /> },
 ];
 
 
@@ -51,14 +50,12 @@ export function DataTableCategory<TData, TValue>({
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
     const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
-    const [selectedAuthors, setSelectedAuthors] = useState<string[]>([]);
 
     useEffect(() => {
         setColumnFilters((prev) => {
             // Remove both status and categories filters
             const baseFilter = prev.filter(
-                (filter) => filter.id !== "status" && filter.id !== "author"
-            );
+                (filter) => filter.id !== "status");
             const newFilter = [...baseFilter];
 
             // Add status filter if there are selected statuses
@@ -68,17 +65,9 @@ export function DataTableCategory<TData, TValue>({
                     value: selectedStatuses
                 })
             }
-
-            // Add author filter if there are selected authors
-            if (selectedAuthors.length > 0) {
-                newFilter.push({
-                    id: "author",
-                    value: selectedAuthors
-                })
-            }
             return newFilter;
         })
-    }, [selectedStatuses, selectedAuthors])
+    }, [selectedStatuses])
 
 
     const table = useReactTable({
@@ -121,7 +110,6 @@ export function DataTableCategory<TData, TValue>({
                                 }
                             />
                             <StatusDropdown selectedStatuses={selectedStatuses} setSelectedStatuses={setSelectedStatuses} statuses={categoryStatuses} />
-                            <AuthorDropdown selectedAuthors={selectedAuthors} setSelectedAuthors={setSelectedAuthors} />
                         </div>
                         {/* Buttons */}
                         <div className="mt-2 flex gap-4">
@@ -129,8 +117,6 @@ export function DataTableCategory<TData, TValue>({
                             <CategoryFilterArea
                                 selectedStatuses={selectedStatuses}
                                 setSelectedStatuses={setSelectedStatuses}
-                                selectedAuthors={selectedAuthors}
-                                setSelectedAuthors={setSelectedAuthors}
                             />
                         </div>
                     </div>

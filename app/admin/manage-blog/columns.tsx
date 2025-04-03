@@ -23,12 +23,12 @@ export const columns: ColumnDef<Blog>[] = [
         header: ({ column }: { column: Column<Blog, unknown> }) => <SortableHeader column={column} label="Tiêu đề" />
     },
     {
-        accessorKey: 'category',
+        accessorKey: 'categoryName',
         header: ({ column }: { column: Column<Blog, unknown> }) => <SortableHeader column={column} label="Danh mục" />,
         filterFn: "multiSelect"
     },
     {
-        accessorKey: 'author',
+        accessorKey: 'authorName',
         header: ({ column }: { column: Column<Blog, unknown> }) => <SortableHeader column={column} label="Tác giả" />
     },
     {
@@ -45,15 +45,15 @@ export const columns: ColumnDef<Blog>[] = [
             let icon: ReactNode;
 
             switch (status) {
-                case 'published':
+                case 'Published':
                     colorClass = "text-green-600 bg-green-100";
                     icon = <FaCheck className="text-sm" />;
                     break;
-                case 'inactive':
+                case 'Inactive':
                     colorClass = "text-red-600 bg-red-100";
                     icon = <IoClose className="text-sm" />
                     break;
-                case 'draft':
+                case 'Draft':
                     colorClass = "text-gray-600 bg-gray-200";
                     icon = <FaInbox />
                     break;

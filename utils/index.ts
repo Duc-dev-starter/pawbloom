@@ -22,19 +22,19 @@ export const scrollToTop = (position = 0, behavior: ScrollBehavior = 'smooth') =
 export const getVietnameseStatus = (status: string, type: string) => {
     const statusMap: Record<string, Record<string, string>> = {
         product: {
-            published: 'Công khai',
-            inactive: 'Ngưng bán',
-            draft: 'Nháp',
+            Published: 'Công khai',
+            Inactive: 'Ngưng bán',
+            Draft: 'Nháp',
         },
         category: {
-            published: 'Công khai',
-            inactive: 'Ẩn',
-            draft: 'Nháp',
+            Published: 'Công khai',
+            Inactive: 'Ẩn',
+            Draft: 'Nháp',
         },
         blog: {
-            published: 'Công khai',
-            inactive: 'Ẩn',
-            draft: 'Nháp',
+            Published: 'Công khai',
+            Inactive: 'Ẩn',
+            Draft: 'Nháp',
         },
         client: {
             active: 'Hoạt động',

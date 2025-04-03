@@ -35,9 +35,9 @@ import BlogFilterArea from "@/components/admin/manage-blog/BlogFilterArea"
 import AuthorDropdown from "@/components/admin/manage-category/AuthorDropdown"
 
 const blogStatuses: Status[] = [
-    { value: 'published', label: 'Công khai', icon: <FaCheck /> },
-    { value: 'inactive', label: 'Ẩn', icon: <IoClose /> },
-    { value: 'draft', label: 'Nháp', icon: <FaInbox /> },
+    { value: 'Published', label: 'Công khai', icon: <FaCheck /> },
+    { value: 'Inactive', label: 'Ẩn', icon: <IoClose /> },
+    { value: 'Draft', label: 'Nháp', icon: <FaInbox /> },
 ];
 
 

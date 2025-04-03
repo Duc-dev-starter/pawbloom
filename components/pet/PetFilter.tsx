@@ -9,9 +9,6 @@ import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import type { PetFilters } from "@/types/pet"
 
-interface PetFilterProps {
-    onFilter: (filters: PetFilters) => void
-}
 
 export default function PetFilter() {
     const [filters, setFilters] = useState<PetFilters>({

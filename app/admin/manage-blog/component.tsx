@@ -14,7 +14,8 @@ const ManageBlogsComponent = () => {
             try {
                 setLoading(true);
                 const response = await getBlogs();
-                setBlogs(response as unknown as Blog[]);
+                console.log(response);
+                setBlogs(response.data.posts);
             } catch (error) {
                 console.log(error);
             } finally {
