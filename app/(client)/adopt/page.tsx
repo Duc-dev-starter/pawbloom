@@ -1,10 +1,10 @@
 "use client"
 
-import React, { useEffect, useState, useCallback } from "react" // Import useCallback
+import React, { useEffect, useState, useCallback } from "react"
 import SearchPet from "@/components/adopt/SearchPet"
 import PetCard from "@/components/adopt/PetCard"
 import { Button } from "@/components/ui/button"
-import type { Pet, PetFilters } from "@/types/pet" // Assuming Pet type expects 'petId'
+import type { Pet, PetFilters } from "@/types/pet"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { getPets } from "@/services/pet"
 

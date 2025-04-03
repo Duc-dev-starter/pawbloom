@@ -17,12 +17,11 @@ import { Input } from "@/components/ui/input"
 // import OTPModal from './OTPModal';
 import { useToast } from '@/hooks/use-toast';
 import { authFormSchema } from '@/schema/auth';
-import { registerUserAction } from '@/actions/register';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import Path from '@/constants/paths';
 import { useRouter } from 'next/navigation';
-import { login, socialLogin } from '@/services/auth';
+import { login, register, socialLogin } from '@/services/auth';
 import { JwtPayload } from '@/types/auth';
 import { signInWithPopup } from "firebase/auth";
 import { auth, facebookProvider, googleProvider } from "@/lib/firebase";
@@ -121,21 +120,22 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
         setLoading(true);
         try {
             if (type === "sign-up") {
-                const formData = new FormData();
-                (Object.keys(values) as Array<keyof typeof values>).forEach((key) => {
-                    const value = values[key];
-                    formData.append(key, value !== undefined && value !== null ? value.toString() : '');
-                });
-                console.log([...formData.entries()]);
-                console.log(formData);
-
-                // Gửi mảng entries thay vì FormData
-                const result = await registerUserAction([...formData.entries()]);
-                console.log(result);
-                if (result.success) {
-                    router.push('')
+                const response = await register(values);
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-expect-error
+                if (response.success) {
+                    toast({
+                        title: "Đăng ký thành công",
+                        description: 'Vui lòng kiểm tra email để xác thực',
+                        variant: "default"
+                    });
+                    setTimeout(() => {
+                        router.push(Path.LOGIN)
+                    }, 1500)
                 } else {
-                    throw new Error(result?.error || 'Có lỗi xảy ra')
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-expect-error
+                    throw new Error(response?.error || 'Có lỗi xảy ra')
                 }
             } else {
                 const response = await login(values);
@@ -147,7 +147,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                     localStorage.setItem('token', token);
                     navigateByRole(decodedToken.role, router);
                     const currentUserResponse = await getCurrentUser();
-                    localStorage.setItem('user', currentUserResponse.data);
+                    console.log(currentUserResponse);
+                    localStorage.setItem('user', JSON.stringify(currentUserResponse.data));
                     toast({
                         title: "Đăng nhập thành công",
                         description: 'Chào mừng người dùng đã đăng nhập vào hệ thống',

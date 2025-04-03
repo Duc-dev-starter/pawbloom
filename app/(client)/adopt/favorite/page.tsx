@@ -55,8 +55,8 @@ export default function FavoritesPage() {
                 ) : (
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                         {favorites.map((pet) => (
-                            <Card key={pet.petId} className="overflow-hidden transition-all hover:shadow-lg">
-                                <Link href={`/adopt/${pet.petId}`}>
+                            <Card key={pet.id} className="overflow-hidden transition-all hover:shadow-lg">
+                                <Link href={`/adopt/${pet.id}`}>
                                     <div className="relative">
                                         <Image
                                             src={pet.photoURL || "/placeholder.svg"}

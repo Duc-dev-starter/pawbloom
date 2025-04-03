@@ -1,5 +1,3 @@
-import { createMiddleware } from "@arcjet/next";
-import aj from "./lib/arcjet";
 // import { NextRequest, NextResponse } from "next/server";
 
 export const config = {
@@ -19,7 +17,3 @@ export const config = {
 //     return NextResponse.next();
 //   }
 
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-export default createMiddleware(aj);
