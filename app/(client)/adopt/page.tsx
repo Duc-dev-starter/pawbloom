@@ -123,7 +123,7 @@ const AdoptPage = () => {
 
 
         if (filters.sort) {
-            let sortedFiltered = [...filtered];
+            const sortedFiltered = [...filtered];
             switch (filters.sort) {
                 case "newest":
                     sortedFiltered.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());

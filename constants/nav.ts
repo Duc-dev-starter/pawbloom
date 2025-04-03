@@ -10,7 +10,7 @@ export const navItems = [
 
 export const userNavItems = [
     { title: 'Nhận nuôi', icon: '/assets/icons/home.svg', link: '/adopt' },
-    { title: 'Trạm cứu trợ', icon: '/assets/icons/tram.svg', link: '/adopt' },
+    { title: 'Trạm cứu trợ', icon: '/assets/icons/tram.svg', link: '/foster' },
     { title: 'Sản phẩm', icon: '/assets/icons/product.svg', link: '/product' },
     { title: 'Tin tức', icon: '/assets/icons/news.svg', link: '/blog' },
 ]

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { ChevronLeft, ChevronRight, Heart, PawPrint } from "lucide-react"
+import { Heart, PawPrint } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
@@ -12,7 +12,7 @@ import PetDetailModal from "./PetDetailModal"
 // Sample data - replace with your actual data
 const petsData: Pet[] = [
     {
-        petId: "601137a0-35a8-4a15-9513-5ad1f73e44a7",
+        id: "601137a0-35a8-4a15-9513-5ad1f73e44a7",
         name: "Buddy",
         breed: "Golden Retriever",
         age: 3,
@@ -36,7 +36,7 @@ const petsData: Pet[] = [
         updatedAt: "2/6/2025 11:09:19 PM",
     },
     {
-        petId: "701137a0-35a8-4a15-9513-5ad1f73e44a8",
+        id: "701137a0-35a8-4a15-9513-5ad1f73e44a8",
         name: "Luna",
         breed: "Siamese",
         age: 2,
@@ -60,7 +60,7 @@ const petsData: Pet[] = [
         updatedAt: "2/8/2025 9:15:30 PM",
     },
     {
-        petId: "801137a0-35a8-4a15-9513-5ad1f73e44a9",
+        id: "801137a0-35a8-4a15-9513-5ad1f73e44a9",
         name: "Max",
         breed: "Beagle",
         age: 1,
@@ -84,7 +84,7 @@ const petsData: Pet[] = [
         updatedAt: "2/10/2025 5:45:12 PM",
     },
     {
-        petId: "901137a0-35a8-4a15-9513-5ad1f73e44b0",
+        id: "901137a0-35a8-4a15-9513-5ad1f73e44b0",
         name: "Bella",
         breed: "Persian",
         age: 4,
@@ -108,7 +108,7 @@ const petsData: Pet[] = [
         updatedAt: "2/12/2025 10:30:45 PM",
     },
     {
-        petId: "101237a0-35a8-4a15-9513-5ad1f73e44c1",
+        id: "101237a0-35a8-4a15-9513-5ad1f73e44c1",
         name: "Charlie",
         breed: "Labrador Retriever",
         age: 2,
@@ -132,7 +132,7 @@ const petsData: Pet[] = [
         updatedAt: "2/15/2025 4:20:18 PM",
     },
     {
-        petId: "201237a0-35a8-4a15-9513-5ad1f73e44d2",
+        id: "201237a0-35a8-4a15-9513-5ad1f73e44d2",
         name: "Daisy",
         breed: "Shih Tzu",
         age: 5,
@@ -180,7 +180,7 @@ export default function MeetPets() {
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {selectedPets.map((pet) => (
-                    <Card key={pet.petId} className="overflow-hidden transition-all hover:shadow-lg">
+                    <Card key={pet.id} className="overflow-hidden transition-all hover:shadow-lg">
                         <div className="relative">
                             <Image
                                 src={pet.photoURL || "/placeholder.svg"}

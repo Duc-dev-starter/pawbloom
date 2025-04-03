@@ -2,7 +2,6 @@ import { LayoutBGFlicker } from "@/components/bg";
 import FeaturePost from "@/components/blog/FeaturePost";
 import { CarouselCustom } from "@/components/customCarousel";
 import MeetPets from "@/components/pet/MeetPet";
-import PetFilter from "@/components/pet/PetFilter";
 import WatchMoreButton from "@/components/WatchMoreButton";
 import Path from "@/constants/paths";
 import EventCard from "@/sections/home/EventCard";

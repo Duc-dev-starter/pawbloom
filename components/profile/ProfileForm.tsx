@@ -97,6 +97,7 @@ export default function ProfileForm({ userData, createdAtDate, updatedAtDate }: 
                 description: "Có lỗi xảy ra khi cập nhật thông tin",
                 variant: "destructive",
             })
+            console.log(error);
         } finally {
             setIsSubmitting(false)
         }

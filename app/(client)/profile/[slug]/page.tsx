@@ -73,6 +73,7 @@ async function getUserData(userId: string): Promise<UserType> {
     // return res.json()
 
     // Giả lập dữ liệu từ API
+    console.log(userId);
     return {
         fullName: "Khoi",
         email: "khoipham2310@gmail.com",
@@ -90,7 +91,7 @@ async function getUserData(userId: string): Promise<UserType> {
 }
 
 // Tạo metadata động dựa trên slug
-export async function generateMetadata({ params }: ProfileProps, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: ProfileProps): Promise<Metadata> {
     const userId = params.slug
 
     // Lấy dữ liệu người dùng

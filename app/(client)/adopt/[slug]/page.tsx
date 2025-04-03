@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { ArrowLeft, Heart, PawPrint, Calendar, Weight, Ruler, Check, X, Share2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -221,11 +220,10 @@ interface AdoptPageDetailProps {
 
 const AdoptPageDetail = ({ params }: AdoptPageDetailProps) => {
     const { slug } = params
-    const router = useRouter()
     const [pet, setPet] = useState<Pet | null>(null)
     const [similarPets, setSimilarPets] = useState<Pet[]>([])
     const [isLoading, setIsLoading] = useState(true)
-    const [isAdopting, setIsAdopting] = useState(false)
+    const [isAdopting] = useState(false)
     const { isFavorite, toggleFavorite } = useFavorites()
     const [isAdoptModalOpen, setIsAdoptModalOpen] = useState(false)
 

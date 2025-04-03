@@ -138,6 +138,7 @@ export default function AdoptionModal({ pet, isOpen, onClose }: AdoptionModalPro
                 description: "Có lỗi xảy ra khi gửi đơn nhận nuôi. Vui lòng thử lại sau.",
                 variant: "destructive",
             })
+            console.log(error);
         } finally {
             setIsSubmitting(false)
         }

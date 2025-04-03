@@ -27,6 +27,7 @@ import { JwtPayload } from '@/types/auth';
 import { signInWithPopup } from "firebase/auth";
 import { auth, facebookProvider, googleProvider } from "@/lib/firebase";
 import { navigateByRole } from '@/utils';
+import { getCurrentUser } from '@/services/user';
 
 
 type FormType = "sign-in" | "sign-up"
@@ -138,13 +139,14 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                 }
             } else {
                 const response = await login(values);
-                console.log(response);
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-expect-error
                 if (response.success) {
                     const token = response.data.token;
                     const decodedToken: JwtPayload = jwtDecode(token);
+                    localStorage.setItem('token', token);
                     navigateByRole(decodedToken.role, router);
+                    const currentUserResponse = await getCurrentUser();
                     toast({
                         title: "Đăng nhập thành công",
                         description: 'Chào mừng người dùng đã đăng nhập vào hệ thống',

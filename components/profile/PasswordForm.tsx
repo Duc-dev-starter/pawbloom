@@ -99,6 +99,7 @@ export default function PasswordForm() {
                 description: "Có lỗi xảy ra khi cập nhật mật khẩu",
                 variant: "destructive",
             })
+            console.log(error);
         } finally {
             setIsSubmitting(false)
         }

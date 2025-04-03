@@ -77,10 +77,13 @@ export const firstLetterCapitialize = (value: string) => {
 
 export const navigateByRole = (role: string, router: { push: (path: string) => void }) => {
     switch (role) {
-        case "user":
+        case "Adopter":
             router.push(Path.HOME);
             break;
-        case "admin":
+        case "Admin":
+            router.push(Path.ADMIN_DASHBOARD);
+            break;
+        case "Foster":
             router.push(Path.ADMIN_DASHBOARD);
             break;
         default:
