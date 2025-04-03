@@ -42,7 +42,7 @@ export const API = {
 
     // PET
     CREATE_PET: '/api/pets',
-    GET_PETS: '/api/pets/search',
+    GET_PETS: '/api/pets',
     GET_UPDATE_DELETE_PET: '/api/pets',
     UPDATE_STATUS_PET: '/api/pets'
 }

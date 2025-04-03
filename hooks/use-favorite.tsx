@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 type FavoritePet = {
-    petId: string;
+    id: string;
     name: string;
     photoURL: string;
     breed: string;
@@ -24,17 +24,17 @@ export function useFavorites() {
     }, []);
 
     // Kiểm tra xem một thú cưng có trong danh sách yêu thích không
-    const isFavorite = (petId: string): boolean => {
-        return favorites.some(fav => fav.petId === petId);
+    const isFavorite = (id: string): boolean => {
+        return favorites.some(fav => fav.id === id);
     };
 
     // Thêm hoặc xóa thú cưng khỏi danh sách yêu thích
     const toggleFavorite = (pet: FavoritePet): void => {
         let newFavorites: FavoritePet[];
 
-        if (isFavorite(pet.petId)) {
+        if (isFavorite(pet.id)) {
             // Xóa khỏi danh sách yêu thích
-            newFavorites = favorites.filter(fav => fav.petId !== pet.petId);
+            newFavorites = favorites.filter(fav => fav.id !== pet.id);
         } else {
             // Thêm vào danh sách yêu thích
             newFavorites = [...favorites, pet];

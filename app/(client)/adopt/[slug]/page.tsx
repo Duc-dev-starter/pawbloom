@@ -13,11 +13,13 @@ import type { Pet } from "@/types/pet"
 import { cn } from "@/lib/utils"
 import PetCard from "@/components/adopt/PetCard"
 import { useFavorites } from "@/hooks/use-favorite"
+import { getPet, getPets } from "@/services/pet"
+import AdoptionModal from "@/components/adopt/AdoptModal"
 
 // Sample data - replace with your actual API call
 const petsData: Pet[] = [
     {
-        petId: "601137a0-35a8-4a15-9513-5ad1f73e44a7",
+        id: "56bc1632-9343-4d80-ae89-017e18f68064",
         name: "Buddy",
         breed: "Golden Retriever",
         age: 3,
@@ -42,7 +44,7 @@ const petsData: Pet[] = [
         updatedAt: "2/6/2025 11:09:19 PM",
     },
     {
-        petId: "701137a0-35a8-4a15-9513-5ad1f73e44a8",
+        id: "701137a0-35a8-4a15-9513-5ad1f73e44a8",
         name: "Luna",
         breed: "Siamese",
         age: 2,
@@ -66,7 +68,7 @@ const petsData: Pet[] = [
         updatedAt: "2/8/2025 9:15:30 PM",
     },
     {
-        petId: "801137a0-35a8-4a15-9513-5ad1f73e44a9",
+        id: "801137a0-35a8-4a15-9513-5ad1f73e44a9",
         name: "Max",
         breed: "Beagle",
         age: 1,
@@ -90,7 +92,7 @@ const petsData: Pet[] = [
         updatedAt: "2/10/2025 5:45:12 PM",
     },
     {
-        petId: "901137a0-35a8-4a15-9513-5ad1f73e44b0",
+        id: "901137a0-35a8-4a15-9513-5ad1f73e44b0",
         name: "Bella",
         breed: "Persian",
         age: 4,
@@ -114,7 +116,7 @@ const petsData: Pet[] = [
         updatedAt: "2/12/2025 10:30:45 PM",
     },
     {
-        petId: "101237a0-35a8-4a15-9513-5ad1f73e44c1",
+        id: "101237a0-35a8-4a15-9513-5ad1f73e44c1",
         name: "Charlie",
         breed: "Labrador Retriever",
         age: 2,
@@ -138,7 +140,7 @@ const petsData: Pet[] = [
         updatedAt: "2/15/2025 4:20:18 PM",
     },
     {
-        petId: "201237a0-35a8-4a15-9513-5ad1f73e44d2",
+        id: "201237a0-35a8-4a15-9513-5ad1f73e44d2",
         name: "Daisy",
         breed: "Shih Tzu",
         age: 5,
@@ -162,7 +164,7 @@ const petsData: Pet[] = [
         updatedAt: "2/18/2025 8:10:33 PM",
     },
     {
-        petId: "301237a0-35a8-4a15-9513-5ad1f73e44e3",
+        id: "301237a0-35a8-4a15-9513-5ad1f73e44e3",
         name: "Rocky",
         breed: "Bulldog",
         age: 4,
@@ -186,7 +188,7 @@ const petsData: Pet[] = [
         updatedAt: "2/20/2025 6:25:40 PM",
     },
     {
-        petId: "401237a0-35a8-4a15-9513-5ad1f73e44f4",
+        id: "401237a0-35a8-4a15-9513-5ad1f73e44f4",
         name: "Coco",
         breed: "Maine Coon",
         age: 3,
@@ -225,28 +227,30 @@ const AdoptPageDetail = ({ params }: AdoptPageDetailProps) => {
     const [isLoading, setIsLoading] = useState(true)
     const [isAdopting, setIsAdopting] = useState(false)
     const { isFavorite, toggleFavorite } = useFavorites()
+    const [isAdoptModalOpen, setIsAdoptModalOpen] = useState(false)
 
     useEffect(() => {
         // Giả lập API call
         const fetchPet = async () => {
             setIsLoading(true)
             try {
-                // Tìm thú cưng theo ID
-                const foundPet = petsData.find((p) => p.petId === slug)
+                const response = await getPet(slug);
+                console.log(response);
 
-                if (foundPet) {
-                    setPet(foundPet)
+                if (response.data) {
+                    setPet(response.data)
 
                     // Tìm các thú cưng tương tự theo breed
-                    const similar = petsData.filter((p) => p.petId !== slug && p.breed === foundPet.breed)
+                    const similarPetResponse = await getPets();
+                    const similarPet = similarPetResponse.data
 
                     // Nếu không có thú cưng cùng breed, tìm theo loại (chó/mèo)
-                    if (similar.length === 0) {
-                        const isDog = isDogBreed(foundPet.breed)
-                        const similarByType = petsData.filter((p) => p.petId !== slug && isDogBreed(p.breed) === isDog)
+                    if (similarPet.length === 0) {
+                        const isDog = isDogBreed(response.data.breed)
+                        const similarByType = petsData.filter((p) => p.id !== slug && isDogBreed(p.breed) === isDog)
                         setSimilarPets(similarByType.slice(0, 4))
                     } else {
-                        setSimilarPets(similar.slice(0, 4))
+                        setSimilarPets(similarPet.slice(0, 4))
                     }
                 } else {
                     // Không tìm thấy thú cưng
@@ -271,7 +275,7 @@ const AdoptPageDetail = ({ params }: AdoptPageDetailProps) => {
         if (!pet) return
 
         toggleFavorite({
-            petId: pet.petId,
+            id: pet.id,
             name: pet.name,
             photoURL: pet.photoURL,
             breed: pet.breed,
@@ -280,14 +284,7 @@ const AdoptPageDetail = ({ params }: AdoptPageDetailProps) => {
 
     const handleAdopt = () => {
         if (!pet || pet.status !== "Available") return
-
-        setIsAdopting(true)
-        // Giả lập quá trình nhận nuôi
-        setTimeout(() => {
-            setIsAdopting(false)
-            // Chuyển hướng đến trang xác nhận hoặc hiển thị thông báo thành công
-            router.push("/adopt/confirmation")
-        }, 1500)
+        setIsAdoptModalOpen(true)
     }
 
     const handleShare = () => {
@@ -415,7 +412,7 @@ const AdoptPageDetail = ({ params }: AdoptPageDetailProps) => {
                                 className="rounded-full bg-white/80 hover:bg-white"
                                 onClick={handleToggleFavorite}
                             >
-                                <Heart className={cn("h-5 w-5", isFavorite(pet.petId) ? "fill-brand text-brand" : "text-gray-700")} />
+                                <Heart className={cn("h-5 w-5", isFavorite(pet.id) ? "fill-brand text-brand" : "text-gray-700")} />
                             </Button>
                         </div>
                     </div>
@@ -529,8 +526,8 @@ const AdoptPageDetail = ({ params }: AdoptPageDetailProps) => {
                                 className="flex-1 gap-2 border-brand text-brand hover:bg-brand/10"
                                 onClick={handleToggleFavorite}
                             >
-                                <Heart className={cn("h-5 w-5", isFavorite(pet.petId) ? "fill-brand" : "")} />
-                                {isFavorite(pet.petId) ? "Đã yêu thích" : "Yêu thích"}
+                                <Heart className={cn("h-5 w-5", isFavorite(pet.id) ? "fill-brand" : "")} />
+                                {isFavorite(pet.id) ? "Đã yêu thích" : "Yêu thích"}
                             </Button>
 
                             <Button
@@ -559,7 +556,7 @@ const AdoptPageDetail = ({ params }: AdoptPageDetailProps) => {
                     {similarPets.length > 0 ? (
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                             {similarPets.map((similarPet) => (
-                                <PetCard key={similarPet.petId} pet={similarPet} />
+                                <PetCard key={similarPet.id} pet={similarPet} />
                             ))}
                         </div>
                     ) : (
@@ -567,6 +564,7 @@ const AdoptPageDetail = ({ params }: AdoptPageDetailProps) => {
                     )}
                 </div>
             </div>
+            {pet && <AdoptionModal pet={pet} isOpen={isAdoptModalOpen} onClose={() => setIsAdoptModalOpen(false)} />}
         </section>
     )
 }

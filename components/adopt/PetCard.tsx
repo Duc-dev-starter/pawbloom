@@ -22,7 +22,7 @@ export default function PetCard({ pet }: PetCardProps) {
         e.preventDefault()
         e.stopPropagation()
         toggleFavorite({
-            petId: pet.petId,
+            id: pet.id,
             name: pet.name,
             photoURL: pet.photoURL,
             breed: pet.breed,
@@ -61,7 +61,7 @@ export default function PetCard({ pet }: PetCardProps) {
     }
 
     return (
-        <Link href={`/adopt/${pet.petId}`}>
+        <Link href={`/adopt/${pet.id}`}>
             <Card className="h-full overflow-hidden transition-all hover:shadow-lg">
                 <div className="relative">
                     <Image
@@ -78,7 +78,7 @@ export default function PetCard({ pet }: PetCardProps) {
                         className="absolute right-3 top-3 rounded-full bg-white/80 hover:bg-white"
                         onClick={toggleFavoritePet}
                     >
-                        <Heart className={cn("h-5 w-5", isFavorite(pet.petId) ? "fill-brand text-brand" : "text-brand")} />
+                        <Heart className={cn("h-5 w-5", isFavorite(pet.id) ? "fill-brand text-brand" : "text-brand")} />
                     </Button>
                     <Badge className={cn("absolute right-3 bottom-3", getStatusColor(pet.status))}>
                         {getStatusText(pet.status)}

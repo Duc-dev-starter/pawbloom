@@ -1,11 +1,20 @@
-
 const nextConfig = {
-  /* config options here */
   images: {
-    domains: ['images.pexels.com', 'avatar.vercel.sh', 'loremflickr.com', 'img.vietqr.io'],
+    domains: [
+      'images.pexels.com',
+      'avatar.vercel.sh',
+      'loremflickr.com',
+      'img.vietqr.io',
+      'upload.wikimedia.org',
+      'encrypted-tbn0.gstatic.com',
+      'example.com',
+      'www.trupanion.com',
+      'i.natgeofe.com'
+    ],
   },
   experimental: {
-    runtime: 'nodejs', // Chạy trên Node.js runtime thay vì Edge
+    runtime: 'nodejs',
   },
 };
+
 module.exports = nextConfig;

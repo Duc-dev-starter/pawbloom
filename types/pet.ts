@@ -1,5 +1,5 @@
 export type Pet = {
-    petId: string;
+    id: string;
     name: string;
     breed: string;
     age: number;
@@ -24,6 +24,7 @@ export type Pet = {
 }
 
 export interface PetFilters {
+    sort: any;
     type?: string;
     size?: string;
     age?: string;
