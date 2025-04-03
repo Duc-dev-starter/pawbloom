@@ -51,13 +51,13 @@ const AdoptPage = () => {
                     setAllPets(mappedPets);
                     setFilteredPets(mappedPets);
                 } else {
-                    console.error("Failed to fetch pets:", response.message || "No data returned");
                     setError(response.message || "Failed to load pets.");
                     setAllPets([]);
                     setFilteredPets([]);
                 }
-            } catch (error: any) {
-                console.error("Error fetching pets:", error);
+            } catch (error) {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 setError(error.message || "An unexpected error occurred.");
                 setAllPets([]);
                 setFilteredPets([]);
@@ -192,7 +192,7 @@ const AdoptPage = () => {
                 </div>
             ) : error ? (
                 <div className="flex flex-col items-center justify-center py-20 text-center px-4">
-                    <h2 className="text-2xl font-semibold mb-4 text-red-600">Error</h2>
+                    <h2 className="text-2xl font-semibold mb-4 text-red-600">Lỗi</h2>
                     <p className="text-gray-500 mb-6">{error}</p>
                 </div>
             ) : filteredPets.length === 0 ? (

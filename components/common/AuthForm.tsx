@@ -147,6 +147,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                     localStorage.setItem('token', token);
                     navigateByRole(decodedToken.role, router);
                     const currentUserResponse = await getCurrentUser();
+                    localStorage.setItem('user', currentUserResponse.data);
                     toast({
                         title: "Đăng nhập thành công",
                         description: 'Chào mừng người dùng đã đăng nhập vào hệ thống',

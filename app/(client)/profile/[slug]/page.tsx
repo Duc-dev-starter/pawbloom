@@ -1,4 +1,4 @@
-import type { Metadata, ResolvingMetadata } from "next"
+import type { Metadata } from "next"
 import { Bell, Home, User } from "lucide-react"
 import {
     Sidebar,
