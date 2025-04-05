@@ -15,13 +15,13 @@ const ProductTabStatus = ({ selectedTab, setSelectedTab }: { selectedTab: string
             <Label className='text-slate-600'>Trạng thái</Label>
             <Tabs value={selectedTab} onValueChange={handleValueChange} className='mt-1'>
                 <TabsList className='h-11 px-2'>
-                    <TabsTrigger className={`h-8 ${selectedTab === "published" ? "text-red-500" : ""}`} value='published'>
+                    <TabsTrigger className={`h-8 ${selectedTab === "Published" ? "text-red-500" : ""}`} value='published'>
                         <FaCheck className='pr-1' />Công khai
                     </TabsTrigger>
-                    <TabsTrigger className={`h-8 ${selectedTab === "inactive" ? "text-red-500" : ""}`} value='inactive'>
+                    <TabsTrigger className={`h-8 ${selectedTab === "Inactive" ? "text-red-500" : ""}`} value='inactive'>
                         <IoClose className='pr-1' />Ẩn
                     </TabsTrigger>
-                    <TabsTrigger className={`h-8 px-3 ${selectedTab === "draft" ? "text-red-500" : ""}`} value='draft'>
+                    <TabsTrigger className={`h-8 px-3 ${selectedTab === "Draft" ? "text-red-500" : ""}`} value='draft'>
                         <FaInbox className='pr-1' />Nháp
                     </TabsTrigger>
                 </TabsList>

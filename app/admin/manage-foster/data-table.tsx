@@ -31,9 +31,9 @@ import { Status } from "@/types/status"
 import { PaginationControls, PaginationSelection } from "@/components/common"
 
 const fosterStatuses: Status[] = [
-    { value: 'published', label: 'Công khai', icon: <FaCheck /> },
-    { value: 'inactive', label: 'Ẩn', icon: <IoClose /> },
-    { value: 'draft', label: 'Nháp', icon: <FaInbox /> },
+    { value: 'Published', label: 'Công khai', icon: <FaCheck /> },
+    { value: 'Inactive', label: 'Ẩn', icon: <IoClose /> },
+    { value: 'Draft', label: 'Nháp', icon: <FaInbox /> },
 ];
 
 export function DataTableFoster<TData, TValue>({

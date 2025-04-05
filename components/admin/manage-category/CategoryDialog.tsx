@@ -26,7 +26,7 @@ const CategoryDialog = () => {
 
     const { reset } = methods;
 
-    const [selectedTab, setSelectedTab] = useState<Category["status"]>('published');
+    const [selectedTab, setSelectedTab] = useState<Category["status"]>('Published');
     const [selectedAuthor, setSelectedAuthor] = useState<Category["author"]>('');
 
     useEffect(() => {
