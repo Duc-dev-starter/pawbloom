@@ -1,4 +1,3 @@
-import { Category } from "./category";
 
 export type ProductStatus = 'published' | 'inactive' | 'draft';
 
@@ -8,9 +7,9 @@ export type Product = {
     supplier: string;
     category: string;
     status: ProductStatus;
-    slug?:string;
+    slug?: string;
     quantity: number;
-    images : string[];
+    images: string[];
     price: number;
     description: string;
     createdAt: string;

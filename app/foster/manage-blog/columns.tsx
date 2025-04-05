@@ -45,15 +45,15 @@ export const columns: ColumnDef<Blog>[] = [
             let icon: ReactNode;
 
             switch (status) {
-                case 'published':
+                case 'Published':
                     colorClass = "text-green-600 bg-green-100";
                     icon = <FaCheck className="text-sm" />;
                     break;
-                case 'inactive':
+                case 'Inactive':
                     colorClass = "text-red-600 bg-red-100";
                     icon = <IoClose className="text-sm" />
                     break;
-                case 'draft':
+                case 'Draft':
                     colorClass = "text-gray-600 bg-gray-200";
                     icon = <FaInbox />
                     break;

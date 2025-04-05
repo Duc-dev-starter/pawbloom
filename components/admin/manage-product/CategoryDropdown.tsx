@@ -15,7 +15,7 @@ const categories: Category[] = [
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
         author: '',
-        status: 'published',
+        status: 'Published',
         description: ''
     },
     {
@@ -24,7 +24,7 @@ const categories: Category[] = [
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
         author: '',
-        status: 'published',
+        status: 'Published',
         description: ''
     },
     {
@@ -33,7 +33,7 @@ const categories: Category[] = [
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
         author: '',
-        status: 'published',
+        status: 'Published',
         description: ''
     },
     {
@@ -42,7 +42,7 @@ const categories: Category[] = [
         createdAt: "2023-12-01T12:00:00Z",
         updatedAt: "2023-12-01T12:00:00Z",
         author: '',
-        status: 'published',
+        status: 'Published',
         description: ''
     },
 ]
