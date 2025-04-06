@@ -1,5 +1,5 @@
 import { HttpStatus } from "@/enum/https";
-import Path from "@/constants/paths";
+// import Path from "@/constants/paths";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { config } from "@/config";

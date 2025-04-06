@@ -1,4 +1,4 @@
-// import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export const config = {
   matcher: [
@@ -6,14 +6,11 @@ export const config = {
   ],
 };
 
+export function middleware(req: NextRequest) {
+  // if (!["/", "/about", "/contact"].includes(req.nextUrl.pathname)) {
+  //   return NextResponse.rewrite(new URL("/not-found", req.url));
+  // }
+  console.log(req.nextUrl.pathname)
 
-
-// export function middleware(req: NextRequest) {
-//     // Kiểm tra xem trang có tồn tại không
-//     if (!["/", "/about", "/contact"].includes(req.nextUrl.pathname)) {
-//       return NextResponse.rewrite(new URL("/not-found", req.url)); // Giữ nguyên URL
-//     }
-
-//     return NextResponse.next();
-//   }
-
+  return NextResponse.next();
+}

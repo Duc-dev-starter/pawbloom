@@ -96,7 +96,7 @@ export default function PetCard({ pet }: PetCardProps) {
                         <Badge variant="secondary">{pet.age} tuổi</Badge>
                         <Badge variant="secondary">{pet.gender === "Male" ? "Đực" : "Cái"}</Badge>
                     </div>
-                    <p className="line-clamp-2 text-sm text-gray-600">{pet.description}</p>
+                    <p className="line-clamp-1 text-sm text-gray-600">{pet.description}</p>
 
                     <div className="mt-3 flex flex-wrap gap-2">
                         {pet.neutering && (
