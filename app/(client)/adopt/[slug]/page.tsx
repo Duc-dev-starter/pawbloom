@@ -9,7 +9,7 @@ interface AdoptPageDetailProps {
 
 // Metadata tĩnh cơ bản
 export const metadata: Metadata = {
-    title: "Chi tiết thú cưng | Pawbloom",
+    title: "Chi tiết thú cưng",
     description: "Tìm hiểu thêm về thú cưng đang cần được nhận nuôi.",
 }
 

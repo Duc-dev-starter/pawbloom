@@ -1,9 +1,12 @@
-import React from 'react'
+import FosterClient from "@/components/foster/FosterClient"
+import type { Metadata } from "next"
 
-const Fosters = () => {
-    return (
-        <div>Fosters</div>
-    )
+export const metadata: Metadata = {
+    title: "Trạm Cứu Trợ | Pawbloom",
+    description: "Danh sách các trạm cứu trợ động vật đối tác với Pawbloom.",
 }
 
-export default Fosters
+export default function FosterPage() {
+    return <FosterClient />
+}
+

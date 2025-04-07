@@ -112,7 +112,7 @@ export default function SearchPet({ onFilter }: SearchPetProps) {
     };
 
     return (
-        <div className="bg-brand/10 px-6 py-8 md:px-16">
+        <div className="px-6 py-8 md:px-16">
             <div className="mx-auto max-w-7xl">
                 <h1 className="mb-6 text-3xl font-bold text-brand-200 md:text-4xl">Tìm kiếm thú cưng</h1>
 

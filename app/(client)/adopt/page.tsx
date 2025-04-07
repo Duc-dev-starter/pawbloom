@@ -149,7 +149,7 @@ const AdoptPage = () => {
 
         setFilteredPets(filtered);
         setCurrentPage(1);
-        // setIsLoading(false); 
+        setIsLoading(false);
     }, [allPets]);
 
 
@@ -201,11 +201,11 @@ const AdoptPage = () => {
                     <p className="text-gray-500 mb-6">
                         {allPets.length > 0 ? "No pets match the current filters. Try adjusting your search." : "There are currently no pets listed for adoption."}
                     </p>
-                    <Button onClick={clearFilters} className="bg-brand hover:bg-brand/90">
+                    <Button onClick={clearFilters} className="hover:bg-brand/90">
                         Xóa bộ lọc
                     </Button>
                     {allPets.length > 0 && (
-                        <Button onClick={clearFilters} className="bg-brand hover:bg-brand/90">
+                        <Button onClick={clearFilters} className="hover:bg-brand/90">
                             Đặt lại tìm kiếm
                         </Button>
                     )}

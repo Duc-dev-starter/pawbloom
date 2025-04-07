@@ -2,8 +2,8 @@ import { BaseService } from "./baseService";
 import { API } from "@/constants/api";
 import { Pet } from "@/types/pet";
 
-export const getPets = async () => {
-    const response = await BaseService.get({ url: API.GET_PETS });
+export const getFosters = async () => {
+    const response = await BaseService.get({ url: API.GET_FOSTERS });
     console.log(response);
     return response;
 }

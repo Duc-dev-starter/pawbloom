@@ -44,5 +44,8 @@ export const API = {
     CREATE_PET: '/api/pets',
     GET_PETS: '/api/pets',
     GET_UPDATE_DELETE_PET: '/api/pets',
-    UPDATE_STATUS_PET: '/api/pets'
+    UPDATE_STATUS_PET: '/api/pets',
+
+    // FOSTER
+    GET_FOSTERS: '/api/fosters'
 }
