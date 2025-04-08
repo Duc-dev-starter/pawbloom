@@ -156,7 +156,7 @@ export default function AdoptionModal({ pet, isOpen, onClose }: AdoptionModalPro
                 })
                 setTimeout(() => {
                     router.push("/application");
-                }, 2000);
+                }, 1000);
             }
 
         } catch (error) {

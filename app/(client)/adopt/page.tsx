@@ -199,17 +199,11 @@ const AdoptPage = () => {
                 <div className="flex flex-col items-center justify-center py-20 text-center px-4">
                     <h2 className="text-2xl font-semibold mb-4">Không có thú cưng nào được tìm thấy</h2>
                     <p className="text-gray-500 mb-6">
-                        {allPets.length > 0 ? "No pets match the current filters. Try adjusting your search." : "There are currently no pets listed for adoption."}
+                        {allPets.length > 0 ? "Không có vật nuôi nào phù hợp với bộ lọc hiện tại. Hãy thử điều chỉnh tìm kiếm của bạn." : "Hiện tại không có vật nuôi nào được liệt kê để nhận nuôi."}
                     </p>
                     <Button onClick={clearFilters} className="hover:bg-brand/90">
                         Xóa bộ lọc
                     </Button>
-                    {allPets.length > 0 && (
-                        <Button onClick={clearFilters} className="hover:bg-brand/90">
-                            Đặt lại tìm kiếm
-                        </Button>
-                    )}
-
                 </div>
             ) : (
                 <>

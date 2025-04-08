@@ -13,11 +13,12 @@ import {
     CheckCircle2,
     XCircle,
     AlertCircle,
-    Clock3,
     CreditCard,
     Filter,
     ChevronDown,
     X,
+    LoaderCircle,
+    HelpCircle,
 } from "lucide-react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -55,6 +56,8 @@ enum ApplicationStatus {
     APPROVED = "approved",
     REJECTED = "rejected",
     CANCELLED = "cancelled",
+    COMPLETED = "completed",
+    PROCESSING = "processing"
 }
 
 export default function ApplicationsClient() {
@@ -126,38 +129,54 @@ export default function ApplicationsClient() {
         }
     }
 
-    // Hàm lấy icon và màu sắc dựa trên trạng thái
     const getStatusInfo = (status: string) => {
-        const statusLower = status.toLowerCase()
+        const statusLower = status.toLowerCase();
 
         switch (statusLower) {
             case ApplicationStatus.APPROVED:
                 return {
                     icon: <CheckCircle2 className="h-5 w-5" />,
-                    color: "text-green-500 bg-green-50",
+                    color: "text-green-600 bg-green-100",
                     text: "Đã duyệt",
-                }
+                };
             case ApplicationStatus.REJECTED:
                 return {
                     icon: <XCircle className="h-5 w-5" />,
-                    color: "text-red-500 bg-red-50",
-                    text: "Từ chối",
-                }
+                    color: "text-red-600 bg-red-100",
+                    text: "Bị từ chối",
+                };
             case ApplicationStatus.CANCELLED:
                 return {
                     icon: <AlertCircle className="h-5 w-5" />,
-                    color: "text-orange-500 bg-orange-50",
+                    color: "text-yellow-600 bg-yellow-100",
                     text: "Đã hủy",
-                }
+                };
+            case ApplicationStatus.COMPLETED:
+                return {
+                    icon: <CheckCircle2 className="h-5 w-5" />,
+                    color: "text-blue-600 bg-blue-100",
+                    text: "Hoàn tất",
+                };
             case ApplicationStatus.PENDING:
+                return {
+                    icon: <Clock className="h-5 w-5 animate-pulse" />,
+                    color: "text-gray-600 bg-gray-100",
+                    text: "Đang chờ duyệt",
+                };
+            case ApplicationStatus.PROCESSING:
+                return {
+                    icon: <LoaderCircle className="h-5 w-5 animate-spin" />,
+                    color: "text-indigo-600 bg-indigo-100",
+                    text: "Đang xử lý",
+                };
             default:
                 return {
-                    icon: <Clock3 className="h-5 w-5" />,
-                    color: "text-blue-500 bg-blue-50",
-                    text: "Đang xử lý",
-                }
+                    icon: <HelpCircle className="h-5 w-5" />,
+                    color: "text-muted-foreground bg-muted",
+                    text: "Không rõ",
+                };
         }
-    }
+    };
 
     // Format ngày giờ
     const formatDateTime = (dateString: string) => {
@@ -220,6 +239,7 @@ export default function ApplicationsClient() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="start">
                             <DropdownMenuItem onClick={() => setSelectedStatus(null)}>Tất cả</DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => setSelectedStatus(ApplicationStatus.COMPLETED)}>Hoàn tất</DropdownMenuItem>
                             <DropdownMenuItem onClick={() => setSelectedStatus(ApplicationStatus.PENDING)}>
                                 Đang xử lý
                             </DropdownMenuItem>
