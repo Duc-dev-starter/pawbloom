@@ -5,21 +5,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Settings, Key } from "lucide-react"
 import ProfileForm from "./ProfileForm"
 import PasswordForm from "./PasswordForm"
+import { User } from "@/types/user"
 
-interface User {
-    fullName: string
-    email: string
-    phoneNumber: string | null
-    role: string
-    profilePictureUrl: string | null
-    address: string | null
-    bio: string | null
-    isActive: boolean
-    emailVerified: boolean
-    createdAt: string
-    updatedAt: string
-    lastLoginAt: string | null
-}
 
 interface ProfileTabsProps {
     userData: User

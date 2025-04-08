@@ -13,8 +13,8 @@ export const getUser = async (id: string) => {
     return response;
 }
 
-export const updateUser = async (id: string, data: Partial<User>) => {
-    const response = await BaseService.put({ url: `${API.GET_UPDATE_DELETE_USER}/${id}`, payload: data });
+export const updateUser = async (data: Partial<User>) => {
+    const response = await BaseService.put({ url: `${API.GET_UPDATE_DELETE_USER}`, payload: data });
     return response;
 }
 
@@ -25,5 +25,10 @@ export const deleteUser = async (id: string) => {
 
 export const getCurrentUser = async () => {
     const response = await BaseService.get({ url: `${API.GET_CURRENT_USER}` });
+    return response;
+}
+
+export const changePassword = async (payload: any) => {
+    const response = await BaseService.put({ url: '/api/users/reset-password', payload });
     return response;
 }

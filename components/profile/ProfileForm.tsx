@@ -9,21 +9,10 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/hooks/use-toast"
+import { User } from "@/types/user"
+import { updateUser } from "@/services/user"
 
-interface User {
-    fullName: string
-    email: string
-    phoneNumber: string | null
-    role: string
-    profilePictureUrl: string | null
-    address: string | null
-    bio: string | null
-    isActive: boolean
-    emailVerified: boolean
-    createdAt: string
-    updatedAt: string
-    lastLoginAt: string | null
-}
+
 
 interface ProfileFormProps {
     userData: User
@@ -33,6 +22,7 @@ interface ProfileFormProps {
 
 export default function ProfileForm({ userData, createdAtDate, updatedAtDate }: ProfileFormProps) {
     const [formData, setFormData] = useState({
+        userId: userData.userId || "",
         fullName: userData.fullName || "",
         email: userData.email || "",
         phoneNumber: userData.phoneNumber || "",
@@ -79,30 +69,43 @@ export default function ProfileForm({ userData, createdAtDate, updatedAtDate }: 
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        setIsSubmitting(true)
+        e.preventDefault();
+        setIsSubmitting(true);
 
         try {
-            // Giả lập API call
-            await new Promise((resolve) => setTimeout(resolve, 1000))
+            const payload = {
+                userId: userData.userId,
+                fullName: formData.fullName,
+                phoneNumber: formData.phoneNumber,
+                address: formData.address,
+                bio: formData.bio,
+                profilePictureUrl: profileImage,
+            };
 
-            // Hiển thị thông báo thành công
+            const response = await updateUser(payload);
+            const updatedUser: User = response.data || {
+                ...userData,
+                ...payload,
+                updatedAt: new Date().toISOString()
+            };
+
+            localStorage.setItem("user", JSON.stringify(updatedUser));
+
             toast({
                 title: "Thành công",
                 description: "Thông tin tài khoản đã được cập nhật",
-            })
+            });
         } catch (error) {
+            console.error(error);
             toast({
                 title: "Lỗi",
                 description: "Có lỗi xảy ra khi cập nhật thông tin",
                 variant: "destructive",
-            })
-            console.log(error);
+            });
         } finally {
-            setIsSubmitting(false)
+            setIsSubmitting(false);
         }
-    }
-
+    };
     return (
         <form onSubmit={handleSubmit}>
             {/* Avatar */}
@@ -174,10 +177,17 @@ export default function ProfileForm({ userData, createdAtDate, updatedAtDate }: 
 
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                         <div>
-                            <Label htmlFor="dob" className="text-slate-600">
-                                Ngày tháng năm sinh
+                            <Label htmlFor="address" className="text-slate-600">
+                                Địa chỉ
                             </Label>
-                            <Input id="dob" name="dob" type="date" value={formData.dob} onChange={handleChange} />
+                            <Input
+                                id="address"
+                                name="address"
+                                type="text"
+                                placeholder="Địa chỉ của bạn"
+                                value={formData.address || ""}
+                                onChange={handleChange}
+                            />
                         </div>
                         <div>
                             <Label htmlFor="phoneNumber" className="text-slate-600">
@@ -195,19 +205,7 @@ export default function ProfileForm({ userData, createdAtDate, updatedAtDate }: 
                     </div>
 
                     <div className="grid grid-cols-1 gap-6">
-                        <div>
-                            <Label htmlFor="address" className="text-slate-600">
-                                Địa chỉ
-                            </Label>
-                            <Input
-                                id="address"
-                                name="address"
-                                type="text"
-                                placeholder="Địa chỉ của bạn"
-                                value={formData.address || ""}
-                                onChange={handleChange}
-                            />
-                        </div>
+
                         <div>
                             <Label htmlFor="bio" className="text-slate-600">
                                 Giới thiệu

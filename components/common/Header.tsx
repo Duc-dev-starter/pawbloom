@@ -1,41 +1,29 @@
 "use client"
-import Images from '@/constants/image'
-import Path from '@/constants/paths'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuGroup,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuPortal,
-    DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from '../ui/button'
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import MobileNavigation from '../MobileNavigation'
 import { userNavItems } from '@/constants/nav'
 import { CircleHelp, DoorClosed, History, MessageSquareWarning, Settings } from 'lucide-react'
-// import { useSelector } from "react-redux";
-// import { RootState } from '@/store/store'
+import Images from '@/constants/image'
+import Path from '@/constants/paths'
+import { User } from '@/types/user'
 
 const Header = () => {
-    // const { email, role } = useSelector((state: RootState) => state.auth);
-    // console.log(email, role);
-    const user = true;
+    // Khởi tạo state cho user
+    const [user, setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
+
     return (
         <TooltipProvider>
             <header className="bg-brand">
@@ -49,7 +37,6 @@ const Header = () => {
                                 <p>Trang Chủ Pawbloom</p>
                             </TooltipContent>
                         </Tooltip>
-
                     </Link>
                     <MobileNavigation />
                     <nav className='hidden lg:block'>
@@ -60,7 +47,6 @@ const Header = () => {
                                         href={item.link}
                                         className="flex items-center gap-1 transition hover:text-brand-100 "
                                     >
-
                                         <Image src={item.icon} alt={item.title} width={24} height={24} />
                                         <span className="text-[16px] font-medium">{item.title}</span>
                                     </Link>
@@ -74,7 +60,6 @@ const Header = () => {
                             <Link href={Path.LOGIN}>
                                 <Button variant="outline">Đăng nhập</Button>
                             </Link>
-
                             {/* Register Button */}
                             <Link href={Path.REGISTER}>
                                 <Button variant="outline" className="bg-white hover:text-brand">
@@ -86,7 +71,7 @@ const Header = () => {
 
                     {user && (
                         <DropdownMenu>
-                            {/* Avatar as trigger */}
+                            {/* Avatar làm trigger */}
                             <DropdownMenuTrigger asChild>
                                 <Avatar className='ml-auto cursor-pointer'>
                                     <AvatarImage src="https://github.com/shadcn.png" />
@@ -94,44 +79,25 @@ const Header = () => {
                                 </Avatar>
                             </DropdownMenuTrigger>
 
-                            {/* Dropdown content */}
+                            {/* Nội dung dropdown */}
                             <DropdownMenuContent className="mr-5 w-56">
-                                <DropdownMenuLabel className='flex cursor-pointer items-center hover:bg-gray-100'>
-                                    <p>Username</p>
-                                    <Avatar className='ml-auto'>
-                                        <AvatarImage src="https://github.com/shadcn.png" />
-                                        <AvatarFallback>CN</AvatarFallback>
-                                    </Avatar>
-                                </DropdownMenuLabel>
+                                <Link href="/profile">
+                                    <DropdownMenuLabel className='flex cursor-pointer items-center hover:bg-gray-100'>
+                                        <p>{user.fullName || "Username"}</p>
+                                        <Avatar className='ml-auto'>
+                                            <AvatarImage src={user.profilePictureUrl || "https://github.com/shadcn.png"} />
+                                            <AvatarFallback>{user.fullName ? user.fullName.charAt(0) : "CN"}</AvatarFallback>
+                                        </Avatar>
+                                    </DropdownMenuLabel>
+                                </Link>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuGroup>
-                                    <DropdownMenuItem>
-                                        Profile
-                                        <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem>
-                                        Billing
-                                        <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem>
-                                        Settings
-                                        <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-                                    </DropdownMenuItem>
-                                    <div className='flex items-center py-[6px] header-menu-item'>
-                                        <History className='ml-2 mr-1' size={20} />
-                                        <DropdownMenuItem>Lịch sử</DropdownMenuItem>
-                                    </div>
-                                    <DropdownMenuSub>
-                                        <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
-                                        <DropdownMenuPortal>
-                                            <DropdownMenuSubContent>
-                                                <DropdownMenuItem>Email</DropdownMenuItem>
-                                                <DropdownMenuItem>Message</DropdownMenuItem>
-                                                <DropdownMenuSeparator />
-                                                <DropdownMenuItem>More...</DropdownMenuItem>
-                                            </DropdownMenuSubContent>
-                                        </DropdownMenuPortal>
-                                    </DropdownMenuSub>
+                                    <Link href="/application">
+                                        <DropdownMenuItem className='flex items-center py-[6px] header-menu-item'>
+                                            <History className='ml-2 mr-1' size={20} />
+                                            Lịch sử
+                                        </DropdownMenuItem>
+                                    </Link>
                                 </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuGroup>
@@ -139,7 +105,6 @@ const Header = () => {
                                         <CircleHelp className='ml-2 mr-1' size={20} />
                                         <DropdownMenuItem>Trợ giúp</DropdownMenuItem>
                                     </div>
-
                                     <div className='flex items-center py-[6px] header-menu-item'>
                                         <MessageSquareWarning className='ml-2 mr-1' size={20} />
                                         <DropdownMenuItem>Feedback</DropdownMenuItem>
@@ -150,7 +115,6 @@ const Header = () => {
                                     <Settings className='ml-2 mr-1' size={20} />
                                     <DropdownMenuItem>Cài đặt</DropdownMenuItem>
                                 </div>
-
                                 <DropdownMenuSeparator />
                                 <div className='flex items-center py-[6px] header-menu-item'>
                                     <DoorClosed className='ml-2 mr-1' size={20} />
@@ -159,11 +123,10 @@ const Header = () => {
                             </DropdownMenuContent>
                         </DropdownMenu>
                     )}
-
                 </div>
             </header>
         </TooltipProvider>
     )
 }
 
-export default Header
+export default Header;

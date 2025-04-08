@@ -1,5 +1,8 @@
-import type { Metadata } from "next"
-import { Bell, Home, User } from "lucide-react"
+"use client" // Đánh dấu đây là Client Component
+
+import { useEffect, useState } from 'react'
+import { Bell, Home, User2 } from "lucide-react"
+import { BiMoney, BiSupport } from "react-icons/bi"
 import {
     Sidebar,
     SidebarContent,
@@ -11,110 +14,44 @@ import {
     SidebarMenuButton,
     SidebarProvider,
 } from "@/components/ui/sidebar"
-import { BiMoney, BiSupport } from "react-icons/bi"
 import ProfileTabs from "@/components/profile/ProfileTabs"
-
-// Định nghĩa kiểu dữ liệu cho user
-interface UserType {
-    fullName: string
-    email: string
-    phoneNumber: string | null
-    role: string
-    profilePictureUrl: string | null
-    address: string | null
-    bio: string | null
-    isActive: boolean
-    emailVerified: boolean
-    createdAt: string
-    updatedAt: string
-    lastLoginAt: string | null
-}
+import { User } from "@/types/user"
 
 interface ProfileProps {
     params: { slug: string }
 }
 
-// Menu items.
+// Menu items
 const commonItems = [
-    {
-        title: "Thông tin tài khoản",
-        url: "#profile",
-        icon: User,
-    },
-    {
-        title: "Thông báo",
-        url: "#notifications",
-        icon: Bell,
-    },
-    {
-        title: "Chi phí",
-        url: "#expenses",
-        icon: BiMoney,
-    },
+    { title: "Thông tin tài khoản", url: "#profile", icon: User2 },
+    { title: "Thông báo", url: "#notifications", icon: Bell },
+    { title: "Chi phí", url: "#expenses", icon: BiMoney },
 ]
 
 const otherItems = [
-    {
-        title: "Mời bạn bè",
-        url: "#invite",
-        icon: Home,
-    },
-    {
-        title: "Hỗ trợ",
-        url: "#support",
-        icon: BiSupport,
-    },
+    { title: "Mời bạn bè", url: "#invite", icon: Home },
+    { title: "Hỗ trợ", url: "#support", icon: BiSupport },
 ]
 
-// Hàm lấy dữ liệu người dùng (giả lập API call)
-async function getUserData(userId: string): Promise<UserType> {
-    // Trong thực tế, đây sẽ là API call
-    // const res = await fetch(`https://api.example.com/users/${userId}`)
-    // return res.json()
+export default function Profile({ params }: ProfileProps) {
+    const [userData, setUserData] = useState<User | null>(null)
 
-    // Giả lập dữ liệu từ API
-    console.log(userId);
-    return {
-        fullName: "Khoi",
-        email: "khoipham2310@gmail.com",
-        phoneNumber: null,
-        role: "Adopter",
-        profilePictureUrl: null,
-        address: null,
-        bio: null,
-        isActive: true,
-        emailVerified: false,
-        createdAt: "2/2/2025 7:54:47 AM",
-        updatedAt: "2/2/2025 2:54:47 PM",
-        lastLoginAt: null,
+    // Lấy key user từ localStorage khi component mount
+    useEffect(() => {
+        const userKey = localStorage.getItem('user') // Lấy key 'user'
+        if (userKey) {
+            // Giả sử userKey là dữ liệu JSON, parse nó thành object
+            const parsedUser = JSON.parse(userKey)
+            setUserData(parsedUser)
+        }
+    }, [])
+
+    // Nếu chưa có dữ liệu, hiển thị loading
+    if (!userData) {
+        return <div>Đang tải...</div>
     }
-}
 
-// Tạo metadata động dựa trên slug
-export async function generateMetadata({ params }: ProfileProps): Promise<Metadata> {
-    const userId = params.slug
-
-    // Lấy dữ liệu người dùng
-    const userData = await getUserData(userId)
-
-    return {
-        title: `Hồ sơ của ${userData.fullName} | Pawbloom`,
-        description: `Quản lý thông tin tài khoản của ${userData.fullName} trên Pawbloom`,
-        openGraph: {
-            title: `Hồ sơ của ${userData.fullName} | Pawbloom`,
-            description: `Quản lý thông tin tài khoản của ${userData.fullName} trên Pawbloom`,
-            type: "profile",
-        },
-    }
-}
-
-export default async function Profile({ params }: ProfileProps) {
-    const { slug } = params
-
-    // Lấy dữ liệu người dùng từ API
-    const userData = await getUserData(slug)
-
-    // Format dates
+    // Format dates từ dữ liệu user
     const createdAtDate = new Date(userData.createdAt).toLocaleDateString("vi-VN")
     const updatedAtDate = new Date(userData.updatedAt).toLocaleDateString("vi-VN")
 
@@ -177,4 +114,3 @@ export default async function Profile({ params }: ProfileProps) {
         </SidebarProvider>
     )
 }
-
