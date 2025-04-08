@@ -8,14 +8,14 @@ export const getApplications = async () => {
     return response;
 }
 
-export const getApplicationsByFoster = async () => {
-    const response = await BaseService.get({ url: API.GET_APPLICATIONS_BY_FOSTER });
-    console.log(response);
-    return response;
-}
 export const createOrder = async (data: any) => {
     const response = await BaseService.post({ url: API.CREATE_ORDER, payload: data });
     return response;
 }
 
+
+export const cancelOrder = async (orderId: string) => {
+    const response = await BaseService.put({ url: `${API.CREATE_ORDER}/${orderId}` });
+    return response;
+}
 
