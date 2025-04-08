@@ -10,40 +10,11 @@ import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import type { Pet } from "@/types/pet"
 import { cn } from "@/lib/utils"
-import PetCard from "@/components/adopt/PetCard"
 import { useFavorites } from "@/hooks/use-favorite"
 import AdoptionModal from "@/components/adopt/AdoptModal"
-import { getPet, getPets } from "@/services/pet"
+import { getPet } from "@/services/pet"
 
-// Sample data - replace with your actual API call
-const petsData: Pet[] = [
-    {
-        id: "56bc1632-9343-4d80-ae89-017e18f68064",
-        name: "Buddy",
-        breed: "Golden Retriever",
-        age: 3,
-        size: "Large",
-        gender: "Male",
-        description:
-            "A friendly and energetic pet who loves to play. Buddy is a wonderful Golden Retriever who enjoys outdoor activities, especially playing fetch and swimming. He's great with children and other dogs, making him a perfect family pet. Buddy has been trained to follow basic commands and is house-trained. He's looking for an active family who can provide him with plenty of exercise and love.",
-        status: "Available",
-        photoURL: "/placeholder.svg?height=500&width=500",
-        weight: 30.5,
-        color: "Golden",
-        neutering: true,
-        humanFriendly: true,
-        dietarySpecific: false,
-        rabiesVaccination: true,
-        dogFriendly: true,
-        pottyCare: false,
-        vaccinations: true,
-        catFriendly: false,
-        rescueCenterId: null,
-        createdAt: "2/6/2025 4:09:19 PM",
-        updatedAt: "2/6/2025 11:09:19 PM",
-    },
-    // Thêm các thú cưng khác ở đây nếu cần
-]
+
 
 interface PetDetailClientProps {
     slug: string
@@ -51,7 +22,6 @@ interface PetDetailClientProps {
 
 export default function PetDetailClient({ slug }: PetDetailClientProps) {
     const [pet, setPet] = useState<Pet | null>(null)
-    const [similarPets, setSimilarPets] = useState<Pet[]>([])
     const [isLoading, setIsLoading] = useState(true)
     const [isAdoptModalOpen, setIsAdoptModalOpen] = useState(false)
     const { isFavorite, toggleFavorite } = useFavorites()
@@ -75,32 +45,13 @@ export default function PetDetailClient({ slug }: PetDetailClientProps) {
                 if (response.data) {
                     setPet(response.data)
 
-                    // Tìm các thú cưng tương tự theo breed
-                    const similarPetResponse = await getPets()
-                    const similarPet = similarPetResponse.data
 
-                    // Nếu không có thú cưng cùng breed, tìm theo loại (chó/mèo)
-                    if (similarPet.length === 0) {
-                        const isDog = isDogBreed(response.data.breed)
-                        const similarByType = petsData.filter((p) => p.id !== slug && isDogBreed(p.breed) === isDog)
-                        setSimilarPets(similarByType.slice(0, 4))
-                    } else {
-                        setSimilarPets(similarPet.slice(0, 4))
-                    }
                 } else {
                     // Không tìm thấy thú cưng
                     console.error("Pet not found")
                 }
             } catch (error) {
                 console.error("Error fetching pet:", error)
-                // Fallback nếu API lỗi - dùng dữ liệu mẫu
-                const fallbackPet = petsData.find((p) => p.id === slug)
-                if (fallbackPet) {
-                    setPet(fallbackPet)
-                    const isDog = isDogBreed(fallbackPet.breed)
-                    const similarByType = petsData.filter((p) => p.id !== slug && isDogBreed(p.breed) === isDog)
-                    setSimilarPets(similarByType.slice(0, 4))
-                }
             } finally {
                 setIsLoading(false)
             }
@@ -109,10 +60,6 @@ export default function PetDetailClient({ slug }: PetDetailClientProps) {
         fetchPet()
     }, [slug])
 
-    const isDogBreed = (breed: string): boolean => {
-        const dogBreeds = ["Retriever", "Beagle", "Labrador", "Shih Tzu", "Poodle", "Bulldog", "Shepherd"]
-        return dogBreeds.some((dogBreed) => breed.includes(dogBreed))
-    }
 
     const handleToggleFavorite = () => {
         if (!pet) return
@@ -395,19 +342,6 @@ export default function PetDetailClient({ slug }: PetDetailClientProps) {
                     </div>
                 </div>
 
-                {/* Phần thú cưng tương tự */}
-                <div className="mt-16">
-                    <h2 className="mb-6 text-2xl font-bold">Thú cưng tương tự</h2>
-                    {similarPets.length > 0 ? (
-                        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                            {similarPets.map((similarPet) => (
-                                <PetCard key={similarPet.id} pet={similarPet} />
-                            ))}
-                        </div>
-                    ) : (
-                        <p className="text-center text-gray-500">Không tìm thấy thú cưng tương tự</p>
-                    )}
-                </div>
             </div>
 
             {/* Modal nhận nuôi */}

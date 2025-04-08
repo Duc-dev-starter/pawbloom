@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
     Dialog,
     DialogContent,
@@ -15,7 +15,6 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import {
     AlertDialog,
     AlertDialogAction,
@@ -28,6 +27,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import type { Pet } from "@/types/pet"
 import { toast } from "@/hooks/use-toast"
+import { createApplication } from "@/services/application"
 
 interface AdoptionModalProps {
     pet: Pet
@@ -40,7 +40,6 @@ export default function AdoptionModal({ pet, isOpen, onClose }: AdoptionModalPro
         fullName: "",
         email: "",
         phoneNumber: "",
-        nationality: "Việt Nam",
         address: "",
         reason: "",
     })
@@ -48,14 +47,29 @@ export default function AdoptionModal({ pet, isOpen, onClose }: AdoptionModalPro
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [showConfirm, setShowConfirm] = useState(false)
 
+    useEffect(() => {
+        if (!isOpen) return
+
+        try {
+            const userJson = localStorage.getItem("user") || "{}"
+            const user = JSON.parse(userJson)
+            setFormData(() => ({
+                fullName: user.fullName ?? "Chưa cập nhật",
+                email: user.email ?? "Chưa cập nhật",
+                phoneNumber: user.phoneNumber ?? "Chưa cập nhật",
+                address: user.address ?? "Chưa cập nhật",
+                reason: "",
+            }))
+        } catch {
+            // parse lỗi thì thôi giữ state mặc định
+        }
+    }, [isOpen])
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
         setFormData((prev) => ({ ...prev, [name]: value }))
     }
 
-    const handleSelectChange = (name: string, value: string) => {
-        setFormData((prev) => ({ ...prev, [name]: value }))
-    }
 
     const validateForm = () => {
         if (!formData.fullName.trim()) {
@@ -102,6 +116,8 @@ export default function AdoptionModal({ pet, isOpen, onClose }: AdoptionModalPro
 
         if (!validateForm()) return
 
+        console.log("Form data:", formData);
+
         // Hiển thị dialog xác nhận
         setShowConfirm(true)
     }
@@ -110,28 +126,33 @@ export default function AdoptionModal({ pet, isOpen, onClose }: AdoptionModalPro
         setIsSubmitting(true)
 
         try {
-            // Giả lập API call
-            await new Promise((resolve) => setTimeout(resolve, 1500))
+            const payload = {
+                petId: pet.id,
+                ...formData
+            }
 
-            // Đóng modal
-            setShowConfirm(false)
-            onClose()
+            const response = await createApplication(payload);
 
-            // Hiển thị thông báo thành công
-            toast({
-                title: "Thành công",
-                description: `Đơn nhận nuôi ${pet.name} đã được gửi thành công. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.`,
-            })
+            if (response) {
+                setShowConfirm(false)
+                onClose()
 
-            // Reset form
-            setFormData({
-                fullName: "",
-                email: "",
-                phoneNumber: "",
-                nationality: "Việt Nam",
-                address: "",
-                reason: "",
-            })
+                // Hiển thị thông báo thành công
+                toast({
+                    title: "Thành công",
+                    description: `Đơn nhận nuôi ${pet.name} đã được gửi thành công. Chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất.`,
+                })
+
+                // Reset form
+                setFormData({
+                    fullName: "",
+                    email: "",
+                    phoneNumber: "",
+                    address: "",
+                    reason: "",
+                })
+            }
+
         } catch (error) {
             toast({
                 title: "Lỗi",
@@ -144,7 +165,6 @@ export default function AdoptionModal({ pet, isOpen, onClose }: AdoptionModalPro
         }
     }
 
-    const adoptionFee = pet.size === "Small" ? 1000000 : pet.size === "Medium" ? 1500000 : 2000000
 
     return (
         <>
@@ -159,38 +179,23 @@ export default function AdoptionModal({ pet, isOpen, onClose }: AdoptionModalPro
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <Label htmlFor="fullName">Họ và tên</Label>
-                                <Input id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} required />
+                                <Input id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} disabled />
                             </div>
 
                             <div>
                                 <Label htmlFor="email">Email</Label>
-                                <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required />
+                                <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} disabled />
                             </div>
 
                             <div>
                                 <Label htmlFor="phoneNumber">Số điện thoại</Label>
-                                <Input id="phoneNumber" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} required />
+                                <Input id="phoneNumber" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} disabled />
                             </div>
+
 
                             <div>
-                                <Label htmlFor="nationality">Quốc tịch</Label>
-                                <Select value={formData.nationality} onValueChange={(value) => handleSelectChange("nationality", value)}>
-                                    <SelectTrigger id="nationality">
-                                        <SelectValue placeholder="Chọn quốc tịch" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="Việt Nam">Việt Nam</SelectItem>
-                                        <SelectItem value="Mỹ">Mỹ</SelectItem>
-                                        <SelectItem value="Nhật Bản">Nhật Bản</SelectItem>
-                                        <SelectItem value="Hàn Quốc">Hàn Quốc</SelectItem>
-                                        <SelectItem value="Khác">Khác</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </div>
-
-                            <div className="col-span-2">
                                 <Label htmlFor="address">Địa chỉ</Label>
-                                <Input id="address" name="address" value={formData.address} onChange={handleChange} required />
+                                <Input id="address" name="address" value={formData.address} onChange={handleChange} disabled />
                             </div>
 
                             <div className="col-span-2">
@@ -205,8 +210,9 @@ export default function AdoptionModal({ pet, isOpen, onClose }: AdoptionModalPro
                                 </div>
                                 <div className="flex justify-between mt-2">
                                     <span className="font-medium">Phí nhận nuôi:</span>
-                                    <span>{adoptionFee.toLocaleString("vi-VN")} VNĐ</span>
+                                    <span>{pet.price.toLocaleString("vi-VN", { style: "currency", currency: "VND" })} VNĐ</span>
                                 </div>
+
                                 <p className="mt-2 text-xs text-gray-500">
                                     Phí nhận nuôi bao gồm chi phí tiêm phòng, triệt sản, và chăm sóc y tế cơ bản.
                                 </p>

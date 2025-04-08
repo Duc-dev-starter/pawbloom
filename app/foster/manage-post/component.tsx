@@ -1,20 +1,20 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import { columns } from './columns'
-import { getBlogs } from '@/services/blog'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Post } from '@/types/post'
 import { DataTablePosts } from './data-table'
+import { getApplicationsByFoster } from '@/services/application'
 
 const ManagePostsComponent = () => {
-    const [posts, setPosts] = useState<Post[]>([]);
+    const [posts] = useState<Post[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     useEffect(() => {
         const fetchPosts = async () => {
             try {
                 setLoading(true);
-                const response = await getBlogs();
-                setPosts(response as unknown as Post[]);
+                const response = await getApplicationsByFoster();
+                console.log(response);
             } catch (error) {
                 console.log(error);
             } finally {

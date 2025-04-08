@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type Pet = {
     id: string;
     name: string;
@@ -10,6 +11,7 @@ export type Pet = {
     photoURL: string;
     weight: number;
     color: string;
+    price: number;
     neutering: boolean;
     humanFriendly: boolean;
     dietarySpecific: boolean;

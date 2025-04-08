@@ -47,5 +47,13 @@ export const API = {
     UPDATE_STATUS_PET: '/api/pets',
 
     // FOSTER
-    GET_FOSTERS: '/api/fosters'
+    GET_FOSTERS: '/api/fosters',
+
+    // APPLICATION
+    GET_APPLICATIONS: '/api/applications/adopter',
+    GET_APPLICATIONS_BY_FOSTER: '/api/applications',
+    CREATE_APPLICATION: '/api/applications',
+
+    // Order
+    CREATE_ORDER: '/api/payments/create-order'
 }
