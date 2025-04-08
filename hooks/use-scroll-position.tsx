@@ -10,7 +10,6 @@ const useScrollPosition = (page: string) => {
         const save = () => {
             // Lưu object với key là tên page và value là position theo trục y hiện tại
             scrollPositions[page] = document.body.scrollTop
-            console.log(`Saved ${page}: ${scrollPositions[page]}`)
         }
 
         document.body.addEventListener('scroll', save)

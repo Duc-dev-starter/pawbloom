@@ -77,11 +77,9 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
             const result = await signInWithPopup(auth, provider);
             const idToken = await result.user.getIdToken();
 
-            console.log(`${providerType} ID Token:`, idToken);
 
             const response = await socialLogin({ idToken, provider: providerType });
 
-            console.log("Backend response:", response);
 
             // Xóa lỗi validation nếu có
             form.clearErrors();
@@ -91,7 +89,6 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
             if (response.success) {
                 const token = response.data.token;
                 const decodedToken: JwtPayload = jwtDecode(token);
-                console.log(decodedToken);
                 navigateByRole(decodedToken.role, router);
                 toast({
                     title: "Đăng nhập thành công",
@@ -116,7 +113,6 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
 
 
     const onSubmit = async (values: z.infer<typeof authFormSchema>) => {
-        console.log(values);
         setLoading(true);
         try {
             if (type === "sign-up") {

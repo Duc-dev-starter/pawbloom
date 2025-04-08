@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useLayoutEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { format } from "date-fns"
@@ -69,25 +69,22 @@ export default function ApplicationsClient() {
     const [paymentDialogOpen, setPaymentDialogOpen] = useState(false)
     const [selectedApplication, setSelectedApplication] = useState<Application | null>(null)
 
-    // Fetch dữ liệu đơn đăng ký
-    useEffect(() => {
+    useLayoutEffect(() => {
         const fetchApplications = async () => {
-            setIsLoading(true)
+            setIsLoading(true);
             try {
                 const response = await getApplications();
-
-                setApplications(response.data.applications)
-                setFilteredApplications(response.data.applications)
+                setApplications(response.data.applications);
+                setFilteredApplications(response.data.applications);
             } catch (err) {
-                console.error("Error fetching applications:", err)
-                setError("Không thể tải danh sách đơn đăng ký. Vui lòng thử lại sau.")
+                console.error("Error fetching applications:", err);
+                setError("Không thể tải danh sách đơn đăng ký. Vui lòng thử lại sau.");
             } finally {
-                setIsLoading(false)
+                setIsLoading(false);
             }
-        }
-
-        fetchApplications()
-    }, [])
+        };
+        fetchApplications();
+    }, []);
 
     // Lọc đơn theo trạng thái
     useEffect(() => {
@@ -99,12 +96,14 @@ export default function ApplicationsClient() {
         }
     }, [selectedStatus, applications])
 
-    // Xử lý thanh toán
     const handlePayment = (application: Application) => {
-        setSelectedApplication(application)
-        setPaymentDialogOpen(true)
-    }
-
+        if (application && application.applicationId) {
+            setSelectedApplication(application);
+            setPaymentDialogOpen(true);
+        } else {
+            console.error("Invalid application data:", application);
+        }
+    };
     const processPayment = async (applicationId: string) => {
         try {
             const payload = {
@@ -268,7 +267,7 @@ export default function ApplicationsClient() {
             {/* Applications list */}
             {filteredApplications.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {filteredApplications.map((application) => {
+                    {filteredApplications.map((application: Application) => {
                         const { date, time } = formatDateTime(application.applicationDate)
                         const statusInfo = getStatusInfo(application.status)
                         const isApproved = application.status.toLowerCase() === ApplicationStatus.APPROVED
@@ -332,6 +331,11 @@ export default function ApplicationsClient() {
                                                     Chờ thanh toán
                                                 </Badge>
                                             )}
+                                            {application.status === "Completed" && (
+                                                <Badge variant="outline" className="text-green-600 border-amber-200 bg-amber-50">
+                                                    Đã thanh toán
+                                                </Badge>
+                                            )}
                                         </div>
                                     </CardContent>
 
@@ -340,7 +344,7 @@ export default function ApplicationsClient() {
                                             <Link href={`/adopt/${application.pet.id}`}>Xem chi tiết</Link>
                                         </Button>
 
-                                        {isApproved && (
+                                        {!isLoading && applications.length > 0 && isApproved && (
                                             <Button
                                                 className="flex-1 gap-2 bg-brand hover:bg-brand/90"
                                                 onClick={() => handlePayment(application)}

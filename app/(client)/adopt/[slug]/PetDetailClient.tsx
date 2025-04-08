@@ -40,7 +40,6 @@ export default function PetDetailClient({ slug }: PetDetailClientProps) {
             setIsLoading(true)
             try {
                 const response = await getPet(slug)
-                console.log("Pet response:", response)
 
                 if (response.data) {
                     setPet(response.data)

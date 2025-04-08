@@ -4,7 +4,6 @@ import { Pet } from "@/types/pet";
 
 export const getPets = async () => {
     const response = await BaseService.get({ url: `${API.GET_PETS}?page=1&pageSize=100` });
-    console.log(response);
     return response;
 }
 export const createPet = async (data: Pet) => {
