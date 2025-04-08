@@ -28,6 +28,7 @@ import {
 import type { Pet } from "@/types/pet"
 import { toast } from "@/hooks/use-toast"
 import { createApplication } from "@/services/application"
+import { useRouter } from "next/navigation"
 
 interface AdoptionModalProps {
     pet: Pet
@@ -46,6 +47,8 @@ export default function AdoptionModal({ pet, isOpen, onClose }: AdoptionModalPro
 
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [showConfirm, setShowConfirm] = useState(false)
+
+    const router = useRouter();
 
     useEffect(() => {
         if (!isOpen) return
@@ -151,6 +154,9 @@ export default function AdoptionModal({ pet, isOpen, onClose }: AdoptionModalPro
                     address: "",
                     reason: "",
                 })
+                setTimeout(() => {
+                    router.push("/application");
+                }, 2000);
             }
 
         } catch (error) {

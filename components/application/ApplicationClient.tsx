@@ -107,8 +107,8 @@ export default function ApplicationsClient() {
             const payload = {
                 applicationId,
                 description: `Thanh toán phí nhận nuôi`,
-                returnUrl: "http://localhost:3000/success",
-                cancelUrl: "http://localhost:3000/failed",
+                returnUrl: "https://pawbloom.vercel.app/success",
+                cancelUrl: "https://pawbloom.vercel.app/failed",
             };
             console.log(payload);
             const response = await createOrder(payload);

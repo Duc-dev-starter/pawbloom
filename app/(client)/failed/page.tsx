@@ -39,7 +39,7 @@ export default function FailedPage() {
             {orderCode && <p>Mã đơn: {orderCode}</p>}
 
             <div className="mt-6 space-x-4">
-                <Button onClick={() => router.push("/history")}>
+                <Button onClick={() => router.push("/application")}>
                     Xem lịch sử
                 </Button>
                 <Button variant="outline" onClick={() => router.push("/")}>

@@ -34,6 +34,7 @@ const petsData: Pet[] = [
         rescueCenterId: null,
         createdAt: "2/6/2025 4:09:19 PM",
         updatedAt: "2/6/2025 11:09:19 PM",
+        price: 30000
     },
     {
         id: "701137a0-35a8-4a15-9513-5ad1f73e44a8",
@@ -58,6 +59,7 @@ const petsData: Pet[] = [
         rescueCenterId: null,
         createdAt: "2/8/2025 2:15:30 PM",
         updatedAt: "2/8/2025 9:15:30 PM",
+        price: 30000
     },
     {
         id: "801137a0-35a8-4a15-9513-5ad1f73e44a9",
@@ -82,6 +84,7 @@ const petsData: Pet[] = [
         rescueCenterId: null,
         createdAt: "2/10/2025 10:45:12 AM",
         updatedAt: "2/10/2025 5:45:12 PM",
+        price: 30000
     },
     {
         id: "901137a0-35a8-4a15-9513-5ad1f73e44b0",
@@ -106,6 +109,7 @@ const petsData: Pet[] = [
         rescueCenterId: null,
         createdAt: "2/12/2025 3:30:45 PM",
         updatedAt: "2/12/2025 10:30:45 PM",
+        price: 30000
     },
     {
         id: "101237a0-35a8-4a15-9513-5ad1f73e44c1",
@@ -130,6 +134,7 @@ const petsData: Pet[] = [
         rescueCenterId: null,
         createdAt: "2/15/2025 9:20:18 AM",
         updatedAt: "2/15/2025 4:20:18 PM",
+        price: 30000
     },
     {
         id: "201237a0-35a8-4a15-9513-5ad1f73e44d2",
@@ -154,6 +159,7 @@ const petsData: Pet[] = [
         rescueCenterId: null,
         createdAt: "2/18/2025 1:10:33 PM",
         updatedAt: "2/18/2025 8:10:33 PM",
+        price: 30000
     },
 ]
 

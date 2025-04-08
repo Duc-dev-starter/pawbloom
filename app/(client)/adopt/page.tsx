@@ -45,11 +45,11 @@ const AdoptPage = () => {
                 console.log("API Response Data:", response);
 
                 if (response.success && response.data && response.data.pets) {
-                    const mappedPets = response.data.pets;
-
-
-                    setAllPets(mappedPets);
-                    setFilteredPets(mappedPets);
+                    const availablePets = response.data.pets.filter(
+                        (pet) => pet.status === "Available"
+                    );
+                    setAllPets(availablePets);
+                    setFilteredPets(availablePets);
                 } else {
                     setError(response.message || "Failed to load pets.");
                     setAllPets([]);
