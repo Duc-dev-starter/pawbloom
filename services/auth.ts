@@ -17,3 +17,9 @@ export const socialLogin = async (data: { provider: string, idToken: string }) =
     const response = await BaseService.post({ url: API.SOCIAL_LOGIN, payload: data });
     return response;
 }
+
+export const forgotPassword = async (email: string) => {
+    const response = await BaseService.put({ url: '/api/users/forgot-password', payload: email });
+    return response;
+}
+

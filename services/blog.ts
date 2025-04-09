@@ -3,7 +3,7 @@ import { BaseService } from "./baseService";
 import { API } from "@/constants/api";
 
 export const getBlogs = async () => {
-    const response = await BaseService.get({ url: API.GET_BLOGS });
+    const response = await BaseService.get({ url: `${API.GET_BLOGS}?page=1&pageSize=100` });
     return response;
 }
 

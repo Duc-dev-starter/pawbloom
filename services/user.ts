@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BaseService } from "./baseService";
 import { API } from "@/constants/api";
 import { User } from "@/types/user";
@@ -32,3 +33,4 @@ export const changePassword = async (payload: any) => {
     const response = await BaseService.put({ url: '/api/users/reset-password', payload });
     return response;
 }
+
