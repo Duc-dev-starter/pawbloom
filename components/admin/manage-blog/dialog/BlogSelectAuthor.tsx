@@ -4,10 +4,7 @@ import { User } from '@/types/user';
 import React, { SetStateAction, useEffect } from 'react'
 
 const BlogSelectAuthor = ({ selectedAuthor, setSelectedAuthor }: { selectedAuthor: string, setSelectedAuthor: React.Dispatch<SetStateAction<User["fullName"]>> }) => {
-    const authors = [
-        "J97",
-        "trinh tran phuong tuan",
-    ]
+    const authors = ["Đức", "Trân", "Phát", "Tùng", "KhôiPHM", "KhoiPM"]
 
     useEffect(() => {
         setSelectedAuthor("Chọn 1 tác giả");

@@ -1,20 +1,36 @@
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { getCategories } from '@/services/category';
 import { Blog } from '@/types/blog';
-import React, { SetStateAction, useEffect } from 'react'
+import { Category } from '@/types/category';
+import React, { SetStateAction, useEffect, useState } from 'react'
 
-const BlogSelectCategory = ({ selectedCategory, setSelectedCategory }: { selectedCategory: string, setSelectedCategory: React.Dispatch<SetStateAction<Blog["category"]>> }) => {
-    const categories = [
-        "dog-food",
-        "cat-food",
-    ]
+const BlogSelectCategory = ({ selectedCategory, setSelectedCategory }: { selectedCategory: string, setSelectedCategory: React.Dispatch<SetStateAction<Blog["categoryName"]>> }) => {
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         setSelectedCategory("cat-food");
     }, [])
 
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await getCategories();
+                if (response.data) {
+                    const categoryNames = response.data.map((category: Category) => category.name);
+                    setCategories(categoryNames);
+                    setSelectedCategory(categoryNames[0]);
+                }
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        };
+
+        fetchCategories();
+    }, [setSelectedCategory]);
+
     const handleValueChange = (value: string) => {
-        setSelectedCategory(value as Blog["category"]);
+        setSelectedCategory(value as Blog["categoryName"]);
     }
 
     return (

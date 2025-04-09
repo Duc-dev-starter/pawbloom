@@ -9,7 +9,8 @@ const nextConfig = {
       'encrypted-tbn0.gstatic.com',
       'example.com',
       'www.trupanion.com',
-      'i.natgeofe.com'
+      'i.natgeofe.com',
+      'res.cloudinary.com'
     ],
   },
   experimental: {

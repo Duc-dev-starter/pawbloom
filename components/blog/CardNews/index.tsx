@@ -1,29 +1,34 @@
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import Image from 'next/image'
-import React from 'react'
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Blog } from '@/types/blog';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
-function CardNews() {
+
+interface CardNewsProps {
+	blog: Blog;
+}
+
+function CardNews({ blog }: CardNewsProps) {
 	return (
 		<Card>
 			<CardHeader>
-				<Image src="/assets/images/newspost.png" alt="test" width={100} height={100} className='w-full h-full object-cover' />
+				<Image src="/assets/images/newspost.png" alt={blog.title} width={100} height={100} className='w-full h-full object-cover' />
 			</CardHeader>
 			<CardContent>
-				<CardTitle className='text-2xl'>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit.
-				</CardTitle>
+				<CardTitle className='text-2xl'>{blog.title}</CardTitle>
 				<CardDescription>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit.
+					{blog.description || blog.content.substring(0, 100) + '...'}
 				</CardDescription>
 			</CardContent>
 			<CardFooter>
-				<Button>
-					Read More
-				</Button>
+				<Link href={`/blog/${blog.id}`}>
+					<Button>Đọc thêm</Button>
+				</Link>
 			</CardFooter>
 		</Card>
-	)
+	);
 }
 
-export default CardNews
+export default CardNews;

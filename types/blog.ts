@@ -4,10 +4,11 @@ export type Blog = {
     id: string;
     title: string;
     content: string;
-    author: string;
-    status: BlogStatus;
-    description: string;
-    category: string;
+    categoryName: string;
+    authorName: string;
+    status: string;
+    description: string | null;
+    publishedAt: string;
     createdAt: string;
     updatedAt: string;
 }

@@ -33,6 +33,7 @@ import { StatusDropdown } from "@/components/admin"
 import { PaginationControls, PaginationSelection } from "@/components/common"
 import BlogFilterArea from "@/components/admin/manage-blog/BlogFilterArea"
 import AuthorDropdown from "@/components/admin/manage-category/AuthorDropdown"
+import BlogDialog from "@/components/admin/manage-blog/BlogDialog"
 
 const blogStatuses: Status[] = [
     { value: 'Published', label: 'Công khai', icon: <FaCheck /> },
@@ -120,12 +121,12 @@ export function DataTableBlog<TData, TValue>({
                             <CardTitle className="text-[23px] font-bold">Tin tức</CardTitle>
                             <p className="text-sm text-slate-600">{data.length} tin tức</p>
                         </div>
-                        <ProductDialog />
+                        <BlogDialog />
                     </div>
                     <div className="flex flex-col gap-3">
                         {/* Search Input and Dropdown */}
                         <div className="flex items-center justify-between gap-4">
-                            <Input placeholder="Tìm kiếm sản phẩm" className="h-10 flex-1"
+                            <Input placeholder="Tìm kiếm bài blog" className="h-10 flex-1"
                                 value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
                                 onChange={(event) =>
                                     table.getColumn("title")?.setFilterValue(event.target.value)

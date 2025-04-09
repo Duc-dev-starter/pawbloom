@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { LuGitPullRequestDraft } from 'react-icons/lu'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Button } from '@/components/ui/button'
@@ -7,45 +7,9 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Checkbox } from '@/components/ui/checkbox'
 import { Separator } from '@/components/ui/separator'
 import { Category } from '@/types/category'
+import { getCategories } from '@/services/category'
 
-const categories: Category[] = [
-    {
-        id: "1",
-        name: "Thức ăn cho chó",
-        createdAt: "2023-12-01T12:00:00Z",
-        updatedAt: "2023-12-01T12:00:00Z",
-        author: '',
-        status: 'Published',
-        description: ''
-    },
-    {
-        id: "2",
-        name: "Thức ăn cho mèo",
-        createdAt: "2023-12-01T12:00:00Z",
-        updatedAt: "2023-12-01T12:00:00Z",
-        author: '',
-        status: 'Published',
-        description: ''
-    },
-    {
-        id: "3",
-        name: "Phụ kiện cho chó",
-        createdAt: "2023-12-01T12:00:00Z",
-        updatedAt: "2023-12-01T12:00:00Z",
-        author: '',
-        status: 'Published',
-        description: ''
-    },
-    {
-        id: "4",
-        name: "Phụ kiện cho mèo",
-        createdAt: "2023-12-01T12:00:00Z",
-        updatedAt: "2023-12-01T12:00:00Z",
-        author: '',
-        status: 'Published',
-        description: ''
-    },
-]
+
 
 type CategoriesDropdownProps = {
     selectedCategories: string[];
@@ -54,6 +18,15 @@ type CategoriesDropdownProps = {
 
 const CategoryDropdown = ({ selectedCategories, setSelectedCategories }: CategoriesDropdownProps) => {
     const [open, setOpen] = useState(false);
+    const [categories, setCategories] = useState<Category[]>([]);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            const response = await getCategories();
+            setCategories(response.data);
+        }
+        fetchCategories();
+    }, [selectedCategories])
 
     const handleCheckboxChange = (value: string) => {
         setSelectedCategories((prev) => {

@@ -93,14 +93,12 @@ const Header = () => {
                                 <DropdownMenuSeparator />
                                 <DropdownMenuGroup>
                                     <Link href="/application">
-                                        <DropdownMenuItem className='flex items-center py-[6px] header-menu-item'>
+                                        <div className='flex items-center py-[6px] header-menu-item'>
                                             <History className='ml-2 mr-1' size={20} />
-                                            Lịch sử
-                                        </DropdownMenuItem>
+                                            <DropdownMenuItem >Lịch sử</DropdownMenuItem>
+                                        </div>
+
                                     </Link>
-                                </DropdownMenuGroup>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuGroup>
                                     <div className='flex items-center py-[6px] header-menu-item'>
                                         <CircleHelp className='ml-2 mr-1' size={20} />
                                         <DropdownMenuItem>Trợ giúp</DropdownMenuItem>
