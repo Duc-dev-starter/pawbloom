@@ -41,10 +41,11 @@ export const API = {
     GET_UPDATE_DELETE_PRODUCT: '/api/products',
 
     // PET
-    CREATE_PET: '/api/pets',
-    GET_PETS: '/api/pets',
-    GET_UPDATE_DELETE_PET: '/api/pets',
-    UPDATE_STATUS_PET: '/api/pets',
+    CREATE_PET: '/api/Pets',
+    GET_PETS: '/api/Pets',
+    GET_UPDATE_DELETE_PET: '/api/Pets',
+    UPDATE_STATUS_PET: '/api/Pets',
+    GET_PET_SEARCH_PAGE: '/api/Pets?',
 
     // FOSTER
     GET_FOSTERS: '/api/fosters',

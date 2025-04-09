@@ -5,6 +5,7 @@ import {
     BookOpen,
     LayoutDashboard,
     Map,
+    PawPrint,
     PieChart,
     Settings2,
     User,
@@ -52,6 +53,12 @@ const data = {
             title: "Dashboard",
             url: Path.ADMIN_DASHBOARD,
             icon: LayoutDashboard,
+            isActive: false,
+        },
+        {
+            title: "Quản lý thú cưng",
+            url: '/admin/manage-pets',
+            icon: PawPrint,
             isActive: false,
         },
         {

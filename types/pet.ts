@@ -35,6 +35,15 @@ export interface PetFilters {
     search?: string;
 }
 
+export interface PetSearchParams {
+    searchTerm?: string;
+    page?: number;
+    pageSize?: number;
+    status?: string;
+    maximumPrice?: number;
+    minimumPrice?: number;
+}
+
 export interface PetResponse {
     success: boolean;
     data: Pet;
