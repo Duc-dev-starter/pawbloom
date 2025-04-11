@@ -157,16 +157,6 @@ export default function Home() {
       </section>
 
       <section className="border-t-2 border-brand p-16">
-        <h1 className="mb-10 text-center text-4xl font-semibold text-brand-200">Sản phẩm</h1>
-        <div className="">
-          <ProductList />
-        </div>
-        <div className="text-center">
-          <WatchMoreButton href={Path.PRODUCT} />
-        </div>
-      </section>
-
-      <section className="border-t-2 border-brand p-16">
         <h1 className="mb-10 text-center text-4xl font-semibold text-brand-200">Sự Kiện</h1>
 
         <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">

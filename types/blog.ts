@@ -11,4 +11,5 @@ export type Blog = {
     publishedAt: string;
     createdAt: string;
     updatedAt: string;
+    img?: string;
 }

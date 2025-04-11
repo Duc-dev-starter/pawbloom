@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { config } from "@/config";
 import { toastService } from "@/utils";
+import Path from "@/constants/paths";
 
 export const axiosInstance = axios.create({
   baseURL: config.API_URL,
@@ -62,41 +63,32 @@ axiosInstance.interceptors.response.use(
       else {
         console.log('o day')
         switch (error.response.status || error.status) {
-          case HttpStatus.Unauthorized:
-          case HttpStatus.Forbidden: {
+          case HttpStatus.Unauthorized: {
             if (!isTokenExpired) {
               isTokenExpired = true
-              //toast.error(data.message);
-              //   setTimeout(() => {
-              //     if (user) {
-              //       window.location.href = PATHS.HOME
-              //     } else {
-              //       return;
-              //     }
-              //     localStorage.clear();
-              //     isTokenExpired = false;
-              //   }, 1300);
+              toastService.show({
+                variant: "destructive",
+                title: "Lỗi xác thực",
+                description: `${data.message || data.Message}`,
+              })
+              setTimeout(() => {
+                window.location.href = Path.HOME
+                localStorage.clear();
+                isTokenExpired = false;
+              }, 1300);
             }
             break;
           }
 
           case HttpStatus.NotFound:
-            // toast.error(data.message || data.Message);
-            //     switch(user.role){
-            //       case "member":
-            //         window.location.href = Path.NOTFOUND;
-            //         break;
-            //       case "admin":
-            //         window.location.href = '/admin/404';
-            //         break;
-
-            //       case "staff":
-            //         window.location.href = "/staff/404";
-            //         break;
-            //       default:
-            //         window.location.href = Path.HOME;
-            //         break;
-            //     }
+            toastService.show({
+              variant: "destructive",
+              title: "Không tìm thấy",
+              description: `${data.message || data.Message}`,
+            })
+            setTimeout(() => {
+              window.location.href = '/not-found'
+            }, 1300);
             break;
 
           case HttpStatus.InternalServerError:

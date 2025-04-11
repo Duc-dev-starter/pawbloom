@@ -89,7 +89,11 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
             if (response.success) {
                 const token = response.data.token;
                 const decodedToken: JwtPayload = jwtDecode(token);
+                localStorage.setItem('token', token);
                 navigateByRole(decodedToken.role, router);
+                const currentUserResponse = await getCurrentUser();
+                console.log(currentUserResponse);
+                localStorage.setItem('user', JSON.stringify(currentUserResponse.data));
                 toast({
                     title: "Đăng nhập thành công",
                     description: 'Chào mừng người dùng đã đăng nhập vào hệ thống',
