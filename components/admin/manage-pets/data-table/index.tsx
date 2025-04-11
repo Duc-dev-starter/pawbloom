@@ -1,3 +1,5 @@
+// @ts-ignore
+
 "use client"
 
 import {
@@ -148,7 +150,7 @@ export function DataTablePets<TData, TValue>({
 							/>
 							<StatusDropdown
 								selectedStatuses={selectedStatuses}
-								// @ts-expect-error
+								// @ts-expect-error columns may not match expected type due to dynamic typing
 								setSelectedStatuses={setSelectedStatuses}
 								statuses={petStatuses}
 							/>

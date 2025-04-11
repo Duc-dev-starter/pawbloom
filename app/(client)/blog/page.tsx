@@ -30,7 +30,7 @@ const BlogPage = () => {
                             Ngày Hội Nhận Nuôi Thú Cưng Thành Công
                         </p>
                         <p className="text-sm font-medium md:text-base">
-                            Sự kiện "Ngày Hội Nhận Nuôi Thú Cưng" đã diễn ra tại Công viên Thống Nhất, TP. HCM.
+                            Sự kiện Ngày Hội Nhận Nuôi Thú Cưng đã diễn ra tại Công viên Thống Nhất, TP. HCM.
                             Sự kiện thu hút hơn 300 người tham dự và đã có hơn 50 thú cưng.
                         </p>
                     </section>

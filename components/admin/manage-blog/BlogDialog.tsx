@@ -41,7 +41,7 @@ const BlogDialog = () => {
         const newBlog: Blog = {
             title: data.title,
             description: data.description,
-            // @ts-expect-error
+            // @ts-expect-error columns may not match expected type due to dynamic typing
             authorName: data.authorName,
             content: data.content,
             publishedAt: new Date().toISOString(),

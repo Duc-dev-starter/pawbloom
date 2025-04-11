@@ -23,7 +23,7 @@ import { useEffect, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { DataTableProps, PaginationType } from "@/interfaces/data-table"
-import { CategoryDropdown, ProductDialog } from "@/components/admin/manage-product"
+import { CategoryDropdown } from "@/components/admin/manage-product"
 import { multiSelectFilter } from "@/utils"
 import { FaCheck } from 'react-icons/fa6'
 import { IoClose } from 'react-icons/io5'
