@@ -88,12 +88,9 @@ export function PetForm({ pet, onSuccess, onCancel }: PetFormProps) {
 				price: pet.price,
 				age: pet.age,
 				weight: pet.weight || 0,
-				//@typescript-eslint/no-explicit-any
-				status: pet.status as any,
-				//@typescript-eslint/no-explicit-any
-				gender: pet.gender as any,
-				//@typescript-eslint/no-explicit-any
-				size: pet.size as any,
+				status: pet.status as PetFormValues["status"],
+				gender: pet.gender as PetFormValues["gender"],
+				size: pet.size as PetFormValues["size"],
 				color: pet.color || "",
 				description: pet.description || "",
 				photoURL: pet.photoURL || "",
@@ -187,12 +184,13 @@ export function PetForm({ pet, onSuccess, onCancel }: PetFormProps) {
 					toast({
 						variant: "destructive",
 						title: "Lỗi thêm mới",
-						// @ts-expect-error
+						// @ts-expect-error result might be undefined if the request fails, handle gracefully
 						description: result.error,
 					})
 				}
 			}
 		} catch (error) {
+			console.error(error)
 			toast({
 				variant: "destructive",
 				title: "Đã xảy ra lỗi",

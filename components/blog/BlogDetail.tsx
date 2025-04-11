@@ -58,6 +58,7 @@ const BlogDetail = ({ slug }: { slug: string }) => {
             const date = new Date(dateString)
             return format(date, "HH:mm", { locale: vi })
         } catch (e) {
+            console.log(e)
             return ""
         }
     }

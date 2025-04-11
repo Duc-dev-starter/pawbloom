@@ -47,7 +47,6 @@ interface DataTablePetsProps<TData, TValue> extends DataTableProps<TData, TValue
 }
 
 export function DataTablePets<TData, TValue>({
-	columns: baseColumns,
 	data,
 	pagination,
 	setPagination,
@@ -106,7 +105,7 @@ export function DataTablePets<TData, TValue>({
 
 	const table = useReactTable({
 		data,
-		//@ts-expect-error
+		// @ts-expect-error
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 		getPaginationRowModel: getPaginationRowModel(),
@@ -149,7 +148,7 @@ export function DataTablePets<TData, TValue>({
 							/>
 							<StatusDropdown
 								selectedStatuses={selectedStatuses}
-								//@ts-expect-error
+								// @ts-expect-error
 								setSelectedStatuses={setSelectedStatuses}
 								statuses={petStatuses}
 							/>
