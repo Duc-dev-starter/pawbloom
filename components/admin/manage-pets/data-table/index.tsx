@@ -107,7 +107,7 @@ export function DataTablePets<TData, TValue>({
 	const table = useReactTable({
 		data,
 		// @typescript-eslint/ban-ts-comment
-		// @ts-expect-error
+		// @ts-expect-error: columns are dynamically generated and not strictly typed
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 		getPaginationRowModel: getPaginationRowModel(),
