@@ -19,7 +19,7 @@ const FosterMenuDropdown = ({ row }: { row: Row<Foster> }) => {
 
     const handleDelete = async () => {
         console.log("Xóa danh mục: ", row.original);
-        const deleteRow = row.original.id;
+        const deleteRow = row.original.userId;
         try {
             const response = await BaseService.delete({ url: `${API.GET_UPDATE_DELETE_CATEGORY}/${deleteRow}` });
             if (response) {
