@@ -22,7 +22,7 @@ const ClientMenuDropdown = ({ row }: {
 
     const handleDelete = async () => {
         console.log("Xóa user: ", row.original);
-        const deleteRow = row.original.id;
+        const deleteRow = row.original.userId;
         try {
             const response = await BaseService.delete({ url: `${API.GET_UPDATE_DELETE_BLOG}/${deleteRow}` });
             if (response) {

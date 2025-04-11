@@ -28,7 +28,7 @@ export function DeletePetDialog({ isOpen, onClose, petId, petName, onSuccess }: 
 		try {
 			const result = await deletePet(petId)
 
-			if (result.success) {
+			if (result) {
 				toast({
 					title: "Xóa thành công",
 					description: `Thú cưng ${petName} đã được xóa`,
@@ -38,7 +38,7 @@ export function DeletePetDialog({ isOpen, onClose, petId, petName, onSuccess }: 
 				toast({
 					variant: "destructive",
 					title: "Lỗi xóa",
-					description: result.error,
+					description: result,
 				})
 			}
 		} catch (error) {

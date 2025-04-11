@@ -38,7 +38,7 @@ export async function createPet(formData: FormData) {
 		// Use your actual API service with JSON payload
 		const response = await createPetApi(formData)
 
-		if (!response.success) {
+		if (!response) {
 			throw new Error("Failed to create pet")
 		}
 
@@ -87,7 +87,7 @@ export async function updatePet(id: string, formData: FormData) {
 		// Use your actual API service with JSON payload
 		const response = await updatePetApi(id, petData)
 
-		if (!response.success) {
+		if (!response) {
 			throw new Error("Failed to update pet")
 		}
 
@@ -132,7 +132,7 @@ export async function getPetById(id: string): Promise<Pet | null> {
 		// Use your actual API service
 		const response = await getPet(id)
 
-		if (!response.success) {
+		if (!response) {
 			throw new Error("Failed to fetch pet")
 		}
 
