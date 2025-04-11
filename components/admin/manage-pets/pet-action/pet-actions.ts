@@ -115,7 +115,7 @@ export async function deletePet(id: string) {
 		// Use your actual API service
 		const response = await deletePetApi(id)
 
-		if (!response.success) {
+		if (!response) {
 			throw new Error("Failed to delete pet")
 		}
 
