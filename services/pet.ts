@@ -70,7 +70,7 @@ export const getApplicationsByFoster = async () => {
     return response
 }
 
-export const createApplication = async (data: any) => {
+export const createApplication = async (data: unknown) => {
     const response = await BaseService.post({ url: API.CREATE_APPLICATION, payload: data })
     return response
 }
@@ -82,10 +82,10 @@ export const updatePetImage = async (id: string, imageFile: File) => {
         const response = await axiosInstance.patch(`${API.GET_UPDATE_DELETE_PET}/${id}/image`, formData)
 
         if (!response) {
-            throw new Error(`Failed to update image: ${response.status} ${response.statusText}`)
+            throw new Error(`Failed to update image: ${response} ${response}`)
         }
 
-        const data = await response.json()
+        const data = await response.data
         return { success: true, data }
     } catch (error) {
         console.error("Error updating pet image:", error)

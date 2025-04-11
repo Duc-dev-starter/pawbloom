@@ -28,8 +28,7 @@ export function DeletePetDialog({ isOpen, onClose, petId, petName, onSuccess }: 
 		try {
 			const result = await deletePet(petId)
 
-			// @ts-expect-error: result may have an 'error' property not in its declared type
-			if (result.success) {
+			if (result) {
 				toast({
 					title: "Xóa thành công",
 					description: `Thú cưng ${petName} đã được xóa`,
@@ -39,8 +38,7 @@ export function DeletePetDialog({ isOpen, onClose, petId, petName, onSuccess }: 
 				toast({
 					variant: "destructive",
 					title: "Lỗi xóa",
-					// @ts-expect-error: result may have an 'error' property not in its declared type
-					description: result.error,
+					description: result,
 				})
 			}
 		} catch (error) {

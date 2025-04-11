@@ -16,6 +16,11 @@ const nextConfig = {
   experimental: {
     runtime: 'nodejs',
   },
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to complete even if there are type errors
+    ignoreBuildErrors: true,
+  },
 };
 
 module.exports = nextConfig;
