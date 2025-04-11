@@ -11,7 +11,7 @@ import { CategoryFormData, CategorySchema } from '@/schema/category'
 import { API } from '@/constants/api'
 import CategoryInputName from './dialog/CategoryInputName'
 import CategoryTextareaDescription from './dialog/CategoryTextareaDescription'
-import ProductTabStatus from '../manage-blog/dialog/BlogTabStatus'
+// import ProductTabStatus from '../manage-blog/dialog/BlogTabStatus'
 
 const CategoryDialog = () => {
     const { toast } = useToast();
@@ -109,7 +109,7 @@ const CategoryDialog = () => {
                             </div>
 
                             <div className='grid grid-cols-2 items-center gap-5'>
-                                <ProductTabStatus selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+                                {/* <ProductTabStatus selectedTab={selectedTab} setSelectedTab={setSelectedTab} /> */}
                                 <CategoryTextareaDescription />
                             </div>
 
