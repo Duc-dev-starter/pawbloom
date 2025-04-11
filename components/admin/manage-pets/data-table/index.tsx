@@ -106,6 +106,7 @@ export function DataTablePets<TData, TValue>({
 
 	const table = useReactTable({
 		data,
+		//@ts-expect-error
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 		getPaginationRowModel: getPaginationRowModel(),
@@ -148,6 +149,7 @@ export function DataTablePets<TData, TValue>({
 							/>
 							<StatusDropdown
 								selectedStatuses={selectedStatuses}
+								//@ts-expect-error
 								setSelectedStatuses={setSelectedStatuses}
 								statuses={petStatuses}
 							/>

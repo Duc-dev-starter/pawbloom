@@ -17,9 +17,6 @@ import {
 import ProfileTabs from "@/components/profile/ProfileTabs"
 import { User } from "@/types/user"
 
-interface ProfileProps {
-    params: { slug: string }
-}
 
 // Menu items
 const commonItems = [
@@ -33,7 +30,7 @@ const otherItems = [
     { title: "Hỗ trợ", url: "#support", icon: BiSupport },
 ]
 
-export default function Profile({ params }: ProfileProps) {
+export default function Profile() {
     const [userData, setUserData] = useState<User | null>(null)
 
     // Lấy key user từ localStorage khi component mount

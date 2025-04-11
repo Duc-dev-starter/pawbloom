@@ -88,8 +88,11 @@ export function PetForm({ pet, onSuccess, onCancel }: PetFormProps) {
 				price: pet.price,
 				age: pet.age,
 				weight: pet.weight || 0,
+				//@typescript-eslint/no-explicit-any
 				status: pet.status as any,
+				//@typescript-eslint/no-explicit-any
 				gender: pet.gender as any,
+				//@typescript-eslint/no-explicit-any
 				size: pet.size as any,
 				color: pet.color || "",
 				description: pet.description || "",
@@ -184,6 +187,7 @@ export function PetForm({ pet, onSuccess, onCancel }: PetFormProps) {
 					toast({
 						variant: "destructive",
 						title: "Lỗi thêm mới",
+						// @ts-expect-error
 						description: result.error,
 					})
 				}

@@ -46,6 +46,7 @@ const BlogDetail = ({ slug }: { slug: string }) => {
             const date = new Date(dateString)
             return format(date, "dd MMMM, yyyy", { locale: vi })
         } catch (e) {
+            console.log(e)
             return dateString
         }
     }

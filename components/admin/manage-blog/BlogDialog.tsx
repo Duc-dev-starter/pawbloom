@@ -41,7 +41,7 @@ const BlogDialog = () => {
         const newBlog: Blog = {
             title: data.title,
             description: data.description,
-            // @ts-ignore
+            // @ts-expect-error
             authorName: data.authorName,
             content: data.content,
             publishedAt: new Date().toISOString(),
