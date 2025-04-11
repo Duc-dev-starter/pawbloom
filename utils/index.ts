@@ -92,4 +92,20 @@ export const navigateByRole = (role: string, router: { push: (path: string) => v
     }
 }
 
+type ToastOptions = {
+    title: string;
+    description?: string;
+    variant?: "default" | "destructive";
+};
 
+let showToast: ((options: ToastOptions) => void) | null = null;
+
+export const registerToast = (fn: typeof showToast) => {
+    showToast = fn;
+};
+
+export const toastService = {
+    show: (options: ToastOptions) => {
+        if (showToast) showToast(options);
+    },
+};

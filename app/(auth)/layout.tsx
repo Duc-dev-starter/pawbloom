@@ -1,8 +1,15 @@
-import React from "react";
+"use client"
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useToast } from "@/hooks/use-toast";
+import { registerToast } from "@/utils";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+    const { toast } = useToast();
+    useEffect(() => {
+        registerToast(toast);
+    }, [toast]);
     return (
         <div className="flex min-h-screen">
             <section className="hidden w-1/2 items-center justify-center bg-brand lg:flex xl:w-2/5">

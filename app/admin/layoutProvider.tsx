@@ -6,16 +6,22 @@ import {
     SidebarProvider,
     SidebarTrigger,
 } from "@/components/ui/sidebar"
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AdminSidebar } from "@/components/admin/AdminSidebar"
 import { AdminSearchbar } from "@/components/admin/dashboard"
 import { Provider } from "react-redux"
 import { store } from "@/store/store"
+import { registerToast } from "@/utils"
+import { useToast } from "@/hooks/use-toast"
 
 
 
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+    const { toast } = useToast();
+    useEffect(() => {
+        registerToast(toast);
+    }, [toast]);
     return (
         <Provider store={store}>
             <SidebarProvider>

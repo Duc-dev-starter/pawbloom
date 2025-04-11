@@ -24,6 +24,10 @@ const Header = () => {
         }
     }, []);
 
+    const handleLogout = () => {
+        localStorage.clear();
+    }
+
     return (
         <TooltipProvider>
             <header className="bg-brand">
@@ -116,7 +120,7 @@ const Header = () => {
                                 <DropdownMenuSeparator />
                                 <div className='flex items-center py-[6px] header-menu-item'>
                                     <DoorClosed className='ml-2 mr-1' size={20} />
-                                    <DropdownMenuItem>Đăng xuất</DropdownMenuItem>
+                                    <DropdownMenuItem onClick={handleLogout}>Đăng xuất</DropdownMenuItem>
                                 </div>
                             </DropdownMenuContent>
                         </DropdownMenu>

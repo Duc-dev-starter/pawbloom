@@ -1,8 +1,9 @@
 import { HttpStatus } from "@/enum/https";
 // import Path from "@/constants/paths";
 import axios from "axios";
-import { toast } from "react-toastify";
+
 import { config } from "@/config";
+import { toastService } from "@/utils";
 
 export const axiosInstance = axios.create({
   baseURL: config.API_URL,
@@ -49,17 +50,23 @@ axiosInstance.interceptors.response.use(
       if (data.errors && data.errors.length > 0) {
         data.errors.forEach((error: { field: string, message: string[] }) => {
           const errorMessage = error.message.join(', ');
-          toast.error(`${error.field}: ${errorMessage}`);
+          toastService.show({
+            variant: "destructive",
+            title: "Hệ thống gặp trục trặc",
+            description: `${error.field}: ${errorMessage}`,
+          })
+          console.log(errorMessage);
         });
       }
 
       else {
-        switch (error.response.status) {
+        console.log('o day')
+        switch (error.response.status || error.status) {
           case HttpStatus.Unauthorized:
           case HttpStatus.Forbidden: {
             if (!isTokenExpired) {
               isTokenExpired = true
-              toast.error(data.message);
+              //toast.error(data.message);
               //   setTimeout(() => {
               //     if (user) {
               //       window.location.href = PATHS.HOME
@@ -74,7 +81,7 @@ axiosInstance.interceptors.response.use(
           }
 
           case HttpStatus.NotFound:
-            toast.error(data.message || data.Message);
+            // toast.error(data.message || data.Message);
             //     switch(user.role){
             //       case "member":
             //         window.location.href = Path.NOTFOUND;
@@ -93,19 +100,28 @@ axiosInstance.interceptors.response.use(
             break;
 
           case HttpStatus.InternalServerError:
-            toast.error(data.message || data.Message);
+            console.log('o day 500')
+            toastService.show({
+              variant: "destructive",
+              title: "Hệ thống gặp trục trặc",
+              description: `${data.message || data.Message}`,
+            })
             // window.location.href = Path.INTERNAL_SERVER_ERROR;
             break;
 
           default:
-            toast.error(data.message || data.Message);
+            toastService.show({
+              variant: "destructive",
+              title: "Hệ thống gặp trục trặc",
+              description: `${data.message || data.Message}`,
+            })
             break;
         }
       }
 
       return Promise.reject(error.response.data);
     } else {
-      toast.error('Network error');
+      //toast.error('Network error');
       return Promise.reject(error);
     }
   }
