@@ -5,7 +5,6 @@ import MeetPets from "@/components/pet/MeetPet";
 import WatchMoreButton from "@/components/WatchMoreButton";
 import Path from "@/constants/paths";
 import EventCard from "@/sections/home/EventCard";
-import ProductList from "@/sections/home/ProductList";
 import { Metadata } from "next";
 import Image from "next/image";
 
