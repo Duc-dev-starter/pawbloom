@@ -1,4 +1,3 @@
-// @ts-ignore
 
 "use client"
 
@@ -107,6 +106,7 @@ export function DataTablePets<TData, TValue>({
 
 	const table = useReactTable({
 		data,
+		// @typescript-eslint/ban-ts-comment
 		// @ts-expect-error
 		columns,
 		getCoreRowModel: getCoreRowModel(),
