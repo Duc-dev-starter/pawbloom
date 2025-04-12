@@ -34,3 +34,12 @@ export const changePassword = async (payload: any) => {
     return response;
 }
 
+export const verifyEmailUser = async (token: string) => {
+    const response = await BaseService.get({ url: `/api/users/verify-email/?token=${token}` })
+    return response;
+}
+
+export const resendEmail = async (email: string) => {
+    const response = await BaseService.post({ url: `/api/users/resend-verification-email`, payload: { email } })
+    return response;
+}

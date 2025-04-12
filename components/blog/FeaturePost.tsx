@@ -1,8 +1,6 @@
-// @ts-nocheck
 "use client";
 
 import { getBlogs } from "@/services/blog";
-import { Blog } from "@/types/blog";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -10,34 +8,49 @@ import React, { useEffect, useState } from "react";
 const DEFAULT_IMAGE =
     "https://images.pexels.com/photos/19036832/pexels-photo-19036832/free-photo-of-mountain-reflection-in-lake.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load";
 
-
+// Dữ liệu sau khi xử lý
+interface DisplayBlog {
+    id: string;
+    title: string;
+    categoryName: string;
+    createdAt: string;
+    slug: string;
+    img: string;
+}
 
 const FeaturePost = () => {
-    const [blogs, setBlogs] = useState<Blog[]>([]);
+    const [blogs, setBlogs] = useState<DisplayBlog[]>([]);
 
     useEffect(() => {
         const fetchBlog = async () => {
-            const response = await getBlogs();
-            if (response) {
-                const sorted = [...response.data.posts]
-                    .sort(
-                        (a: any, b: any) =>
-                            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-                    )
-                    .slice(0, 4)
-                    .map((post: any) => ({
-                        id: post.id,
-                        title: post.title,
-                        categoryName: post.categoryName,
-                        createdAt: post.createdAt.split(" ")[0],
-                        slug: `/blog/${post.id}`,
-                        img: DEFAULT_IMAGE,
-                    }));
+            try {
+                const response = await getBlogs();
+                const posts = response?.data?.posts;
 
-                // @ts-expect-error columns may not match expected type due to dynamic typing
-                setBlogs(sorted);
+                if (Array.isArray(posts)) {
+                    const sorted: DisplayBlog[] = [...posts]
+                        .sort(
+                            (a, b) =>
+                                new Date(b.createdAt).getTime() -
+                                new Date(a.createdAt).getTime()
+                        )
+                        .slice(0, 4)
+                        .map((post) => ({
+                            id: post.id,
+                            title: post.title,
+                            categoryName: post.categoryName,
+                            createdAt: post.createdAt.split(" ")[0],
+                            slug: `/blog/${post.id}`,
+                            img: post.image || DEFAULT_IMAGE, // nếu có field ảnh thì dùng, không thì fallback
+                        }));
+
+                    setBlogs(sorted);
+                }
+            } catch (error) {
+                console.error("Error fetching blogs:", error);
             }
         };
+
         fetchBlog();
     }, []);
 
@@ -48,10 +61,10 @@ const FeaturePost = () => {
             {/* First - Featured post */}
             <div className="flex w-full flex-col gap-4 lg:w-1/2">
                 <Image
-                    src={blogs[0].img || DEFAULT_IMAGE}
+                    src={blogs[0].img}
                     className="h-[290px] rounded-3xl object-cover"
-                    width="895"
-                    height="290"
+                    width={895}
+                    height={290}
                     alt="feature"
                 />
                 <div className="flex items-center gap-4">
@@ -62,7 +75,6 @@ const FeaturePost = () => {
                     <span className="text-gray-500">{blogs[0].createdAt}</span>
                 </div>
                 <Link
-                    // @ts-expect-error columns may not match expected type due to dynamic typing
                     href={blogs[0].slug}
                     className="text-xl font-semibold lg:text-3xl lg:font-bold"
                 >
@@ -79,10 +91,10 @@ const FeaturePost = () => {
                     >
                         <div className="aspect-video w-1/3">
                             <Image
-                                src={blog.img || DEFAULT_IMAGE}
+                                src={blog.img}
                                 className="size-full rounded-3xl object-cover"
-                                width="298"
-                                height="168"
+                                width={298}
+                                height={168}
                                 alt="blog"
                             />
                         </div>
@@ -93,7 +105,6 @@ const FeaturePost = () => {
                                 <span className="text-sm text-gray-500">{blog.createdAt}</span>
                             </div>
                             <Link
-                                // @ts-expect-error columns may not match expected type due to dynamic typing
                                 href={blog.slug}
                                 className="text-base font-medium sm:text-lg md:text-2xl lg:text-xl xl:text-2xl"
                             >
