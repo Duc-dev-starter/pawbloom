@@ -8,6 +8,7 @@ import {
     PieChart,
     Settings2,
     User,
+    Star
 } from "lucide-react"
 
 import {
@@ -43,6 +44,12 @@ const data = {
             title: "Quản lý khách hàng",
             url: "#",
             icon: User,
+            isActive: true,
+        },
+        {
+            title: "Quản lý đơn của trạm",
+            url: "/foster/manage-applications",
+            icon: Star,
             isActive: true,
         },
         {

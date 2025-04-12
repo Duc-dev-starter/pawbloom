@@ -2,6 +2,7 @@
 import { BaseService } from "./baseService";
 import { API } from "@/constants/api";
 import { Pet } from "@/types/pet";
+import { axiosInstance } from "./axiosInstance";
 
 export const getApplications = async () => {
     const response = await BaseService.get({ url: API.GET_APPLICATIONS });
@@ -32,4 +33,17 @@ export const updatePet = async (id: string, data: Partial<Pet>) => {
 export const deletePet = async (id: string) => {
     const response = await BaseService.delete({ url: `${API.GET_UPDATE_DELETE_PET}/${id}` });
     return response;
+}
+
+// Approve or reject an application
+export const updateApplicationStatus = async (applicationId: string, option: string) => {
+    try {
+        const response = await axiosInstance.put(`${process.env.NEXT_PUBLIC_BASE_API_URL}api/Applications`, null, {
+            params: { applicationId, option },
+        })
+        return response.data
+    } catch (error) {
+        console.error("Error updating application status:", error)
+        throw error
+    }
 }
