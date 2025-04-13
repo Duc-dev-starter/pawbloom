@@ -1,20 +1,13 @@
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbList,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+import Breadcrumbs from "@/components/BreadcrumbDynamic"
+import { FosterSidebar } from "@/components/foster/FosterSidebar"
 import { Separator } from "@/components/ui/separator"
 import {
     SidebarInset,
     SidebarProvider,
     SidebarTrigger,
 } from "@/components/ui/sidebar"
-import React from 'react'
 import { Metadata } from "next"
-import { FosterSidebar } from "@/components/foster/FosterSidebar"
+import React from 'react'
 
 export const metadata: Metadata = {
     title: {
@@ -34,7 +27,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                     <div className="flex items-center gap-2 px-4">
                         <SidebarTrigger className="-ml-1" />
                         <Separator orientation="vertical" className="mr-2 h-4" />
-                        <Breadcrumb>
+                        {/* <Breadcrumb>
                             <BreadcrumbList>
                                 <BreadcrumbItem className="hidden md:block">
                                     <BreadcrumbLink href="/foster/dashboard">
@@ -46,7 +39,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                                     <BreadcrumbPage>Data Fetching</BreadcrumbPage>
                                 </BreadcrumbItem>
                             </BreadcrumbList>
-                        </Breadcrumb>
+                        </Breadcrumb> */}
+                        <Breadcrumbs />
                     </div>
                 </header>
                 {/* <div className="flex flex-1 flex-col gap-4 p-4 pt-0">

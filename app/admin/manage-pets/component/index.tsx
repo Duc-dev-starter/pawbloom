@@ -24,7 +24,7 @@ function ManagePets() {
 		try {
 			setLoading(true)
 			const response = await getPetSearchPage({
-				searchTerm,
+				searchTerm: searchTerm,
 				page: pagination.pageIndex + 1, // Convert to 1-based indexing for API
 				pageSize: pagination.pageSize,
 				status: selectedStatuses.length > 0 ? selectedStatuses.join(",") : undefined,
