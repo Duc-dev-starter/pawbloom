@@ -11,19 +11,18 @@ import {
 	useReactTable,
 } from "@tanstack/react-table"
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { useEffect, useState } from "react"
+import { PaginationControls, PaginationSelection } from "@/components/common"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import type { DataTableProps, PaginationType } from "@/interfaces/data-table"
+import type { Status } from "@/types/status"
 import { multiSelectFilter } from "@/utils"
+import { Clock } from "lucide-react"
+import { useEffect, useState } from "react"
 import { FaCheck } from "react-icons/fa6"
 import { IoClose } from "react-icons/io5"
-import { Clock } from "lucide-react"
-import type { Status } from "@/types/status"
-import { StatusDropdown } from "../status-dropdown"
-import { PaginationControls, PaginationSelection } from "@/components/common"
 import ApplicationFilterArea from "../filter"
+import { StatusDropdown } from "../status-dropdown"
 // import { PetDropdown } from "./pet-dropdown"
 import type { Application } from "@/types/foster-application"
 import { Pet } from "@/types/pet"
@@ -110,13 +109,13 @@ export function DataTableApplication<TData, TValue>({ columns, data }: DataTable
 					</div>
 					<div className="flex flex-col gap-3">
 						{/* Search Input and Dropdown */}
-						<div className="flex items-center justify-between gap-4">
-							<Input
-								placeholder="Tìm kiếm theo ID"
+						<div className="flex items-center gap-4">
+							{/* <Input
+								placeholder="Tìm kiếm theo id"
 								className="h-10 flex-1"
 								value={(table.getColumn("applicationId")?.getFilterValue() as string) ?? ""}
 								onChange={(event) => table.getColumn("applicationId")?.setFilterValue(event.target.value)}
-							/>
+							/> */}
 							<StatusDropdown
 								selectedStatuses={selectedStatuses}
 								setSelectedStatuses={setSelectedStatuses}

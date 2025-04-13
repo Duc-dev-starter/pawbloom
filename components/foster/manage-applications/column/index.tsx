@@ -34,7 +34,7 @@ export const columns: ColumnDef<Application>[] = [
 			const pet = row.getValue("pet") as Application["pet"]
 			return (
 				<div className="flex items-center gap-2">
-					<Avatar className="h-8 w-8">
+					<Avatar className="size-8">
 						<AvatarImage src={pet.photoURL || "/placeholder.svg"} alt={pet.name} />
 						<AvatarFallback>{pet.name.charAt(0)}</AvatarFallback>
 					</Avatar>
@@ -54,9 +54,9 @@ export const columns: ColumnDef<Application>[] = [
 			const user = row.getValue("user") as Application["user"]
 			return (
 				<div className="flex items-center gap-2">
-					<Avatar className="h-8 w-8">
-						<AvatarImage src={user.profilePictureUrl || "/placeholder.svg"} alt={user.fullName} />
-						<AvatarFallback>{user.fullName.charAt(0)}</AvatarFallback>
+					<Avatar className="size-8">
+						<AvatarImage src={user?.profilePictureUrl || "/placeholder.svg"} alt={user.fullName} />
+						<AvatarFallback>{user?.fullName.charAt(0)}</AvatarFallback>
 					</Avatar>
 					<div>
 						<div className="font-medium">{user.fullName}</div>
@@ -89,9 +89,9 @@ export const columns: ColumnDef<Application>[] = [
 					variant={status === "Approved" ? "secondary" : status === "Rejected" ? "destructive" : "outline"}
 					className={`flex items-center gap-1 ${status === "Approved" ? "bg-green-100 text-green-800 hover:bg-green-100" : ""}`}
 				>
-					{status === "Approved" && <Check className="h-3 w-3" />}
-					{status === "Rejected" && <X className="h-3 w-3" />}
-					{status === "Pending" && <Clock className="h-3 w-3" />}
+					{status === "Approved" && <Check className="size-3" />}
+					{status === "Rejected" && <X className="size-3" />}
+					{status === "Pending" && <Clock className="size-3" />}
 					{status}
 				</Badge>
 			)
@@ -125,23 +125,25 @@ export const columns: ColumnDef<Application>[] = [
 			return (
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
-						<Button variant="ghost" className="h-8 w-8 p-0">
+						<Button variant="ghost" className="size-8 p-0">
 							<span className="sr-only">Mở menu</span>
-							<MoreHorizontal className="h-4 w-4" />
+							<MoreHorizontal className="size-4" />
 						</Button>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent align="end">
 						<DropdownMenuLabel>Hành động</DropdownMenuLabel>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem
-							onClick={() => handleStatusUpdate("approve")}
-							disabled={application.status === "Approved"}
+							onClick={() => handleStatusUpdate("Approved")}
+							disabled={application.status === "Approved" || application.status === "Rejected"}
 						>
-							<Check className="mr-2 h-4 w-4" />
+							<Check className="mr-2 size-4" />
 							Chấp nhận
 						</DropdownMenuItem>
-						<DropdownMenuItem onClick={() => handleStatusUpdate("reject")} disabled={application.status === "Rejected"}>
-							<X className="mr-2 h-4 w-4" />
+						<DropdownMenuItem onClick={() => handleStatusUpdate("Rejected")}
+							disabled={application.status === "Rejected" || application.status === "Approved"}
+						>
+							<X className="mr-2 size-4" />
 							Từ chối
 						</DropdownMenuItem>
 					</DropdownMenuContent>

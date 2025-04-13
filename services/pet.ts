@@ -48,12 +48,12 @@ export const getPetSearchPage = async (params: {
 }) => {
     const queryParams = new URLSearchParams()
 
-    if (params.searchTerm) queryParams.append("search", params.searchTerm)
+    if (params.searchTerm) queryParams.append("searchTerm", params.searchTerm)
     if (params.page) queryParams.append("page", params.page.toString())
     if (params.pageSize) queryParams.append("pageSize", params.pageSize.toString())
     if (params.status) queryParams.append("status", params.status)
 
-    const url = `${API.GET_PETS}?${queryParams.toString()}`
+    const url = `${API.GET_PETS}/search?${queryParams.toString()}`
     const response = await BaseService.get({ url })
     return response
 }
