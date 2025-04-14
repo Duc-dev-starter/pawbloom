@@ -108,27 +108,31 @@ const Header = () => {
                                     <Link href="/application">
                                         <div className='flex items-center py-[6px] header-menu-item'>
                                             <History className='ml-2 mr-1' size={20} />
-                                            <DropdownMenuItem>Lịch sử</DropdownMenuItem>
+                                            <DropdownMenuItem className='cursor-pointer'>Lịch sử</DropdownMenuItem>
                                         </div>
                                     </Link>
-                                    <div className='flex items-center py-[6px] header-menu-item'>
-                                        <CircleHelp className='ml-2 mr-1' size={20} />
-                                        <DropdownMenuItem>Trợ giúp</DropdownMenuItem>
-                                    </div>
-                                    <div className='flex items-center py-[6px] header-menu-item'>
-                                        <MessageSquareWarning className='ml-2 mr-1' size={20} />
-                                        <DropdownMenuItem>Feedback</DropdownMenuItem>
-                                    </div>
+                                    <Link href={'https://www.facebook.com/kpm.529'}>
+                                        <div className='flex items-center py-[6px] header-menu-item'>
+                                            <CircleHelp className='ml-2 mr-1' size={20} />
+                                            <DropdownMenuItem className='cursor-pointer'>Trợ giúp</DropdownMenuItem>
+                                        </div>
+                                    </Link>
+                                    <Link href={'https://www.facebook.com/kpm.529'}>
+                                        <div className='flex items-center py-[6px] header-menu-item'>
+                                            <MessageSquareWarning className='ml-2 mr-1' size={20} />
+                                            <DropdownMenuItem className='cursor-pointer'>Feedback</DropdownMenuItem>
+                                        </div>
+                                    </Link>
                                 </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
                                 <div className='flex items-center py-[6px] header-menu-item'>
                                     <Settings className='ml-2 mr-1' size={20} />
-                                    <DropdownMenuItem>Cài đặt</DropdownMenuItem>
+                                    <DropdownMenuItem className='cursor-pointer'>Cài đặt</DropdownMenuItem>
                                 </div>
                                 <DropdownMenuSeparator />
-                                <div className='flex items-center py-[6px] header-menu-item'>
+                                <div onClick={handleLogout} className='flex items-center py-[6px] header-menu-item'>
                                     <DoorClosed className='ml-2 mr-1' size={20} />
-                                    <DropdownMenuItem onClick={handleLogout}>Đăng xuất</DropdownMenuItem>
+                                    <DropdownMenuItem className='cursor-pointer'>Đăng xuất</DropdownMenuItem>
                                 </div>
                             </DropdownMenuContent>
                         </DropdownMenu>
