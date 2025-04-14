@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { resendEmail, verifyEmailUser } from "@/services/user"
 
-export default function VerifyEmailPage() {
+export default function VerifyEmailClient() {
     const searchParams = useSearchParams()
     const token = searchParams.get("token")
     const [status, setStatus] = useState<"loading" | "success" | "error">("loading")
