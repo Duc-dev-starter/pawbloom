@@ -137,6 +137,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                 }
             } else {
                 const response = await login(values);
+                console.log(response);
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-expect-error
                 if (response.success) {

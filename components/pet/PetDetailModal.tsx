@@ -48,10 +48,8 @@ export default function PetDetailModal({ pet, isOpen, onClose }: PetDetailModalP
     }
 
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            const user = localStorage.getItem("user")
-            setIsLoggedIn(!!user)
-        }
+        const user = localStorage.getItem("user")
+        setIsLoggedIn(!!user)
     }, [])
 
 

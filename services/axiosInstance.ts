@@ -72,7 +72,7 @@ axiosInstance.interceptors.response.use(
                 description: `${data.message || data.Message}`,
               })
               setTimeout(() => {
-                window.location.href = Path.HOME
+                // window.location.href = Path.HOME
                 localStorage.clear();
                 isTokenExpired = false;
               }, 1300);
