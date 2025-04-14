@@ -19,7 +19,7 @@ export function PetDialog({ isOpen, onClose, pet, onSuccess }: PetDialogProps) {
 
 	return (
 		<Dialog open={isOpen} onOpenChange={onClose}>
-			<DialogContent className="w-full">
+			<DialogContent className="max-w-5xl w-full">
 				<DialogHeader>
 					<DialogTitle>{pet ? `Chỉnh sửa thú cưng: ${pet.name}` : "Thêm thú cưng mới"}</DialogTitle>
 				</DialogHeader>

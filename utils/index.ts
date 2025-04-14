@@ -75,19 +75,19 @@ export const firstLetterCapitialize = (value: string) => {
     return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
-export const navigateByRole = (role: string, router: { push: (path: string) => void }) => {
+export const navigateByRole = (role: string) => {
     switch (role) {
         case "Adopter":
-            router.push(Path.HOME);
+            window.location.href = (Path.HOME);
             break;
         case "Admin":
-            router.push(Path.ADMIN_DASHBOARD);
+            window.location.href = (Path.ADMIN_DASHBOARD);
             break;
         case "Foster":
-            router.push(Path.ADMIN_DASHBOARD);
+            window.location.href = (Path.ADMIN_DASHBOARD);
             break;
         default:
-            router.push(Path.HOME);
+            window.location.href = (Path.HOME);
             break;
     }
 }
@@ -108,4 +108,22 @@ export const toastService = {
     show: (options: ToastOptions) => {
         if (showToast) showToast(options);
     },
+};
+
+
+export const getPetStatus = (status: string): string => {
+    switch (status) {
+        case "Available":
+            return "Hiện hành";
+        case "Adopted":
+            return "Đã nhận nuôi";
+        case "Pending":
+            return "Đang chờ";
+        case "Unavailable":
+            return "Không khả dụng";
+        case "In Treatment":
+            return "Đang điều trị";
+        default:
+            return "Không xác định";
+    }
 };

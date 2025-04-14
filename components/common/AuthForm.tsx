@@ -20,7 +20,6 @@ import { authFormSchema } from '@/schema/auth';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import Path from '@/constants/paths';
-import { useRouter } from 'next/navigation';
 import { login, register, socialLogin } from '@/services/auth';
 import { JwtPayload } from '@/types/auth';
 import { signInWithPopup } from "firebase/auth";
@@ -39,7 +38,6 @@ interface AuthFormProps extends React.ComponentPropsWithoutRef<"form"> {
 
 const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
     const [loading, setLoading] = useState(false);
-    const router = useRouter();
     const form = useForm<z.infer<typeof authFormSchema>>({
         resolver: zodResolver(authFormSchema),
         defaultValues: {
@@ -90,7 +88,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                 const token = response.data.token;
                 const decodedToken: JwtPayload = jwtDecode(token);
                 localStorage.setItem('token', token);
-                navigateByRole(decodedToken.role, router);
+                navigateByRole(decodedToken.role);
                 const currentUserResponse = await getCurrentUser();
                 console.log(currentUserResponse);
                 localStorage.setItem('user', JSON.stringify(currentUserResponse.data));
@@ -130,7 +128,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                         variant: "default"
                     });
                     setTimeout(() => {
-                        router.push(Path.LOGIN)
+                        window.location.href = (Path.LOGIN)
                     }, 1500)
                 } else {
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -145,7 +143,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                     const token = response.data.token;
                     const decodedToken: JwtPayload = jwtDecode(token);
                     localStorage.setItem('token', token);
-                    navigateByRole(decodedToken.role, router);
+                    navigateByRole(decodedToken.role);
                     const currentUserResponse = await getCurrentUser();
                     console.log(currentUserResponse);
                     localStorage.setItem('user', JSON.stringify(currentUserResponse.data));

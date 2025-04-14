@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import { X, Check, PawPrint, Heart, Calendar, Weight, Ruler } from "lucide-react"
 import {
@@ -15,6 +15,8 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import type { Pet } from "@/types/pet"
+import { getPetStatus } from "@/utils"
+import { useRouter } from "next/navigation"
 
 interface PetDetailModalProps {
     pet: Pet | null
@@ -24,10 +26,18 @@ interface PetDetailModalProps {
 
 export default function PetDetailModal({ pet, isOpen, onClose }: PetDetailModalProps) {
     const [isAdopting, setIsAdopting] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const router = useRouter()
 
     if (!pet) return null
 
+
     const handleAdoptClick = () => {
+        if (!isLoggedIn) {
+            router.push("/sign-in")
+            return
+        }
+
         setIsAdopting(true)
         // Thêm logic xử lý nhận nuôi ở đây
         setTimeout(() => {
@@ -36,6 +46,14 @@ export default function PetDetailModal({ pet, isOpen, onClose }: PetDetailModalP
             // Hiển thị thông báo thành công
         }, 1500)
     }
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const user = localStorage.getItem("user")
+            setIsLoggedIn(!!user)
+        }
+    }, [])
+
 
     const renderFeature = (value: boolean, label: string) => (
         <div className="flex items-center gap-2">
@@ -62,7 +80,7 @@ export default function PetDetailModal({ pet, isOpen, onClose }: PetDetailModalP
                         height={400}
                         className="w-full h-64 object-cover rounded-md"
                     />
-                    <Badge className="absolute top-2 right-2 bg-green-500 text-white">{pet.status}</Badge>
+                    <Badge className="absolute top-2 right-2 bg-green-500 text-white">{getPetStatus(pet.status)}</Badge>
                 </div>
 
                 <div className="grid grid-cols-3 gap-4 py-2">
@@ -112,7 +130,10 @@ export default function PetDetailModal({ pet, isOpen, onClose }: PetDetailModalP
                         disabled={isAdopting || pet.status !== "Available"}
                     >
                         <PawPrint className="mr-2 h-4 w-4" />
-                        {isAdopting ? "Đang xử lý..." : "Nhận nuôi"}
+                        {isLoggedIn
+                            ? (isAdopting ? "Đang xử lý..." : "Nhận nuôi")
+                            : "Đăng nhập để nhận nuôi"}
+
                     </Button>
                 </DialogFooter>
             </DialogContent>

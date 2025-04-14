@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import { Heart, PawPrint } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import type { Pet } from "@/types/pet"
 import PetDetailModal from "./PetDetailModal"
+import { getPets } from "@/services/pet"
+import { getPetStatus } from "@/utils"
 
 // Sample data - replace with your actual data
 const petsData: Pet[] = [
@@ -165,8 +167,29 @@ const petsData: Pet[] = [
 
 export default function MeetPets() {
     const [selectedPet, setSelectedPet] = useState<Pet | null>(null)
+    const [pets, setPets] = useState<Pet[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false)
-    const selectedPets = petsData.slice(0, 3)
+
+    useEffect(() => {
+        const fetchPets = async () => {
+            const response = await getPets();
+
+            const availablePets = response.data.pets
+                .filter((pet: Pet) => pet.status === "Available")
+                .sort((a: Pet, b: Pet) => {
+                    const dateA = new Date(a.createdAt);
+                    const dateB = new Date(b.createdAt);
+                    return dateB.getTime() - dateA.getTime();
+                })
+                .slice(0, 3);
+
+            setPets(availablePets);
+        };
+
+        fetchPets();
+    }, []);
+
+
 
 
     const handlePetClick = (pet: Pet) => {
@@ -185,7 +208,7 @@ export default function MeetPets() {
             </div>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {selectedPets.map((pet) => (
+                {pets.map((pet) => (
                     <Card key={pet.id} className="overflow-hidden transition-all hover:shadow-lg">
                         <div className="relative">
                             <Image
@@ -211,7 +234,7 @@ export default function MeetPets() {
                             >
                                 <Heart className="h-5 w-5 text-brand" />
                             </Button>
-                            <Badge className="absolute right-3 bottom-3 bg-green-500 text-white">{pet.status}</Badge>
+                            <Badge className="absolute right-3 bottom-3 bg-green-500 text-white">{getPetStatus(pet.status)}</Badge>
                         </div>
                         <CardContent className="p-4">
                             <div className="mb-2 flex items-center justify-between">

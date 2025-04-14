@@ -65,7 +65,6 @@ function ManagePets() {
 
 	return (
 		<div>
-			<h1 className="text-2xl font-bold">Quản lí thú cưng</h1>
 			<DataTablePets
 				columns={getColumns({
 					onEdit: () => { },
