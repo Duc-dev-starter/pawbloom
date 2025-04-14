@@ -1,33 +1,45 @@
 "use client"
-import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Button } from '../ui/button'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import MobileNavigation from '../MobileNavigation'
-import { userNavItems } from '@/constants/nav'
-import { CircleHelp, DoorClosed, History, MessageSquareWarning, Settings } from 'lucide-react'
-import Images from '@/constants/image'
-import Path from '@/constants/paths'
-import { User } from '@/types/user'
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Button } from '../ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import MobileNavigation from '../MobileNavigation';
+import { userNavItems } from '@/constants/nav';
+import { CircleHelp, DoorClosed, History, MessageSquareWarning, Settings } from 'lucide-react';
+import Images from '@/constants/image';
+import Path from '@/constants/paths';
+import { User } from '@/types/user';
 
 const Header = () => {
-    // Khởi tạo state cho user
     const [user, setUser] = useState<User | null>(null);
 
-    useEffect(() => {
+    const updateUserFromStorage = () => {
         const storedUser = localStorage.getItem('user');
         if (storedUser) {
             setUser(JSON.parse(storedUser));
+        } else {
+            setUser(null);
         }
+    };
+
+    useEffect(() => {
+        updateUserFromStorage();
+
+        window.addEventListener('storage', updateUserFromStorage);
+
+        return () => {
+            window.removeEventListener('storage', updateUserFromStorage);
+        };
     }, []);
 
     const handleLogout = () => {
         localStorage.clear();
-        window.location.href = "/"
-    }
+        setUser(null);
+        window.location.href = "/";
+    };
 
     return (
         <TooltipProvider>
@@ -50,7 +62,7 @@ const Header = () => {
                                 <li key={item.title}>
                                     <Link
                                         href={item.link}
-                                        className="flex items-center gap-1 transition hover:text-brand-100 "
+                                        className="flex items-center gap-1 transition hover:text-brand-100"
                                     >
                                         <Image src={item.icon} alt={item.title} width={24} height={24} />
                                         <span className="text-[16px] font-medium">{item.title}</span>
@@ -65,7 +77,6 @@ const Header = () => {
                             <Link href={Path.LOGIN}>
                                 <Button variant="outline">Đăng nhập</Button>
                             </Link>
-                            {/* Register Button */}
                             <Link href={Path.REGISTER}>
                                 <Button variant="outline" className="bg-white hover:text-brand">
                                     Đăng ký
@@ -76,15 +87,12 @@ const Header = () => {
 
                     {user && (
                         <DropdownMenu>
-                            {/* Avatar làm trigger */}
                             <DropdownMenuTrigger asChild>
                                 <Avatar className='ml-auto cursor-pointer'>
                                     <AvatarImage src="https://github.com/shadcn.png" />
                                     <AvatarFallback>CN</AvatarFallback>
                                 </Avatar>
                             </DropdownMenuTrigger>
-
-                            {/* Nội dung dropdown */}
                             <DropdownMenuContent className="mr-5 w-56">
                                 <Link href="/profile">
                                     <DropdownMenuLabel className='flex cursor-pointer items-center hover:bg-gray-100'>
@@ -100,9 +108,8 @@ const Header = () => {
                                     <Link href="/application">
                                         <div className='flex items-center py-[6px] header-menu-item'>
                                             <History className='ml-2 mr-1' size={20} />
-                                            <DropdownMenuItem >Lịch sử</DropdownMenuItem>
+                                            <DropdownMenuItem>Lịch sử</DropdownMenuItem>
                                         </div>
-
                                     </Link>
                                     <div className='flex items-center py-[6px] header-menu-item'>
                                         <CircleHelp className='ml-2 mr-1' size={20} />
@@ -129,7 +136,7 @@ const Header = () => {
                 </div>
             </header>
         </TooltipProvider>
-    )
-}
+    );
+};
 
 export default Header;
