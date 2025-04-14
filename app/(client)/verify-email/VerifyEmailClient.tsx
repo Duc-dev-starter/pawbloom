@@ -134,7 +134,7 @@ export default function VerifyEmailClient() {
                     )}
                 </CardContent>
                 <CardFooter className="flex justify-center">
-                    <Button onClick={() => window.location.href = '/'} className="w-full">
+                    <Button onClick={() => { window.location.href = '/' }} className="w-full">
                         Quay về trang chủ
                     </Button>
                 </CardFooter>
