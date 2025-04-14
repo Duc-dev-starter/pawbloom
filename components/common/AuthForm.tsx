@@ -77,6 +77,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
 
 
             const response = await socialLogin({ idToken, provider: providerType });
+            console.log(response);
+            console.log(idToken);
 
 
             // Xóa lỗi validation nếu có

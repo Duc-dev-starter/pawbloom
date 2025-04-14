@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useEffect, useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { CheckCircle, XCircle, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -16,7 +16,6 @@ export default function VerifyEmailPage() {
     const [message, setMessage] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
-    const router = useRouter();
 
     useEffect(() => {
         const verifyEmail = async () => {
@@ -33,7 +32,7 @@ export default function VerifyEmailPage() {
                     setStatus("success")
                     setMessage("Email của bạn đã được xác minh thành công!")
                     setTimeout(() => {
-                        router.push('/')
+                        window.location.href = '/sign-in'
                     }, 1300)
                 } else {
                     setStatus("error")
@@ -135,7 +134,7 @@ export default function VerifyEmailPage() {
                     )}
                 </CardContent>
                 <CardFooter className="flex justify-center">
-                    <Button onClick={() => router.push('/')} className="w-full">
+                    <Button onClick={() => window.location.href = '/'} className="w-full">
                         Quay về trang chủ
                     </Button>
                 </CardFooter>
