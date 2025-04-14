@@ -29,7 +29,14 @@ export default function PetDetailModal({ pet, isOpen, onClose }: PetDetailModalP
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const router = useRouter()
 
+
+    useEffect(() => {
+        const user = localStorage.getItem("user")
+        setIsLoggedIn(!!user)
+    }, [])
+
     if (!pet) return null
+
 
 
     const handleAdoptClick = () => {
@@ -47,10 +54,6 @@ export default function PetDetailModal({ pet, isOpen, onClose }: PetDetailModalP
         }, 1500)
     }
 
-    useEffect(() => {
-        const user = localStorage.getItem("user")
-        setIsLoggedIn(!!user)
-    }, [])
 
 
     const renderFeature = (value: boolean, label: string) => (
