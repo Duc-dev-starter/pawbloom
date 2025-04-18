@@ -50,9 +50,6 @@ export default function MeetPets() {
 
     return (
         <div className="w-full">
-            <div className="mb-8 flex items-center justify-between">
-                <h2 className="text-2xl font-semibold text-brand-200 md:text-3xl">Gặp gỡ thú cưng</h2>
-            </div>
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {pets.map((pet) => (

@@ -10,7 +10,14 @@ const nextConfig = {
       'example.com',
       'www.trupanion.com',
       'i.natgeofe.com',
-      'res.cloudinary.com'
+      'res.cloudinary.com',
+      'images.unsplash.com',
+      "i.pravatar.cc",
+      "i.pinimg.com",
+      "static.wikia.nocookie.net",
+      "th.bing.com",
+      "motionbgs.com",
+      "otakukart.com"
     ],
   },
   experimental: {

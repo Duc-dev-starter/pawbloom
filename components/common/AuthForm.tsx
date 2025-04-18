@@ -90,7 +90,6 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                 const token = response.data.token;
                 const decodedToken: JwtPayload = jwtDecode(token);
                 localStorage.setItem('token', token);
-                navigateByRole(decodedToken.role);
                 const currentUserResponse = await getCurrentUser();
                 console.log(currentUserResponse);
                 localStorage.setItem('user', JSON.stringify(currentUserResponse.data));
@@ -99,6 +98,9 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                     description: 'Chào mừng người dùng đã đăng nhập vào hệ thống',
                     variant: "default"
                 });
+                setTimeout(() => {
+                    navigateByRole(decodedToken.role);
+                }, 100);
             } else {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-expect-error
@@ -146,7 +148,6 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                     const token = response.data.token;
                     const decodedToken: JwtPayload = jwtDecode(token);
                     localStorage.setItem('token', token);
-                    navigateByRole(decodedToken.role);
                     const currentUserResponse = await getCurrentUser();
                     console.log(currentUserResponse);
                     localStorage.setItem('user', JSON.stringify(currentUserResponse.data));
@@ -155,6 +156,9 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, className, ...props }) => {
                         description: 'Chào mừng người dùng đã đăng nhập vào hệ thống',
                         variant: "default"
                     });
+                    setTimeout(() => {
+                        navigateByRole(decodedToken.role);
+                    }, 100);
                 } else {
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-expect-error

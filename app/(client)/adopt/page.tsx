@@ -1,189 +1,184 @@
 "use client"
 
-import React, { useEffect, useState, useCallback } from "react"
+import { useEffect, useState, useCallback } from "react"
 import SearchPet from "@/components/adopt/SearchPet"
 import PetCard from "@/components/adopt/PetCard"
 import { Button } from "@/components/ui/button"
 import type { Pet, PetFilters } from "@/types/pet"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { getPets } from "@/services/pet"
-
+import AdoptionProcess from "@/components/adopt/AdoptProcess"
 
 interface ApiResponse {
-    success: boolean;
+    success: boolean
     data: {
-        pets: Pet[];
-        currentPage?: number;
-        totalPages?: number;
-        hasNext?: boolean;
-        hasPrevious?: boolean;
-        totalCount?: number;
-        pageSize?: number;
-    };
-    message?: string;
+        pets: Pet[]
+        currentPage?: number
+        totalPages?: number
+        hasNext?: boolean
+        hasPrevious?: boolean
+        totalCount?: number
+        pageSize?: number
+    }
+    message?: string
 }
-
-
-
 
 const AdoptPage = () => {
     const [allPets, setAllPets] = useState<Pet[]>([])
-    const [filteredPets, setFilteredPets] = useState<Pet[]>([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const [filteredPets, setFilteredPets] = useState<Pet[]>([])
+    const [currentPage, setCurrentPage] = useState(1)
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         const fetchInitialPets = async () => {
-            setIsLoading(true);
-            setError(null);
+            setIsLoading(true)
+            setError(null)
             try {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
-                const response: ApiResponse = await getPets();
+                const response: ApiResponse = await getPets()
 
-                console.log("API Response Data:", response);
+                console.log("API Response Data:", response)
 
                 if (response.success && response.data && response.data.pets) {
-                    const availablePets = response.data.pets.filter(
-                        (pet) => pet.status === "Available"
-                    );
-                    setAllPets(availablePets);
-                    setFilteredPets(availablePets);
+                    const availablePets = response.data.pets.filter((pet) => pet.status === "Available")
+                    setAllPets(availablePets)
+                    setFilteredPets(availablePets)
                 } else {
-                    setError(response.message || "Failed to load pets.");
-                    setAllPets([]);
-                    setFilteredPets([]);
+                    setError(response.message || "Failed to load pets.")
+                    setAllPets([])
+                    setFilteredPets([])
                 }
             } catch (error) {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
-                setError(error.message || "An unexpected error occurred.");
-                setAllPets([]);
-                setFilteredPets([]);
+                setError(error.message || "An unexpected error occurred.")
+                setAllPets([])
+                setFilteredPets([])
             } finally {
-                setIsLoading(false);
-            }
-        };
-        fetchInitialPets();
-    }, []);
-
-
-    const handleFilter = useCallback((filters: PetFilters) => {
-
-        let filtered = [...allPets];
-
-        if (filters.search) {
-            const searchTerm = filters.search.toLowerCase();
-            filtered = filtered.filter(
-                (pet) =>
-                    pet.name.toLowerCase().includes(searchTerm) ||
-                    pet.breed.toLowerCase().includes(searchTerm) ||
-                    pet.description.toLowerCase().includes(searchTerm),
-            );
-        }
-
-        if (filters.type && filters.type !== "all") {
-            const dogBreeds = ["retriever", "beagle", "labrador", "shih tzu", "bulldog", "shepherd"];
-            if (filters.type === "dog") {
-                filtered = filtered.filter((pet) => dogBreeds.some((breed) => pet.breed.toLowerCase().includes(breed)));
-            } else if (filters.type === "cat") {
-                filtered = filtered.filter((pet) => !dogBreeds.some((breed) => pet.breed.toLowerCase().includes(breed)));
+                setIsLoading(false)
             }
         }
+        fetchInitialPets()
+    }, [])
 
-        if (filters.size && filters.size !== "all") {
-            filtered = filtered.filter((pet) => pet.size.toLowerCase() === filters.size?.toLowerCase());
-        }
+    const handleFilter = useCallback(
+        (filters: PetFilters) => {
+            let filtered = [...allPets]
 
-        if (filters.age && filters.age !== "all") {
-            switch (filters.age) {
-                case "0-1":
-                    filtered = filtered.filter((pet) => pet.age < 1);
-                    break;
-                case "1-3":
-                    filtered = filtered.filter((pet) => pet.age >= 1 && pet.age <= 3);
-                    break;
-                case "3-7":
-                    filtered = filtered.filter((pet) => pet.age > 3 && pet.age <= 7);
-                    break;
-                case "7+":
-                    filtered = filtered.filter((pet) => pet.age > 7);
-                    break;
+            if (filters.search) {
+                const searchTerm = filters.search.toLowerCase()
+                filtered = filtered.filter(
+                    (pet) =>
+                        pet.name.toLowerCase().includes(searchTerm) ||
+                        pet.breed.toLowerCase().includes(searchTerm) ||
+                        pet.description.toLowerCase().includes(searchTerm),
+                )
             }
-        }
 
-        if (filters.gender && filters.gender !== "all") {
-            filtered = filtered.filter((pet) => pet.gender.toLowerCase() === filters.gender?.toLowerCase());
-        }
-
-        if (filters.status && filters.status !== "all") {
-            filtered = filtered.filter((pet) => pet.status.toLowerCase() === filters.status?.toLowerCase());
-        }
-
-
-        if (filters.sort) {
-            const sortedFiltered = [...filtered];
-            switch (filters.sort) {
-                case "newest":
-                    sortedFiltered.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-                    break;
-                case "oldest":
-                    sortedFiltered.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
-                    break;
-                case "name_asc":
-                    sortedFiltered.sort((a, b) => a.name.localeCompare(b.name));
-                    break;
-                case "name_desc":
-                    sortedFiltered.sort((a, b) => b.name.localeCompare(a.name));
-                    break;
-                case "age_asc":
-                    sortedFiltered.sort((a, b) => a.age - b.age);
-                    break;
-                case "age_desc":
-                    sortedFiltered.sort((a, b) => b.age - a.age);
-                    break;
+            if (filters.type && filters.type !== "all") {
+                const dogBreeds = ["retriever", "beagle", "labrador", "shih tzu", "bulldog", "shepherd"]
+                if (filters.type === "dog") {
+                    filtered = filtered.filter((pet) => dogBreeds.some((breed) => pet.breed.toLowerCase().includes(breed)))
+                } else if (filters.type === "cat") {
+                    filtered = filtered.filter((pet) => !dogBreeds.some((breed) => pet.breed.toLowerCase().includes(breed)))
+                }
             }
-            filtered = sortedFiltered;
-        }
 
-        setFilteredPets(filtered);
-        setCurrentPage(1);
-        setIsLoading(false);
-    }, [allPets]);
+            if (filters.size && filters.size !== "all") {
+                filtered = filtered.filter((pet) => pet.size.toLowerCase() === filters.size?.toLowerCase())
+            }
 
+            if (filters.age && filters.age !== "all") {
+                switch (filters.age) {
+                    case "0-1":
+                        filtered = filtered.filter((pet) => pet.age < 1)
+                        break
+                    case "1-3":
+                        filtered = filtered.filter((pet) => pet.age >= 1 && pet.age <= 3)
+                        break
+                    case "3-7":
+                        filtered = filtered.filter((pet) => pet.age > 3 && pet.age <= 7)
+                        break
+                    case "7+":
+                        filtered = filtered.filter((pet) => pet.age > 7)
+                        break
+                }
+            }
+
+            if (filters.gender && filters.gender !== "all") {
+                filtered = filtered.filter((pet) => pet.gender.toLowerCase() === filters.gender?.toLowerCase())
+            }
+
+            if (filters.status && filters.status !== "all") {
+                filtered = filtered.filter((pet) => pet.status.toLowerCase() === filters.status?.toLowerCase())
+            }
+
+            if (filters.sort) {
+                const sortedFiltered = [...filtered]
+                switch (filters.sort) {
+                    case "newest":
+                        sortedFiltered.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                        break
+                    case "oldest":
+                        sortedFiltered.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+                        break
+                    case "name_asc":
+                        sortedFiltered.sort((a, b) => a.name.localeCompare(b.name))
+                        break
+                    case "name_desc":
+                        sortedFiltered.sort((a, b) => b.name.localeCompare(a.name))
+                        break
+                    case "age_asc":
+                        sortedFiltered.sort((a, b) => a.age - b.age)
+                        break
+                    case "age_desc":
+                        sortedFiltered.sort((a, b) => b.age - a.age)
+                        break
+                }
+                filtered = sortedFiltered
+            }
+
+            setFilteredPets(filtered)
+            setCurrentPage(1)
+            setIsLoading(false)
+        },
+        [allPets],
+    )
 
     // --- Client-Side Pagination Calculations ---
-    const petsPerPage = 8;
-    const totalPages = Math.ceil(filteredPets.length / petsPerPage);
-    const currentPets = filteredPets.slice((currentPage - 1) * petsPerPage, currentPage * petsPerPage);
+    const petsPerPage = 8
+    const totalPages = Math.ceil(filteredPets.length / petsPerPage)
+    const currentPets = filteredPets.slice((currentPage - 1) * petsPerPage, currentPage * petsPerPage)
 
     // --- Pagination Handlers ---
     const goToPage = (page: number) => {
-        setCurrentPage(page);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    };
+        setCurrentPage(page)
+        window.scrollTo({ top: 0, behavior: "smooth" })
+    }
 
     const nextPage = () => {
         if (currentPage < totalPages) {
-            goToPage(currentPage + 1);
+            goToPage(currentPage + 1)
         }
-    };
+    }
 
     const prevPage = () => {
         if (currentPage > 1) {
-            goToPage(currentPage - 1);
+            goToPage(currentPage - 1)
         }
-    };
+    }
 
     const clearFilters = useCallback(() => {
         handleFilter({
-            sort: undefined
-        });
-    }, [handleFilter]);
+            sort: undefined,
+        })
+    }, [handleFilter])
 
     return (
         <section className="min-h-[91vh]">
+            <AdoptionProcess />
             <SearchPet onFilter={handleFilter} />
 
             {isLoading ? (
@@ -199,7 +194,9 @@ const AdoptPage = () => {
                 <div className="flex flex-col items-center justify-center py-20 text-center px-4">
                     <h2 className="text-2xl font-semibold mb-4">Không có thú cưng nào được tìm thấy</h2>
                     <p className="text-gray-500 mb-6">
-                        {allPets.length > 0 ? "Không có vật nuôi nào phù hợp với bộ lọc hiện tại. Hãy thử điều chỉnh tìm kiếm của bạn." : "Hiện tại không có vật nuôi nào được liệt kê để nhận nuôi."}
+                        {allPets.length > 0
+                            ? "Không có vật nuôi nào phù hợp với bộ lọc hiện tại. Hãy thử điều chỉnh tìm kiếm của bạn."
+                            : "Hiện tại không có vật nuôi nào được liệt kê để nhận nuôi."}
                     </p>
                     <Button onClick={clearFilters} className="hover:bg-brand/90">
                         Xóa bộ lọc
@@ -225,11 +222,9 @@ const AdoptPage = () => {
                                 <ChevronLeft className="h-5 w-5 text-brand" />
                             </Button>
 
-
                             <span className="px-4 py-2 text-sm font-medium">
                                 Trang {currentPage} trên {totalPages}
                             </span>
-
 
                             <Button
                                 variant="outline"
@@ -245,7 +240,7 @@ const AdoptPage = () => {
                 </>
             )}
         </section>
-    );
-};
+    )
+}
 
-export default AdoptPage;
+export default AdoptPage

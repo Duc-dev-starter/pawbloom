@@ -2,6 +2,7 @@ import { LayoutBGFlicker } from "@/components/bg";
 import FeaturePost from "@/components/blog/FeaturePost";
 import { CarouselCustom } from "@/components/customCarousel";
 import MeetPets from "@/components/pet/MeetPet";
+import StatsSection from "@/components/StatsSection";
 import WatchMoreButton from "@/components/WatchMoreButton";
 import Path from "@/constants/paths";
 import EventCard from "@/sections/home/EventCard";
@@ -49,74 +50,13 @@ const eventData = [
 ];
 
 export default function Home() {
-  // Dữ liệu cho các phần giống nhau
-  const stats = [
-    { value: "50+", label: "Trạm cứu trợ" },
-    { value: "100+", label: "Bé thú cưng" },
-    { value: "200+", label: "Sản phẩm" },
-  ];
-
-  // const svgDecorations = [
-  //   { src: "/assets/icons/dots.svg", alt: "dot", style: { top: "10%", left: "5%" } },
-  //   { src: "/assets/icons/paw.svg", alt: "paw", style: { top: "50%", left: "10%" } },
-  // ];
 
 
 
   return (
     <>
 
-      <section className="md:px-28 md:py-16">
-
-        <div className="absolute">
-          <LayoutBGFlicker
-            className=" inset-0 z-0 size-full [mask-image:radial-gradient(450px_circle_at_center,white,transparent)]"
-            squareSize={4}
-            gridGap={1}
-            color="#f5bfc1"
-            maxOpacity={0.5}
-            flickerChance={0.1}
-            height={450}
-          />
-        </div>
-        <div className="relative flex flex-col gap-5 lg:flex-row lg:gap-x-10">
-
-          <div className="relative z-10 flex flex-1 flex-col gap-6">
-            <h2 className="text-center font-medium italic text-brand-200 lg:text-left">
-              #cơ hội thứ 2, mái ấm mãi mãi
-            </h2>
-            <h1 className="text-center text-3xl font-semibold md:text-5xl lg:text-left">
-              Tìm kiếm thú cưng cho bạn
-            </h1>
-            <p className="text-center text-lg font-medium text-gray-500 md:text-xl lg:text-left">
-              Pawbloom – Nơi kết nối những trái tim yêu thương với những chú thú cưng cần được yêu thương.
-              Chúng tôi giúp tạo dựng mái ấm mới, mang lại cơ hội thứ hai cho thú cưng từ các trạm cứu trợ.
-            </p>
-
-            <div className="flex justify-center gap-10 lg:justify-start">
-              {stats.map((stat, index) => (
-                <div key={index} className="flex flex-col items-center gap-2 lg:items-start">
-                  <h1 className="text-3xl font-bold text-brand md:text-4xl">{stat.value}</h1>
-                  <p className="text-sm text-gray-600 font-medium md:text-base">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="relative z-10 flex flex-1 justify-center">
-            <Image
-              src={homePageImage}
-              alt="pet"
-              width={500}
-              height={500}
-              className="h-auto max-w-full rounded-md object-cover"
-            />
-          </div>
-        </div>
-
-
-
-      </section>
+      <StatsSection />
       <section className="border-t-2 border-brand p-10">
         <h1 className="mb-10 text-center text-4xl font-semibold text-brand-200">Về Chúng Tôi</h1>
         <div className="flex flex-col items-center gap-10 md:flex-row">

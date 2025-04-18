@@ -117,7 +117,7 @@ const Header = () => {
                                             <DropdownMenuItem className='cursor-pointer'>Trợ giúp</DropdownMenuItem>
                                         </div>
                                     </Link>
-                                    <Link href={'https://www.facebook.com/kpm.529'}>
+                                    <Link href={'/feedback'}>
                                         <div className='flex items-center py-[6px] header-menu-item'>
                                             <MessageSquareWarning className='ml-2 mr-1' size={20} />
                                             <DropdownMenuItem className='cursor-pointer'>Feedback</DropdownMenuItem>
