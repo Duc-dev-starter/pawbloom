@@ -1,4 +1,3 @@
-import { LayoutBGFlicker } from "@/components/bg";
 import FeaturePost from "@/components/blog/FeaturePost";
 import { CarouselCustom } from "@/components/customCarousel";
 import MeetPets from "@/components/pet/MeetPet";
